@@ -1,0 +1,4 @@
+contract-kit/.venv/
+contract-kit/.pytest_cache/
+contract-kit/**/__pycache__/
+/dist/

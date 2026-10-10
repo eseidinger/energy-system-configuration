@@ -8,6 +8,8 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [Architecture decisions](decisions/) — accepted cross-project choices that establish the implementation baseline.
 - [VEF-to-ODIP authentication flow](architecture/vef-odip-authentication.md) — sequence, trust boundaries, threats, and required controls.
 - [Gate 0 domain review](reviews/2026-10-10-gate-0-domain-review.md) — approval and limitations of the version 0.2 implementation baseline.
+- [Gate 1 contract-kit review](reviews/2026-10-10-gate-1-domain-review.md) — reviewed fixture, numerical oracle, recommendation, and release prerequisite.
+- [Shared contract kit](contract-kit/) — executable schemas, APIs, examples, fixtures, expected results, and validation tests.
 
 The documents intentionally separate why the integration exists, what participating systems must guarantee, and how the teams should deliver it.
 

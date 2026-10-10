@@ -1,7 +1,7 @@
 # DEC-01: Reference data
 
 **Status:** Accepted
-**Date:** 2026-10-10
+**Date:** 2026-10-10 (amended after source retrieval)
 **Decision owner:** Integration repository maintainer
 **Due date:** 2026-10-10 (completed)
 
@@ -19,14 +19,19 @@ tests without implying that it is a site-specific engineering forecast.
 - The representative coordinate is the municipality reference point published
   by the Bavarian State Office for Statistics: approximately `48.0622 N`,
   `12.2347 E`.
-- The reference calendar year is **2024**. It contains 8,784 hourly UTC
-  intervals because 2024 is a leap year.
+- The reference calendar is **2024**. It contains 8,784 hourly UTC intervals
+  because 2024 is a leap year. It is a synthetic calendar profile, not a claim
+  that every value was observed during 2024.
 - The dataset ID is `energy-reference-wasserburg-am-inn-2024` and its first
   immutable publication version will be `1.0.0`.
-- The `PV_YIELD_PER_KWP` fixture will be derived from pinned hourly PVGIS data
-  for the representative coordinate. The source request, response, attribution,
-  database/version, retrieval time, orientation, inclination, PV technology,
-  and loss assumptions will be preserved as provenance.
+- The `PV_YIELD_PER_KWP` fixture is derived from pinned hourly PVGIS-ERA5 2023
+  data for the representative coordinate. At retrieval on 2026-10-10, the
+  PVGIS 5.3 hourly endpoint rejected 2024 because its supported maximum year
+  was 2023. Source hours are mapped by month, day, and UTC hour onto 2024;
+  February 29 is the hourly mean of February 28 and March 1. The source request,
+  response, attribution, database/version, retrieval time, orientation,
+  inclination, PV technology, loss assumptions, and transformation are
+  preserved as provenance.
 - The first-release load shape, import tariff, export tariff, and component
   catalog may be synthetic. They must be realistic enough to exercise the
   contract, clearly marked as synthetic, and must not contain customer data or
@@ -43,6 +48,9 @@ tests without implying that it is a site-specific engineering forecast.
 
 - Results describe a reproducible regional reference case, not the expected
   output of a particular roof or building in Wasserburg am Inn.
+- The 2024 timestamps provide the leap-year simulation boundary, while the PV
+  values are a transformed 2023 source profile. Results must not be described
+  as observed 2024 production.
 - Roof geometry, local shading, customer consumption, live tariffs, taxes,
   subsidies, installation quotes, and current product availability remain out
   of scope for the first release.

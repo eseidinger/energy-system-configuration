@@ -5,7 +5,7 @@
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
 
-**Current gate:** Gate 0 completed on 2026-10-10; contract version `0.2` is the frozen implementation baseline and Gate 1 is next. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
+**Current gate:** Gate 0 completed on 2026-10-10. Gate 1 implementation and maintainer review are complete in the working tree; the immutable `contract-kit-v0.2.0` tag, release archive, and ODIP/VEF CI pins remain before Gate 1 closes and subproject implementation starts. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
 
@@ -82,6 +82,11 @@ These IDs are the traceable units to create in the respective repositories.
 **Exit:** All six decisions are recorded; no unresolved choice changes schema shape, simulation math, identity, or deployment topology.
 
 ### Gate 1 — Build the shared contract kit
+
+**Status (2026-10-10):** Items 1–5 are implemented and pass the repository-neutral
+test runner. The deterministic release archive can be built locally. Item 6 is
+pending the immutable commit, tag, published archive/checksum, and consumer CI
+pins; Gate 2 must not start before that handoff is complete.
 
 1. Create versioned JSON Schemas for the generic publication manifest, energy artifacts, optimization request, candidate, result, and machine-readable errors.
 2. Add a compact but complete one-year energy fixture plus a non-energy publication fixture.
