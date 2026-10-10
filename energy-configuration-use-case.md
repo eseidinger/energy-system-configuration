@@ -1,8 +1,8 @@
 # AI-Assisted Energy System Configuration Use Case
 
-**Status:** Proposed use case, version 0.2  
-**Date:** 2026-10-09  
-**Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers  
+**Status:** Implementation baseline, version 0.2
+**Date:** 2026-10-09
+**Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Define the user outcome, bounded scope, and observable behavior of the first end-to-end energy-system configuration demonstration.
 
 The normative system interfaces are defined in the [integration contract](energy-configuration-integration-contract.md). The work needed to deliver them is ordered in the [integration plan](energy-configuration-integration-plan.md).
@@ -62,7 +62,7 @@ The first release excludes heat pumps, electric vehicles, grid-connection approv
 | VEF | Validates the request and dataset, generates compatible configurations, simulates them, applies constraints, ranks feasible candidates, and presents the outcome. |
 | AI assistant | Proposes structured inputs for confirmation and explains only evidence present in a completed run. |
 | Developer Platform | Runs ODIP and VEF as isolated applications and provides their databases, secrets, routing, health checks, resource controls, and observability. |
-| Domain reviewer | Approves the energy-model and simulation assumptions before contract version 1 is accepted. |
+| Domain reviewer | For the bounded demonstration, the sole cross-project maintainer reviews the energy-model and simulation assumptions. Independent qualified review is required before production or certified-engineering use. |
 
 ## 5 Preconditions
 

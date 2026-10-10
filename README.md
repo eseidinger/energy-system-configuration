@@ -5,5 +5,15 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [Use case definition](energy-configuration-use-case.md) — user goal, scope, actors, scenarios, and observable acceptance conditions.
 - [Integration contract](energy-configuration-integration-contract.md) — normative APIs, schemas, calculations, security boundaries, and contract tests.
 - [Integration plan](energy-configuration-integration-plan.md) — decisions, repository work packages, ordered integration gates, handoffs, and completion criteria.
+- [Architecture decisions](decisions/) — accepted cross-project choices that establish the implementation baseline.
+- [VEF-to-ODIP authentication flow](architecture/vef-odip-authentication.md) — sequence, trust boundaries, threats, and required controls.
+- [Gate 0 domain review](reviews/2026-10-10-gate-0-domain-review.md) — approval and limitations of the version 0.2 implementation baseline.
 
 The documents intentionally separate why the integration exists, what participating systems must guarantee, and how the teams should deliver it.
+
+## Licensing
+
+Repository-authored schemas, APIs, tests, and tooling use Apache-2.0.
+Repository-authored documentation, synthetic fixtures, and expected results use
+CC BY 4.0. Third-party data retains its source terms and attribution. See
+[LICENSE](LICENSE) and [NOTICE](NOTICE).

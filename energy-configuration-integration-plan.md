@@ -1,9 +1,11 @@
 # AI-Assisted Energy System Configuration Integration Plan
 
-**Status:** Proposed plan, version 0.1  
-**Date:** 2026-10-09  
-**Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers  
+**Status:** Proposed plan, version 0.1
+**Date:** 2026-10-09
+**Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
+
+**Current gate:** Gate 0 completed on 2026-10-10; contract version `0.2` is the frozen implementation baseline and Gate 1 is next. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
 
@@ -37,12 +39,12 @@ Record these as short architecture decisions. Gate 0 closes only when every item
 
 | ID | Decision | Required outcome |
 | --- | --- | --- |
-| `DEC-01` | Reference data | Confirm region, calendar year, source licenses, catalog owner, and whether synthetic fixtures are sufficient for the demonstration. |
-| `DEC-02` | Simulation | Domain reviewer approves PV, inverter, battery dispatch, annual operations, component lifetime, rounding, and numeric tolerances. |
-| `DEC-03` | Connectivity | Select authenticated public HTTPS ingress or define a private cross-project service capability. |
-| `DEC-04` | Identity | Select issuer, token audience, claims, provisioning owner, and rotation process for VEF's read-only ODIP identity. |
-| `DEC-05` | Limits and retention | Set artifact and publication size limits, candidate/search bounds, run timeout, retention, and customer-data classification. |
-| `DEC-06` | Contract ownership | Name the owner and release process for shared JSON Schema/OpenAPI definitions and fixtures. |
+| [`DEC-01`](decisions/DEC-01-reference-data.md) | Reference data | Confirm region, calendar year, source licenses, catalog owner, and whether synthetic fixtures are sufficient for the demonstration. |
+| [`DEC-02`](decisions/DEC-02-simulation.md) | Simulation | Domain reviewer approves PV, inverter, battery dispatch, annual operations, component lifetime, rounding, and numeric tolerances. |
+| [`DEC-03`](decisions/DEC-03-connectivity.md) | Connectivity | Select authenticated public HTTPS ingress or define a private cross-project service capability. |
+| [`DEC-04`](decisions/DEC-04-identity.md) | Identity | Select issuer, token audience, claims, provisioning owner, and rotation process for VEF's read-only ODIP identity. |
+| [`DEC-05`](decisions/DEC-05-limits-retention-classification.md) | Limits and retention | Set artifact and publication size limits, candidate/search bounds, run timeout, retention, and customer-data classification. |
+| [`DEC-06`](decisions/DEC-06-contract-ownership-and-releases.md) | Contract ownership | Name the owner and release process for shared JSON Schema/OpenAPI definitions and fixtures. |
 
 If a decision changes a contract field or behavior, update the proposed contract before dependent implementation begins.
 
