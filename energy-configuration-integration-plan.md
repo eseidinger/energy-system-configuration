@@ -1,11 +1,11 @@
 # AI-Assisted Energy System Configuration Integration Plan
 
-**Status:** Proposed plan, version 0.1
-**Date:** 2026-10-09
+**Status:** Reconciled plan, version 0.2
+**Date:** 2026-10-11
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
 
-**Current gate:** Gate 0 completed on 2026-10-10. Gate 1 implementation and maintainer review are complete in the working tree; the immutable `contract-kit-v0.2.0` tag, release archive, and ODIP/VEF CI pins remain before Gate 1 closes and subproject implementation starts. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
+**Current gate:** Gate 0 completed on 2026-10-10. Gate 1 kit implementation and [maintainer release review](reviews/2026-10-11-contract-kit-0.4.0-release-review.md) are complete. Platform reconciliation on 2026-10-11 targets `0.4.0`, retaining `0.3.0` identity changes and adding implemented monitoring/log contracts. The [versioned release page](https://github.com/eseidinger/energy-system-configuration/releases/tag/contract-kit-v0.4.0) is the publication record for the immutable tag, archive, and checksum. ODIP/VEF CI pins remain before Gate 1 closes and subproject implementation starts. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
 
@@ -55,9 +55,9 @@ These IDs are the traceable units to create in the respective repositories.
 | ID | Project | Deliverable | Acceptance evidence |
 | --- | --- | --- | --- |
 | `SHARED-01` | Cross-project | Versioned contract kit containing schemas, examples, fixtures, expected digests, simulation totals, and recommendation. | ODIP and VEF validate the same kit in CI. |
-| `DP-01` | Developer Platform | Deploy ODIP API, ODIP worker, and VEF as separate projects with immutable images, databases, secrets, readiness, and bounded resources. | Applications become ready after restart and retain data. |
+| `DP-01` | Developer Platform | Deploy ODIP API and worker in one ODIP project and VEF in a separate project, with immutable images, separate databases, managed service binding, readiness, and bounded resources. | Applications become ready after restart and retain data. |
 | `DP-02` | Developer Platform | Permit the selected VEF-to-ODIP route with least-privilege egress. | Allowed ODIP request succeeds; an unrelated destination is denied. |
-| `DP-03` | Developer Platform | Document application identity and, if selected, private cross-project routing as explicit capabilities. | Capability contract and isolation tests pass. |
+| `DP-03` | Developer Platform | Apply platform-managed route/group policies, provider-approved service access, trusted principal headers, and separate project governance. | Normalized identity, pending/approval, revocation/rotation, backend isolation, and governance tests pass. |
 | `ODIP-01` | ODIP core | Add a generic immutable dataset-publication manifest with schema reference, multiple artifacts, provenance, and validation-policy result. | Energy and non-energy fixtures publish without domain branching in ODIP core. |
 | `ODIP-02` | ODIP core | Serve immutable manifests and artifacts with versions, ETags, conditional reads, and checksums. | Repeated reads match digests; corrections require a new version. |
 | `ODIP-03` | ODIP | Enforce application authentication, dataset-scoped read/write authorization, and constrained source retrieval. | Unauthorized operations and disallowed source locations fail. |
@@ -83,10 +83,11 @@ These IDs are the traceable units to create in the respective repositories.
 
 ### Gate 1 — Build the shared contract kit
 
-**Status (2026-10-10):** Items 1–5 are implemented and pass the repository-neutral
+**Status (2026-10-11):** Items 1–5 are implemented and pass the repository-neutral
 test runner. The deterministic release archive can be built locally. Item 6 is
-pending the immutable commit, tag, published archive/checksum, and consumer CI
-pins; Gate 2 must not start before that handoff is complete.
+complete only when the reconciled `0.4.0` release is published and both consumers
+pin its version and archive checksum in CI; Gate 2 must not start before that
+handoff is complete. See the release page above for publication evidence.
 
 1. Create versioned JSON Schemas for the generic publication manifest, energy artifacts, optimization request, candidate, result, and machine-readable errors.
 2. Add a compact but complete one-year energy fixture plus a non-energy publication fixture.
@@ -125,11 +126,11 @@ pins; Gate 2 must not start before that handoff is complete.
 1. Build ODIP and VEF immutable images and record their digests.
 2. Deploy ODIP API, worker, and database; publish the agreed reference fixture.
 3. Deploy VEF and its separate database with the exact supported contract and model versions.
-4. Provision VEF's read-only ODIP credential through the platform secret mechanism.
+4. Apply project governance and ODIP/VEF access policies separately from declarations. Create VEF's service-access request, approve only ODIP's reader group, wait for active reconciliation, and consume its project-wide secret binding. Provision/approve human VEF membership separately.
 5. Apply the selected route, DNS, TLS, and least-privilege egress policy.
-6. Verify successful token validation and dataset-scoped access from VEF to ODIP.
-7. Verify that an unauthorized identity, prohibited dataset, and unrelated egress destination are denied.
-8. Enable correlation on dataset ID, dataset version, and run ID without recording customer details or tokens.
+6. Verify token validation at the platform boundary, stripped inbound credentials, normalized identity headers, and ODIP's stable-principal dataset allow-list. Verify VEF run ownership, browser login, and CSRF behavior.
+7. Verify unauthorized/pending identities, prohibited datasets, writes by the reader, direct backend bypass, and unrelated egress are denied. Exercise rotation/adoption and revocation with issued credentials. Record DNS pins and reapply on address change.
+8. Deploy component-aware monitoring and minimized central logging. Separate boundary probe success from Kubernetes readiness, propagate opaque VEF/ODIP correlation with domain links in owned evidence, and read through authorized retained-log APIs. Capture deployed ingestion, seven-day expiry/compactor, restart, actual restore, and access-reconciliation evidence. Historical EV-45 does not accept the new logging increment or energy gate.
 
 **Exit:** `DP-01` through `DP-03` pass; VEF completes a real authenticated publication fetch from deployed ODIP.
 
@@ -143,7 +144,7 @@ Execute the following in one automated environment:
 4. Assert rejection of a modified artifact, wrong unit, missing hour, unpublished version, unsupported schema major, invalid customer input, unauthorized caller, and changed body under a reused idempotency key.
 5. Publish corrected dataset `1.0.1`; reproduce the existing `1.0.0` run unchanged, then explicitly start and verify a new `1.0.1` run.
 6. Interrupt ODIP after VEF has verified `1.0.0` and confirm that only the verified cached version can be reused.
-7. Restart ODIP and VEF, verify retained state, reproduce one completed run, and capture resource and observability evidence.
+7. Restart ODIP and VEF, verify retained state, reproduce one completed run, and capture observability evidence: separate boundary/readiness signals, safe retained correlation, scoped denial, and backend-unavailable handling. Verify retired/restarted-pod readback and elapsed seven-day expiry with collector/compactor health; immediate ingestion is insufficient.
 8. Restore the tested state from backup and reproduce the reference result.
 
 **Exit:** `INT-01` passes in full. Local tests or three independently healthy deployments are not substitutes for this gate.
@@ -186,11 +187,11 @@ Consumers pin handoff versions. A producer may add backward-compatible optional 
 
 ## 7 Current baseline and sequencing risks
 
-This plan is based on the repositories inspected on 2026-10-09.
+ODIP and VEF baselines remain those inspected on 2026-10-09. Developer Platform was rechecked against its current GitHub default branch on 2026-10-11.
 
 | Project | Reviewed baseline | Consequence for sequencing |
 | --- | --- | --- |
-| Developer Platform [`27a45e1`](https://github.com/eseidinger/developer-platform/tree/27a45e14c82b109894ec9d1781e1e1cf3c1ec0bd) | [Application schema](https://github.com/eseidinger/developer-platform/blob/27a45e14c82b109894ec9d1781e1e1cf3c1ec0bd/platform/app/spec.py) and [manifests](https://github.com/eseidinger/developer-platform/blob/27a45e14c82b109894ec9d1781e1e1cf3c1ec0bd/platform/app/manifests.py) support services, schedules, PostgreSQL, and declared egress; the [security model](https://github.com/eseidinger/developer-platform/blob/27a45e14c82b109894ec9d1781e1e1cf3c1ec0bd/docs/architecture/security-and-authorization.md) separates application authorization from platform authorization. | Decide the application identity and route before Gate 4; do not assume platform OIDC grants authorize ODIP data access. |
+| Developer Platform [`b360dde`](https://github.com/eseidinger/developer-platform/tree/b360ddee34444748c95705c597aa7b17491cd05b) | Hosted identity/deployment inputs remain unchanged; [component-aware monitoring and centralized operational logs](https://github.com/eseidinger/developer-platform/blob/b360ddee34444748c95705c597aa7b17491cd05b/infrastructure/monitoring/README.md) now implement protected-boundary probes, independent Kubernetes readiness, minimized envelopes, project-authorized retained reads, and configured seven-day storage. Historical EV-45 still records 39 checks with nine deferred and no deployed control-plane revision. | Use kit `0.4.0` operational profiles with the retained `0.3.0` identity boundary. Deploy the new source and envelope-emitting fixture; monitoring/retention, real restore, outages, and the external energy suite remain open acceptance work. PostgreSQL TLS and component secret isolation remain outside the current lab profile. |
 | ODIP [`accc027`](https://github.com/eseidinger/open-data-intelligence-platform/tree/accc027194014b38677aa761566ed57682825767) | The [ingestion service](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/services/platform-api/src/main/kotlin/de/eseidinger/odip/platform/ingestion/service/IngestionService.kt) and [worker](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/workers/data-worker/src/odip_worker/run.py) exist, but the [normalizer](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/workers/data-worker/src/odip_worker/normalization.py) currently handles a narrow energy observation; broader analytics remain in the [development plan](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/docs/development-plan.md). | Complete the generic publication model before coupling VEF to energy-specific ODIP behavior. |
 | VEF [`43ee5cc`](https://github.com/eseidinger/variability-engineering-framework/tree/43ee5cc1c981970fd9068c7a9e0119a935c925ea) | The [analysis engine](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/apps/prototype/api/src/main/java/de/eseidinger/variabilityengineering/core/AnalysisEngine.java) uses a [fixture-backed population](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/apps/prototype/api/src/main/java/de/eseidinger/variabilityengineering/http/FoodServicePopulationStore.java); generative configuration and optimization are [roadmap](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/docs/01-product/roadmap.md) work, and current [variant identity](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/apps/prototype/api/src/main/java/de/eseidinger/variabilityengineering/core/Variant.java) has no quantities or units. | Prove candidate identity, quantities, units, and simulation math against small fixtures before adding deployed or AI concerns. |
 

@@ -1,64 +1,85 @@
 # VEF-to-ODIP authentication flow and threat notes
 
-**Status:** Gate 0 baseline
+**Status:** Reconciled identity baseline from kit `0.3.0`, retained in `0.4.0`, 2026-10-11
 **Related decisions:** [DEC-03](../decisions/DEC-03-connectivity.md), [DEC-04](../decisions/DEC-04-identity.md)
 
-## Sequence
+## Provisioning and sequence
+
+VEF requests service access through the Platform API. ODIP's project
+administrator approves only its reader group. The platform reconciles the
+confidential client and target groups, then delivers a project-wide secret
+binding to VEF. ODIP records a finer dataset grant for the stable service
+principal ID. Applications configure no dedicated realm, fixed client ID,
+OAuth scope, or Keycloak role.
 
 ```mermaid
 sequenceDiagram
     participant VEF as VEF application
-    participant KC as Keycloak energy-system realm
-    participant ODIP as ODIP API
-    participant AUTHZ as ODIP authorization policy
-
-    VEF->>KC: POST token endpoint<br/>client_credentials for vef-odip-reader
-    KC->>KC: Authenticate client and resolve service-account role
-    KC-->>VEF: Short-lived JWT<br/>aud=odip-api, role=dataset.read
-    VEF->>ODIP: GET immutable publication<br/>Authorization: Bearer JWT
-    ODIP->>ODIP: Verify signature, issuer, audience,<br/>authorized party, times, and client role
-    ODIP->>AUTHZ: Check client and dataset ID
+    participant IDP as Environment identity provider
+    participant EDGE as Platform ODIP access boundary
+    participant ODIP as Private ODIP backend
+    participant AUTHZ as ODIP dataset policy
+    VEF->>IDP: client_credentials using managed binding
+    IDP-->>VEF: Short-lived token with derived audience and group IDs
+    VEF->>EDGE: HTTPS GET publication with bearer token
+    EDGE->>EDGE: Verify token, active service, route, groups, revocation snapshot
+    EDGE->>ODIP: Strip credentials and spoofed headers; add normalized principal context
+    ODIP->>ODIP: Require well-formed trusted context
+    ODIP->>AUTHZ: Check stable principal ID and dataset permission
     AUTHZ-->>ODIP: Permit published dataset read
-    ODIP-->>VEF: Manifest or artifact with ETag
+    ODIP-->>VEF: Manifest/artifact through boundary with ETag
     VEF->>VEF: Verify trusted origin, schema, and SHA-256
 ```
 
-VEF refreshes the token before expiry and does not forward it to any host other
-than the configured ODIP origin. ODIP validates the token locally using cached
-Keycloak signing keys; it contacts Keycloak discovery/JWKS endpoints only to
-initialize or refresh those keys.
+VEF reacquires tokens before expiry and sends them only to the configured ODIP
+origin. The platform boundary owns signing-key discovery and caching. ODIP
+requires no identity-provider egress for caller authentication. Header validation
+alone cannot establish trust: network policy must prevent direct backend access.
 
 ## Trust boundaries
 
-- Developer Platform routing and egress policy controls where traffic may go;
-  it does not grant ODIP application permissions.
-- Keycloak authenticates the VEF client and issues a bounded access token.
-- ODIP is the final authority for dataset and operation authorization.
-- VEF independently validates publication origin, schema, and artifact digests
-  after ODIP authorizes retrieval.
+- Platform grants authorize control-plane changes; application groups authorize
+  hosted routes. Neither grants ODIP dataset access or VEF run ownership alone.
+- The provider boundary authenticates and checks coarse route-group authority,
+  including effective revocation even when a token still asserts membership.
+- ODIP owns dataset-specific decisions keyed to stable principal ID. VEF owns
+  run ownership and caller-scoped idempotency through the same identity context.
+- The consumer project is the service-secret boundary. All VEF components may
+  receive its credential; component-specific attribution is not available.
+- Public cross-project HTTPS is encrypted. PostgreSQL transport in the accepted
+  single-host lab profile is not TLS-protected.
 
 ## Threats and controls
 
 | Threat | Required control | Acceptance evidence |
 | --- | --- | --- |
-| Stolen VEF credential | Secret is injected only into VEF, rotated every 90 days, and absent from images and logs. | Retired secret cannot obtain a token; secret-scanning and log checks pass. |
-| Stolen access token | Five-minute lifetime, TLS, audience restriction, and no token logging. | Expired and wrong-audience tokens return `401`. |
-| Token issued for another client | ODIP validates `aud`, authorized party, and the Keycloak client role. | Token for an unrelated client returns `401` or `403` without data. |
-| Valid client reads another dataset | ODIP applies its local client-to-dataset allow-list after token validation. | Request for a prohibited dataset returns `403`. |
-| VEF attempts an ODIP write | The service account has only `dataset.read`, and ODIP checks operation authorization. | Catalog, ingestion, and publication writes return `403`. |
-| Malicious artifact URL or redirect | VEF accepts only relative artifact paths resolved against the configured ODIP origin and rejects cross-origin redirects. | External URL and redirect fixtures fail before retrieval. |
-| DNS or certificate interception | HTTPS certificate and hostname verification are mandatory; endpoints are configured, not read from publications. | Invalid certificate or hostname fails closed. |
-| Signing-key rotation or discovery outage | ODIP caches still-valid keys, refreshes on an unknown key, and rejects the token if refresh fails. | Known cached key continues to validate; unknown key with failed refresh returns `401`. |
-| Excessive network access | Project egress permits only the approved ODIP and Keycloak HTTPS destinations. | ODIP and token requests succeed; unrelated egress is denied. |
-| Sensitive-data leakage | Customer details, secrets, and tokens are excluded from logs, traces, publications, results, and explanations. | Automated log assertions find only approved correlation identifiers. |
+| Stolen service credential | Project-scoped managed binding, at least 90-day rotation, no telemetry exposure. | Retired client cannot obtain tokens; all components in the project are within the accepted trust boundary. |
+| Stolen or invalid token | At most five-minute lifetime; boundary validates exact issuer, derived audience, type, times, subject, and client. | Expired/wrong-audience token returns `401` without redirect. |
+| Unapproved client or wrong group | Provider approval and active service state, route group IDs, and current snapshot. | Unapproved/wrong-group request returns `403` before reaching ODIP. |
+| Reader targets other data or writes | ODIP principal-to-dataset grant and no writer route membership. | Prohibited dataset and write operations return `403`. |
+| Forged identity headers | Strip all inbound reserved headers; only boundary reaches backend. | Spoofed header replaced and direct/same-project backend bypass denied with healthy controls. |
+| Rotation changes client identity | Local domain grants use stable principal ID; normal adoption confirms new binding. | Principal remains stable, new client works, old client is revoked. |
+| Malicious path or redirect | Only trusted-origin relative paths; reject cross-origin redirects and ambiguous path encodings. | Unsafe retrieval fails before data use. |
+| Intercepted traffic | Verify certificate and hostname; configure origins outside payloads. | Invalid TLS fails closed. |
+| Stale authorization or provider outage | Snapshots expire within five minutes; unusable signing keys and expired snapshots fail closed. | Existing claims cannot bypass revocation; outage tests demonstrate the bound. |
+| Excessive network access | Explicit hostname/443 exceptions approved by operator and pinned at apply. | Allowed requests pass; unrelated egress fails; changed DNS requires reapply. |
+| Sensitive-data leakage | Disable optional profile attributes; exclude customer details and secrets from telemetry. | Sanitized correlation and automated log assertions. |
+| Browser forgery | VEF browser route requires approved user membership, managed CSRF token, and same-origin header. | Pending human, missing CSRF, and cross-origin mutation fail. |
 
-## Failure behavior
+## Failure and recovery behavior
 
-- Keycloak unavailable before token acquisition: VEF does not call ODIP without
-  authentication and reports an operational dependency failure.
-- ODIP unavailable after VEF verified an immutable publication: VEF may use only
-  that exact cached publication and records its version and checksums.
-- Keycloak signing-key refresh unavailable: ODIP may validate with an applicable
-  cached key; an unknown key fails closed.
-- Authorization failure: VEF does not retry `401` or `403` indefinitely and does
-  not fall back to anonymous access.
+- Token acquisition fails: VEF reports a dependency failure and never falls
+  back to anonymous access.
+- Access boundary returns `401`/`403`: no indefinite retry or fallback. The
+  platform's access-error body differs from application `error/v1`.
+- Expired authorization snapshot or unavailable authentication material:
+  boundary fails closed; `503` is an operational dependency failure.
+- ODIP unavailable after immutable data verification: VEF may use only the
+  exact verified cached publication, retaining its version and digests.
+- After actual backup restore: platform catalog reconciles clients/groups and
+  revocation outward, browser sessions invalidate, and inconsistent credentials
+  rotate before access reopens. A reconciliation rehearsal is not restore proof.
+
+The upstream neutral acceptance run covers core identity/isolation behavior;
+its nine deferred checks, including actual restore, outages, log retention, and
+the external energy suite, remain integration obligations.

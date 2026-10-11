@@ -56,3 +56,13 @@ tariff, catalog, and calendar-profile assumptions where appropriate.
 Gate 1 becomes complete only when `contract-kit-v0.2.0` is committed, tagged,
 published with its `SHA256SUMS`, and pinned by ODIP and VEF CI. Subproject
 implementation must not begin from the mutable working tree.
+
+## Platform reconciliation note — 2026-10-11
+
+Kit `0.3.0` supersedes the `0.2.0` deployment, identity, classification, and
+platform retention assumptions. This historical approval remains the reviewed
+energy numerical baseline; it does not approve the new identity profile or
+complete its release handoff. See the [platform compatibility notes](../contract-kit/platform/README.md).
+The next immutable release and consumer pins now target `0.4.0`, which adds
+the operational-envelope and component-monitoring contract, after the required
+maintainer review; the earlier numerical fixtures and outputs are unchanged.

@@ -1,7 +1,7 @@
 # DEC-05: Limits, retention, and data classification
 
 **Status:** Accepted
-**Date:** 2026-10-10
+**Date:** 2026-10-10; reconciled 2026-10-11
 **Decision owner:** Integration repository maintainer
 **Due date:** 2026-10-10 (completed)
 
@@ -38,11 +38,17 @@ with reference fixtures and does not require identifying customer information.
 
 | Data | Classification |
 | --- | --- |
-| Published reference fixtures and their provenance | `PUBLIC` |
-| ODIP ingestion working data | `INTERNAL` |
-| VEF customer inputs, runs, results, and evidence | `CUSTOMER_CONFIDENTIAL` |
-| Client secrets, access tokens, and signing material | `SECRET` |
-| Operational logs and metrics | `INTERNAL` |
+| Published reference fixtures and their provenance | `Public` |
+| ODIP ingestion working data | `Internal` |
+| VEF customer inputs, runs, results, and evidence | `Confidential` |
+| Client secrets, access tokens, and signing material | `Restricted` |
+| Operational logs and metrics | `Internal` |
+
+Project governance uses the platform classification vocabulary above and is
+separate from the application declaration. ODIP declares a maximum of `Internal`,
+VEF declares `Confidential`, and both declare telemetry `Internal`. `Restricted`
+is limited to managed credentials, not ordinary project data. Stable identity
+IDs remain security identifiers; optional display name/email release is disabled.
 
 The first release does not collect names, exact street addresses, account
 numbers, or free-form customer notes. Customer details and credentials are
@@ -54,11 +60,28 @@ excluded from publications, logs, metrics, traces, and AI explanations.
   contract version is supported and for one year after support ends.
 - VEF customer requests, runs, results, and evidence are retained for 180 days
   after run completion.
-- Operational logs are retained for 30 days.
-- Security audit records are retained for 180 days.
-- Backups are retained for 30 days.
-- Expiration triggers automatic deletion from active storage. Expired records
-  disappear from backups as those backups pass their retention period.
+- Applications enforce domain-row expiration in active storage. Project workload
+  retirement retains its database until an explicitly authorized purge.
+- Centralized workload logs now collect only minimized operational envelopes,
+  with seven-day retention configured. Deployed ingestion/readback and elapsed
+  expiry/compactor evidence remain open; collection outages can lose entries.
+  Free-text logs remain best-effort kubelet diagnostics. Metrics retain seven
+  days or 4 GB.
+- Envelope correlation is an opaque lowercase UUID/32-hex value, Internal under
+  the reference governance. Domain IDs remain in application-owned evidence;
+  customer details and secrets never enter the envelope. Shared Loki/Grafana are
+  operator-only; retained reads use fixed project-authorized Platform API queries.
+  Backend `state: unavailable` is failure even when HTTP status is `200`.
+- Application-owned security audit records retain 180 days. Platform audit events
+  are append-only with no automatic expiry in the lab; review growth annually.
+- Platform backups retain the latest verified snapshot plus 14 daily, 8 weekly,
+  and 6 monthly recovery points. Active-row deletion does not delete those copies;
+  expired records leave recovery storage only when containing snapshots expire.
+- Pending access requests expire after 30 days; terminal requests and revoked
+  memberships retain 90 days. These platform records are distinct from VEF runs.
+- The original 30-day log/backup assumptions are superseded for kit `0.3.0` by
+  this platform-aligned policy. Application retention owners, purge authority,
+  and recovery owners are recorded through the separate governance API.
 
 ## Rejection behavior
 

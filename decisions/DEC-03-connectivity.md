@@ -1,7 +1,7 @@
 # DEC-03: Connectivity
 
 **Status:** Accepted
-**Date:** 2026-10-10
+**Date:** 2026-10-10; reconciled 2026-10-11
 **Decision owner:** Integration repository maintainer
 **Due date:** 2026-10-10 (completed)
 
@@ -17,12 +17,16 @@ prerequisite.
 - VEF accesses ODIP through ODIP's stable public HTTPS application ingress.
 - Public ingress means network-reachable, not anonymously readable. ODIP's
   publication endpoints require the application identity defined by `DEC-04`.
-- TLS is mandatory and uses a certificate managed through the target platform
-  installation.
-- VEF egress is limited to the ODIP API hostname and the Keycloak token endpoint
-  on port 443, plus platform-provided DNS.
-- ODIP egress is limited to the Keycloak discovery and JWKS endpoints on port
-  443 where key retrieval is not supplied locally.
+- Cross-project HTTPS TLS is mandatory and uses certificates managed through
+  the target installation. PostgreSQL transport is not TLS-protected in the
+  accepted single-host lab profile.
+- Each VEF calling component declares the ODIP API hostname and managed token
+  endpoint hostname on TCP 443, plus platform-provided DNS. Operators approve
+  their resolved CIDRs and port. DNS is pinned at apply time; changed addresses
+  require explicit reapply.
+- ODIP inbound authentication requires no application-side Keycloak egress.
+  The platform access boundary retrieves signing keys. Ingestion source access
+  belongs to separately declared worker egress.
 - VEF rejects redirects to another origin. Publication artifact paths are
   relative and may resolve only against the trusted ODIP manifest origin.
 - A private cross-project service route is deferred. Adding one later must
@@ -33,8 +37,9 @@ prerequisite.
 - VEF resolves the configured ODIP and Keycloak names and verifies their TLS
   certificates.
 - An authenticated ODIP publication request succeeds from the VEF project.
-- An unauthenticated ODIP request and a request to an unrelated destination
-  fail.
+- An unauthenticated ODIP request, unrelated destination, and direct protected
+  backend bypass fail. A healthy control request proves each denial is policy
+  enforcement rather than a DNS or connectivity failure.
 - A manifest redirect or artifact path targeting another origin is rejected.
 
 ## Consequences

@@ -35,6 +35,7 @@ contract-kit/
 ├── examples/
 ├── fixtures/
 ├── expected-results/
+├── platform/
 └── tests/
 ```
 
@@ -51,8 +52,15 @@ files state how they were produced and are checked for drift in CI.
   version.
 - Documentation and test-runner corrections that do not change contract
   behavior increment the patch version.
-- The initial implementation baseline is `0.2.0`, tagged
-  `contract-kit-v0.2.0` after Gate 1 passes.
+- The original implementation baseline was `0.2.0`. Any already published
+  `contract-kit-v0.2.0` tag or artifact remains immutable; the reconciled Gate 1
+  handoff now targets `0.4.0`.
+- The `0.3.0` identity reconciliation breaks the earlier security integration
+  assumptions. The reviewed `0.2.0` numerical oracle stays unchanged.
+- The subsequent `0.4.0` reconciliation adds the operational-envelope schema,
+  example, and component-monitoring/log contract. It is an additive minor change
+  with unchanged deployment/access input schemas. Publish `contract-kit-v0.4.0`
+  only after review and release checks.
 - The first accepted release is `1.0.0`, tagged `contract-kit-v1.0.0` only after
   the integration and release gates pass.
 

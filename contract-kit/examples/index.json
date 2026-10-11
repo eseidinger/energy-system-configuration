@@ -38,5 +38,21 @@
   {
     "document": "error.json",
     "schema": "urn:portfolio:error:v1"
+  },
+  {
+    "document": "platform-service-principal.json",
+    "schema": "urn:portfolio:platform:principal-headers:v1"
+  },
+  {
+    "document": "platform-user-principal.json",
+    "schema": "urn:portfolio:platform:principal-headers:v1"
+  },
+  {
+    "document": "platform-access-error.json",
+    "schema": "urn:portfolio:platform:access-error:v1"
+  },
+  {
+    "document": "platform-operational-envelope.json",
+    "schema": "urn:portfolio:platform:operational-envelope:v1"
   }
 ]
