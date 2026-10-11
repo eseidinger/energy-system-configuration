@@ -36,3 +36,13 @@ topology. Repository-authored software and schema material uses Apache-2.0;
 repository-authored documentation and data material uses CC BY 4.0; third-party
 data retains its source terms and attribution. Contract version `0.2` is frozen
 as the implementation baseline and Gate 0 is complete.
+
+## Platform reconciliation note — 2026-10-11
+
+Kit `0.3.0` supersedes the `0.2.0` deployment, identity, classification, and
+platform retention assumptions. This historical approval remains the reviewed
+energy numerical baseline; it does not approve the new identity profile or
+complete its release handoff. See the [platform compatibility notes](../contract-kit/platform/README.md).
+The next immutable release and consumer pins now target `0.4.0`, which adds
+the operational-envelope and component-monitoring contract, after the required
+maintainer review; the earlier numerical fixtures and outputs are unchanged.

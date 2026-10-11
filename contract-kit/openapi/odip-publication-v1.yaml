@@ -4,9 +4,9 @@ info:
   version: 1.0.0
   description: Domain-neutral discovery and retrieval of published dataset versions.
 servers:
-  - url: https://odip.example.invalid
+  - url: https://api-odip.apps.example.invalid
 security:
-  - keycloak: [dataset.read]
+  - platformBearer: []
 paths:
   /api/v1/datasets:
     get:
@@ -26,8 +26,10 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/PublicationPage'}
+        '400': {$ref: '#/components/responses/BadRequest'}
         '401': {$ref: '#/components/responses/Unauthorized'}
         '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
   /api/v1/datasets/{datasetId}/versions/{version}:
     get:
       operationId: getDatasetPublication
@@ -45,8 +47,10 @@ paths:
               schema: {$ref: ../schemas/dataset-publication-v1.schema.json}
         '304':
           description: The supplied ETag still identifies the immutable version.
+        '400': {$ref: '#/components/responses/BadRequest'}
         '401': {$ref: '#/components/responses/Unauthorized'}
         '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
         '404': {$ref: '#/components/responses/NotFound'}
         '409': {$ref: '#/components/responses/Conflict'}
   /api/v1/datasets/{datasetId}/versions/{version}/artifacts/{artifactId}:
@@ -72,19 +76,23 @@ paths:
               schema: {type: string, contentEncoding: binary}
         '304':
           description: The supplied ETag still identifies the immutable artifact.
+        '400': {$ref: '#/components/responses/BadRequest'}
         '401': {$ref: '#/components/responses/Unauthorized'}
         '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
         '404': {$ref: '#/components/responses/NotFound'}
         '409': {$ref: '#/components/responses/Conflict'}
 components:
   securitySchemes:
-    keycloak:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://identity.example.invalid/realms/energy-system/protocol/openid-connect/token
-          scopes:
-            dataset.read: Read allow-listed published datasets and artifacts.
+    platformBearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Short-lived client-credentials token from the platform-managed service
+        binding. The platform validates its derived audience and approved group
+        IDs, strips the token, and forwards normalized identity headers to ODIP.
+        Application-defined OAuth scopes are not used.
   parameters:
     DatasetId:
       name: datasetId
@@ -129,15 +137,35 @@ components:
     Error:
       $ref: ../schemas/error-v1.schema.json
   responses:
+    BadRequest:
+      description: Malformed or ambiguous route path rejected by the platform boundary.
+      content:
+        application/json:
+          schema: {$ref: ../schemas/platform-access-error-v1.schema.json}
     Unauthorized:
-      description: Missing, invalid, or expired bearer token.
-      content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+      description: Missing, invalid, or expired identity; bearer routes never redirect.
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Error'
+              - $ref: ../schemas/platform-access-error-v1.schema.json
     Forbidden:
-      description: Token lacks dataset.read or access to the requested dataset.
-      content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+      description: Platform route-group denial or ODIP dataset-level denial.
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Error'
+              - $ref: ../schemas/platform-access-error-v1.schema.json
     NotFound:
       description: Dataset, published version, or artifact was not found.
       content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
     Conflict:
       description: Dataset version exists but is not published.
       content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+    AccessUnavailable:
+      description: Platform authentication or authorization snapshot unavailable; fail closed before the backend.
+      content:
+        application/json:
+          schema: {$ref: ../schemas/platform-access-error-v1.schema.json}

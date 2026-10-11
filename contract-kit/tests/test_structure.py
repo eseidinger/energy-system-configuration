@@ -24,6 +24,7 @@ def test_required_directories_exist() -> None:
         "expected-results",
         "contractkit",
         "tests",
+        "platform",
     }
 
     assert required <= {path.name for path in ROOT.iterdir() if path.is_dir()}

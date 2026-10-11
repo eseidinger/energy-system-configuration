@@ -27,6 +27,12 @@ def test_release_archive_is_reproducible_and_complete(tmp_path) -> None:
         f"{prefix}/LICENSES/CC-BY-4.0.txt",
         f"{prefix}/contract-kit/VERSION",
         f"{prefix}/contract-kit/uv.lock",
+        f"{prefix}/contract-kit/platform/baseline.json",
+        f"{prefix}/contract-kit/platform/upstream-inputs.schema.json",
+        f"{prefix}/contract-kit/platform/README.md",
+        f"{prefix}/contract-kit/schemas/platform-operational-envelope-v1.schema.json",
+        f"{prefix}/contract-kit/examples/platform-operational-envelope.json",
+        f"{prefix}/contract-kit/platform/examples/odip-access-policy.json",
         f"{prefix}/contract-kit/fixtures/index.json",
         f"{prefix}/contract-kit/expected-results/optimization-reference.json",
     } <= names

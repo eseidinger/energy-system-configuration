@@ -4,14 +4,24 @@ info:
   version: 1.0.0
   description: Submit bounded energy optimization runs and retrieve immutable results.
 servers:
-  - url: https://vef.example.invalid
+  - url: https://api-vef.apps.example.invalid
 security:
-  - keycloak: []
+  - platformSession: []
 paths:
   /api/v1/optimization-runs:
     post:
       operationId: createOptimizationRun
       parameters:
+        - name: X-Platform-CSRF-Token
+          in: header
+          required: true
+          description: Value of the managed __Host-platform-csrf cookie; the boundary also requires a same-origin Origin header.
+          schema: {type: string, minLength: 1}
+        - name: Origin
+          in: header
+          required: true
+          description: Exact public HTTPS origin of this application.
+          schema: {type: string, format: uri}
         - name: Idempotency-Key
           in: header
           required: true
@@ -28,8 +38,10 @@ paths:
             application/json:
               schema: {$ref: '#/components/schemas/RunAccepted'}
         '400': {$ref: '#/components/responses/BadRequest'}
+        '302': {$ref: '#/components/responses/LoginRequired'}
         '401': {$ref: '#/components/responses/Unauthorized'}
         '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
         '409': {$ref: '#/components/responses/Conflict'}
         '413': {$ref: '#/components/responses/PayloadTooLarge'}
         '422': {$ref: '#/components/responses/Unprocessable'}
@@ -48,8 +60,11 @@ paths:
                   - $ref: '#/components/schemas/ActiveRun'
                   - $ref: ../schemas/energy-optimization-result-v1.schema.json
                   - $ref: '#/components/schemas/FailedRun'
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '302': {$ref: '#/components/responses/LoginRequired'}
         '401': {$ref: '#/components/responses/Unauthorized'}
         '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
         '404': {$ref: '#/components/responses/NotFound'}
   /api/v1/optimization-runs/{runId}/candidates:
     get:
@@ -64,8 +79,11 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/CandidatePage'}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '302': {$ref: '#/components/responses/LoginRequired'}
         '401': {$ref: '#/components/responses/Unauthorized'}
         '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
         '404': {$ref: '#/components/responses/NotFound'}
         '409': {$ref: '#/components/responses/Conflict'}
   /api/v1/capabilities:
@@ -77,12 +95,22 @@ paths:
           content:
             application/json:
               schema: {$ref: '#/components/schemas/Capabilities'}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '302': {$ref: '#/components/responses/LoginRequired'}
         '401': {$ref: '#/components/responses/Unauthorized'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '503': {$ref: '#/components/responses/AccessUnavailable'}
 components:
   securitySchemes:
-    keycloak:
-      type: openIdConnect
-      openIdConnectUrl: https://identity.example.invalid/realms/energy-system/.well-known/openid-configuration
+    platformSession:
+      type: apiKey
+      in: cookie
+      name: __Host-platform-session
+      description: >-
+        Platform-managed browser session after OIDC login and application-group
+        approval. Unauthenticated requests redirect to login. The backend receives
+        normalized principal headers. This cookie is one part of the managed
+        session; applications do not create or inspect it.
   parameters:
     RunId:
       name: runId
@@ -152,15 +180,35 @@ components:
     Error:
       $ref: ../schemas/error-v1.schema.json
   responses:
+    LoginRequired:
+      description: Browser session missing or expired; platform redirects to login without reaching VEF.
+      headers:
+        Location:
+          schema: {type: string}
     BadRequest:
-      description: Syntactically invalid request.
-      content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+      description: Syntactically invalid request or ambiguous route path.
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Error'
+              - $ref: ../schemas/platform-access-error-v1.schema.json
     Unauthorized:
-      description: Missing, invalid, or expired bearer token.
-      content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+      description: Invalid platform session identity or missing/malformed normalized backend identity.
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Error'
+              - $ref: ../schemas/platform-access-error-v1.schema.json
     Forbidden:
       description: Caller lacks authority for this operation or run.
-      content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/Error'
+              - $ref: ../schemas/platform-access-error-v1.schema.json
     NotFound:
       description: Run was not found.
       content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
@@ -173,3 +221,8 @@ components:
     Unprocessable:
       description: Request violates domain rules, capability bounds, or search-space limit.
       content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+    AccessUnavailable:
+      description: Platform authentication or authorization snapshot unavailable; fail closed before the backend.
+      content:
+        application/json:
+          schema: {$ref: ../schemas/platform-access-error-v1.schema.json}
