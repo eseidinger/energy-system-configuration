@@ -5,7 +5,7 @@
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
 
-**Current gate:** Gate 0 completed on 2026-10-10. Gate 1 implementation and maintainer review are complete in the working tree; platform reconciliation on 2026-10-11 prepares `0.4.0`, retaining `0.3.0` identity changes and adding implemented monitoring/log contracts. The immutable `contract-kit-v0.4.0` tag, release archive, and ODIP/VEF CI pins remain before Gate 1 closes and subproject implementation starts. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
+**Current gate:** Gate 0 completed on 2026-10-10. Gate 1 kit implementation and [maintainer release review](reviews/2026-10-11-contract-kit-0.4.0-release-review.md) are complete. Platform reconciliation on 2026-10-11 targets `0.4.0`, retaining `0.3.0` identity changes and adding implemented monitoring/log contracts. The [versioned release page](https://github.com/eseidinger/energy-system-configuration/releases/tag/contract-kit-v0.4.0) is the publication record for the immutable tag, archive, and checksum. ODIP/VEF CI pins remain before Gate 1 closes and subproject implementation starts. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
 
@@ -85,8 +85,9 @@ These IDs are the traceable units to create in the respective repositories.
 
 **Status (2026-10-11):** Items 1–5 are implemented and pass the repository-neutral
 test runner. The deterministic release archive can be built locally. Item 6 is
-pending the reconciled `0.4.0` immutable commit, tag, published archive/checksum, and consumer CI
-pins; Gate 2 must not start before that handoff is complete.
+complete only when the reconciled `0.4.0` release is published and both consumers
+pin its version and archive checksum in CI; Gate 2 must not start before that
+handoff is complete. See the release page above for publication evidence.
 
 1. Create versioned JSON Schemas for the generic publication manifest, energy artifacts, optimization request, candidate, result, and machine-readable errors.
 2. Add a compact but complete one-year energy fixture plus a non-energy publication fixture.
