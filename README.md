@@ -11,6 +11,7 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [Gate 1 contract-kit review](reviews/2026-10-10-gate-1-domain-review.md) — reviewed fixture, numerical oracle, recommendation, and release prerequisite.
 - [Platform reconciliation](contract-kit/platform/README.md) — pinned implementation, breaking identity changes, deployment examples, and remaining acceptance work.
 - [Contract kit 0.4.0 release review](reviews/2026-10-11-contract-kit-0.4.0-release-review.md) — maintainer publication authorization, verification, and remaining consumer handoff.
+- [Contract kit 0.4.0 cross-project acceptance](reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md) — shared-kit acceptance by Developer Platform, ODIP, and VEF.
 - [Shared contract kit](contract-kit/) — executable schemas, APIs, examples, fixtures, expected results, and validation tests.
 
 The documents intentionally separate why the integration exists, what participating systems must guarantee, and how the teams should deliver it.

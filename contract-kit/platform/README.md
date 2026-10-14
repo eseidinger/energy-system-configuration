@@ -28,7 +28,8 @@ kit. Kit `0.4.0` is implemented and published under the annotated
 with archive SHA-256
 `884e3590614328c2adafa457153e11575dc1be09b9f53d7b0f53704fe39d02b0`.
 Existing tags and release artifacts must not be overwritten. ODIP and VEF still
-need to pin that version and checksum in their CI.
+pin that version and checksum in their CI, as recorded in the
+[cross-project acceptance](../../reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md).
 
 ## Additions since `0.3.0`
 
