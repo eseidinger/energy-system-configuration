@@ -61,7 +61,7 @@ files state how they were produced and are checked for drift in CI.
   example, and component-monitoring/log contract. It is an additive minor change
   with unchanged deployment/access input schemas. Publish `contract-kit-v0.4.0`
   only after review and release checks.
-- The proposed `0.5.0` handoff adds the VEF AI assistance profile, proposal and
+- The `0.5.0` handoff adds the VEF AI assistance profile, proposal and
   explanation schemas, citation validation, examples, and consumer acceptance
   cases. It leaves ODIP APIs, platform identity, and numerical oracles unchanged.
   Publication requires review and release checks; Gate 6 acceptance remains open.

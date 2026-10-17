@@ -273,12 +273,12 @@ An individual candidate includes component IDs and quantities, constraint evalua
 
 ## 5 AI assistance contract
 
-The proposed kit `0.5.0` packages these requirements in the normative
+Kit `0.5.0` packages these requirements in the normative
 [VEF AI assistance profile](contract-kit/ai/README.md), proposal and explanation
 schemas, examples, semantic citation checks, and consumer acceptance cases.
 This additive VEF handoff leaves the accepted `0.4.0` ODIP and numerical
-contracts unchanged. Publication and Gate 6 implementation acceptance remain
-separate release steps.
+contracts unchanged. The `0.5.0` implementation handoff does not establish
+Gate 6 acceptance or authorize the final `1.0.0` release.
 
 The AI layer belongs to the VEF user journey in the first release. It may propose a structured customer request from natural language and explain a completed run. The structured request is shown to the user for confirmation before optimization. The AI layer reads only a bounded result and approved evidence from ODIP and VEF; it does not call database connections, change component rules, publish ODIP data, or choose a recommendation independently of the optimizer.
 

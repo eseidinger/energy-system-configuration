@@ -3,7 +3,9 @@
 Version `0.5.0` adds the [VEF AI assistance contract](ai/README.md), request
 proposal and explanation schemas, cited-evidence examples, semantic citation
 validation, and consumer acceptance cases for Gate 6. This is an additive
-implementation handoff pending review and publication, not Gate 6 acceptance.
+implementation handoff for VEF, not Gate 6 acceptance. The
+[versioned release page](https://github.com/eseidinger/energy-system-configuration/releases/tag/contract-kit-v0.5.0)
+is the publication record for the archive and checksum.
 ODIP APIs and the numerical fixtures remain unchanged. See the
 [compatibility notes](ai/README.md#version-and-release-handoff).
 
