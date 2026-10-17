@@ -158,7 +158,7 @@ Execute the following in one automated environment:
 
 ### Gate 6 — Add AI assistance and release
 
-**Status (2026-10-17):** Next delivery milestone; `VEF-05` and release acceptance remain open.
+**Status (2026-10-17):** Next delivery milestone; `VEF-05` and release acceptance remain open. The proposed kit `0.5.0` packages the [VEF AI assistance profile](contract-kit/ai/README.md), schemas, examples, semantic citation checks, and consumer acceptance cases. Publication and VEF implementation/acceptance remain required; ODIP APIs and the numerical baseline are unchanged.
 
 1. Add natural-language-to-request proposal generation behind mandatory user confirmation.
 2. Restrict explanation input to the bounded run result and approved evidence view.
