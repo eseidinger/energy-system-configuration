@@ -1,11 +1,11 @@
 # AI-Assisted Energy System Configuration Integration Plan
 
 **Status:** Reconciled plan, version 0.2
-**Date:** 2026-10-11
+**Date:** 2026-10-17
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
 
-**Current gate:** Gate 0 completed on 2026-10-10. Gate 1 is complete: the kit is implemented and published as `0.4.0`, and the three owners recorded [cross-project acceptance](reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md) on 2026-10-14. Platform reconciliation retains the `0.3.0` identity changes and adds implemented monitoring/log contracts. The [versioned release page](https://github.com/eseidinger/energy-system-configuration/releases/tag/contract-kit-v0.4.0) is the publication record for the immutable tag, archive, and checksum. Gate 2 and Gate 3 work may start. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
+**Current gate:** Gate 5 accepted on 2026-10-17 by maintainer direction; Gate 6 is next. ODIP and VEF implement contract kit `0.4.0`, are deployed to Developer Platform, and the workflow is operational. The [Gate 5 acceptance record](reviews/2026-10-17-gate-5-acceptance.md) records this decision. Gates 0–4 are complete for progression to Gate 6. The shared kit was published as `0.4.0` and received [cross-project acceptance](reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md) on 2026-10-14. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
 
@@ -99,6 +99,8 @@ which records the ODIP and VEF CI pins for the immutable archive.
 
 ### Gate 2 — Deliver the ODIP publication vertical slice
 
+**Status (2026-10-17):** Complete for progression to Gate 6, based on the maintainer-confirmed implementation, deployment, and operational workflow recorded in the [Gate 5 acceptance](reviews/2026-10-17-gate-5-acceptance.md).
+
 1. Implement the generic publication model and state transition so partially published data is never visible.
 2. Implement immutable manifest and artifact retrieval, ETags, conditional reads, and error responses.
 3. Implement the energy adapter and its quality policy outside ODIP core.
@@ -109,6 +111,8 @@ which records the ODIP and VEF CI pins for the immutable archive.
 **Exit:** `ODIP-01` through `ODIP-03` and `ENERGY-01` pass; a clean client can retrieve and verify every artifact using only the contract.
 
 ### Gate 3 — Deliver the deterministic VEF vertical slice
+
+**Status (2026-10-17):** Complete for progression to Gate 6, based on the maintainer-confirmed implementation, deployment, and operational workflow recorded in the [Gate 5 acceptance](reviews/2026-10-17-gate-5-acceptance.md).
 
 1. Implement ODIP client retrieval against a stub serving the exact shared fixture.
 2. Validate trusted-origin artifact paths, schema major version, roles, units, intervals, and all checksums before persisting a verified import.
@@ -122,6 +126,8 @@ which records the ODIP and VEF CI pins for the immutable archive.
 
 ### Gate 4 — Connect the deployed applications
 
+**Status (2026-10-17):** Complete for progression to Gate 6, based on the maintainer-confirmed implementation, deployment, and operational workflow recorded in the [Gate 5 acceptance](reviews/2026-10-17-gate-5-acceptance.md).
+
 1. Build ODIP and VEF immutable images and record their digests.
 2. Deploy ODIP API, worker, and database; publish the agreed reference fixture.
 3. Deploy VEF and its separate database with the exact supported contract and model versions.
@@ -134,6 +140,8 @@ which records the ODIP and VEF CI pins for the immutable archive.
 **Exit:** `DP-01` through `DP-03` pass; VEF completes a real authenticated publication fetch from deployed ODIP.
 
 ### Gate 5 — Run cross-project acceptance
+
+**Status (2026-10-17):** Accepted by maintainer direction. See the [acceptance record](reviews/2026-10-17-gate-5-acceptance.md). The following scenarios remain the deterministic acceptance baseline for Gate 6 regression verification.
 
 Execute the following in one automated environment:
 
@@ -149,6 +157,8 @@ Execute the following in one automated environment:
 **Exit:** `INT-01` passes in full. Local tests or three independently healthy deployments are not substitutes for this gate.
 
 ### Gate 6 — Add AI assistance and release
+
+**Status (2026-10-17):** Next delivery milestone; `VEF-05` and release acceptance remain open.
 
 1. Add natural-language-to-request proposal generation behind mandatory user confirmation.
 2. Restrict explanation input to the bounded run result and approved evidence view.
@@ -186,7 +196,7 @@ Consumers pin handoff versions. A producer may add backward-compatible optional 
 
 ## 7 Current baseline and sequencing risks
 
-ODIP and VEF baselines remain those inspected on 2026-10-09. Developer Platform was rechecked against its current GitHub default branch on 2026-10-11.
+The table below preserves the historical implementation baselines inspected on 2026-10-09 for ODIP and VEF and on 2026-10-11 for Developer Platform. It does not describe current implementation gaps: the maintainer confirmed contract `0.4.0` implementation, deployment, and an operational workflow, and accepted Gate 5 on 2026-10-17. Current delivery sequencing starts at Gate 6.
 
 | Project | Reviewed baseline | Consequence for sequencing |
 | --- | --- | --- |
@@ -194,7 +204,7 @@ ODIP and VEF baselines remain those inspected on 2026-10-09. Developer Platform 
 | ODIP [`accc027`](https://github.com/eseidinger/open-data-intelligence-platform/tree/accc027194014b38677aa761566ed57682825767) | The [ingestion service](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/services/platform-api/src/main/kotlin/de/eseidinger/odip/platform/ingestion/service/IngestionService.kt) and [worker](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/workers/data-worker/src/odip_worker/run.py) exist, but the [normalizer](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/workers/data-worker/src/odip_worker/normalization.py) currently handles a narrow energy observation; broader analytics remain in the [development plan](https://github.com/eseidinger/open-data-intelligence-platform/blob/accc027194014b38677aa761566ed57682825767/docs/development-plan.md). | Complete the generic publication model before coupling VEF to energy-specific ODIP behavior. |
 | VEF [`43ee5cc`](https://github.com/eseidinger/variability-engineering-framework/tree/43ee5cc1c981970fd9068c7a9e0119a935c925ea) | The [analysis engine](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/apps/prototype/api/src/main/java/de/eseidinger/variabilityengineering/core/AnalysisEngine.java) uses a [fixture-backed population](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/apps/prototype/api/src/main/java/de/eseidinger/variabilityengineering/http/FoodServicePopulationStore.java); generative configuration and optimization are [roadmap](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/docs/01-product/roadmap.md) work, and current [variant identity](https://github.com/eseidinger/variability-engineering-framework/blob/43ee5cc1c981970fd9068c7a9e0119a935c925ea/apps/prototype/api/src/main/java/de/eseidinger/variabilityengineering/core/Variant.java) has no quantities or units. | Prove candidate identity, quantities, units, and simulation math against small fixtures before adding deployed or AI concerns. |
 
-The main delivery risk is integrating on illustrative payloads before the shared schemas and numerical fixtures are executable. Gate 1 is therefore a prerequisite for implementation convergence, not documentation cleanup to defer until the end.
+The earlier sequencing risks above informed Gates 1–5. For Gate 6, preserve the accepted deterministic workflow and its numerical authority while adding confirmed input proposals and evidence-grounded explanations.
 
 ## 8 Completion criteria
 
