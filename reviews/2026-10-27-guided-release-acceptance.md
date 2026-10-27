@@ -43,7 +43,7 @@ The operator reported these protected POST responses from browser Network:
 
 - Non-empty `existingComponentIds: ["pv-standard-400"]` with version 1.0.1:
   HTTP 422, `existing_equipment_not_supported`.
-- Empty existing list with unpublished version 9.9.9:
+- Empty existing list with nonexistent version 9.9.9:
   HTTP 422, `publication_not_found`.
 
 These match the approved new-installation scope and unpublished-version rule.
@@ -57,9 +57,34 @@ A valid version-1.0.1 request with budget EUR 0 created
 `run-64dd8cc4-608c-492b-9b3d-58162d63f645` and the operator observed
 `INFEASIBLE`, with no recommendation and guidance to adjust the constraints.
 This distinguishes engineering infeasibility from the two rejected requests.
-The full result/count/optimality export and AI explanation review for this run
-are not yet captured. This observation is separate from the immutable
+The operator also supplied the AI explanation: it correctly states that none
+of the 252 evaluated candidates is feasible, there is no recommendation, and
+optimality is NOT_APPLICABLE. It separates customer inputs, calculated outputs
+and model assumptions, retains the synthetic-calendar warning, and explicitly
+declines to infer per-candidate failure causes or unavailable cost, tariff,
+profile and measured-data evidence. This semantic AI-07 review passes. The
+raw explanation JSON, individual citation values and current provider/image
+pins remain uncaptured. These observations are separate from the immutable
 version-isolation evidence archive below.
+
+## Partial-calendar rejection and HTTP classification defect
+
+The isolated synthetic version 1.0.90 has manifest SHA-256
+`657b6d6e293355e3c88e881dece819815cc9d0a5d9bb3b3c8454ee757c65901d`.
+Its four aligned hourly series cover January 1 through July 1, 2024
+(4,368 hours); normalized load fractions, artifact digests, released schemas
+and generic semantic checks pass. It deliberately violates DEC-08's complete
+calendar-year requirement. The operator observed ODIP status FAILED with
+`profile_validation_failed`: the hosted publication rejection passes.
+
+The subsequent VEF request using this failed version was rejected with HTTP
+503 `publication_unavailable`. This prevents invalid data use but incorrectly
+classifies a permanent publication-state rejection as a temporary outage.
+The pinned ODIP contract specifies HTTP 409 for an existing version that is
+not published; VEF previously translated only upstream 404 to a 422 response.
+The VEF correction maps 409 to HTTP 422 `publication_not_published` and retains
+404 as `publication_not_found` and upstream outages as 503. Its hosted retest
+is pending; do not count this VEF negative case as passed yet.
 
 ## Evidence and limits
 
