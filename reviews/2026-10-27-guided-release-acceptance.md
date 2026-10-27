@@ -195,7 +195,7 @@ The agent restarted only ODIP test's service workload. Operation
 `2b197f8a-f634-4456-b357-bd496ecf5f8c` succeeded at revision 10, one ready
 replica, unchanged web image. The old web pod was replaced. The scheduled
 ingestion worker remained active with a successful preceding run. Protected
-publication-byte readback remains pending. The operator subsequently created
+publication-byte readback was initially pending. The operator subsequently created
 `run-36002a86-73ce-4445-bd66-aff03c7621f9` using corrected version 1.0.1:
 SUCCEEDED, 194 feasible of 252 evaluated, the unchanged recommendation,
 EUR 365.64 annualized cost, EUR 8,240 investment and self-sufficiency 0.889509006.
@@ -206,8 +206,46 @@ corrected oracle. This passes the reported post-restart functional calculation.
 The [sanitized run observation](evidence/2026-10-27-post-restart-run.json) retains
 the result and limits. Complete candidate pages were not exported for this new
 run, and VEF supports verified-cache fallback; this alone does not establish
-fresh ODIP/S3 byte reads or a new all-candidate comparison. Direct artifact
-download/hash comparison is the next check.
+fresh ODIP/S3 byte reads or a new all-candidate comparison. The subsequent
+direct artifact download/hash comparison is recorded below.
+
+### Passed protected artifact readback after restart
+
+The operator used the five Download buttons for published 1.0.1 and saved
+the files in `/tmp/energy-odip-after-restart/artifacts/`. The agent read all
+five files and verified each exact SHA-256 against the approved corrected
+manifest and each byte against the corrected reference. All five pass:
+PV yield, import tariff, export tariff, component catalog and load shape.
+The [machine-readable verification](evidence/2026-10-27-post-restart-artifacts.json)
+contains sizes, hashes, route scope and limitations. Together with the new
+calculation, this passes service-restart function and operator artifact-readback
+checks. Consumer manifest/ETag exchanges and complete new candidate-page export
+were not independently captured.
+
+The S3 backend is enabled, but these reads alone do not prove each particular
+artifact lacks a legacy PostgreSQL payload fallback. This is not a database or
+bucket restore. The private local archive is VEF's ignored
+`apps/prototype/api/target/hosted-acceptance-20261027/post-restart-artifact-evidence.tar.gz`,
+SHA-256 `e6e20631548cd45e2cda07089bf56a12efeb3266932a75e5a835ae2287232969`.
+Controlled long-term storage remains open.
+
+### Next recovery prerequisite
+
+The platform's existing isolated restore procedure requires a fresh Ubuntu
+recovery VM, an explicit verified snapshot and privately supplied restic/S3
+credentials. The checked-in recovery inventory targets `127.0.0.1:2222`.
+Read-only preflight found that port unavailable, no `.runtime/recovery-vm`
+directory, and no `/dev/kvm` on this controller. QEMU, cloud-image tools and
+Ansible are installed. No VM or backup was created, and no restore or recovery
+request was performed.
+
+For the remaining joint restore, select an isolated target and verified snapshot
+containing the accepted energy versions. Restore ODIP's PostgreSQL and retained
+bucket versions plus VEF's database under quarantine; reconcile access, grants,
+fresh credentials and bindings; redeploy the pinned images; then verify artifact
+bytes and deterministic results before reopening routes. The platform runbook
+warns that a new source backup can briefly stop Caddy/Grafana and selected native
+stores. A service restart or successful backup readback does not waive this gate.
 
 Both projects' bounded HTTP metrics and resource snapshots are readable.
 Snapshots without an acceptance workload do not prove worst-case runtime.

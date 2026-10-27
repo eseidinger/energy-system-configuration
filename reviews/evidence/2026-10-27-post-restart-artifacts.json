@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-27",
+  "scope": "protected ODIP operator artifact download after service restart",
+  "project": "odip-test",
+  "datasetId": "energy-reference-wasserburg-am-inn-2024",
+  "version": "1.0.1",
+  "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+  "afterRestartOperation": "2b197f8a-f634-4456-b357-bd496ecf5f8c",
+  "transportObservation": "Maintainer used the five ODIP Publications Download buttons after the successful restart and saved the files into the agreed local folder.",
+  "checks": [
+    {
+      "artifactId": "pv-yield",
+      "sizeBytes": 403487,
+      "sha256": "b934b5c6b1a671eb50fca67898c297f0ddda7adc995d919fcfc0182bf93641eb",
+      "matchesManifest": true,
+      "byteIdenticalToReference": true
+    },
+    {
+      "artifactId": "import-tariff",
+      "sizeBytes": 404229,
+      "sha256": "dce4fadfaba9999f119e9ab16450d42cbc4986a8edee9ecbc3f1693c298e3b18",
+      "matchesManifest": true,
+      "byteIdenticalToReference": true
+    },
+    {
+      "artifactId": "export-tariff",
+      "sizeBytes": 404229,
+      "sha256": "c2ef3f7e59496dc07f5a8cc3ad6033a17af5c7ec08df3115c8467510abf8dbdc",
+      "matchesManifest": true,
+      "byteIdenticalToReference": true
+    },
+    {
+      "artifactId": "component-catalog",
+      "sizeBytes": 2425,
+      "sha256": "a96fe38d1fe9fdb955c730db5249775fc81a9b61894d94a96d1070b720d1535a",
+      "matchesManifest": true,
+      "byteIdenticalToReference": true
+    },
+    {
+      "artifactId": "reference-load-shape",
+      "sizeBytes": 492077,
+      "sha256": "ca14bce1740d7ac70667c772cd866e35aeabd797bf0f2e3b8c04e9221462d647",
+      "matchesManifest": true,
+      "byteIdenticalToReference": true
+    }
+  ],
+  "verdict": "PASS: all five downloaded artifacts match manifest digests and corrected reference bytes",
+  "limits": [
+    "The comparison uses the previously verified local manifest; no fresh protected consumer manifest response was exported.",
+    "Operator download routes were exercised, not independently captured consumer GET/ETag/304 exchanges.",
+    "S3 backend is enabled, but these downloads alone do not establish that each specific artifact lacks a legacy PostgreSQL payload fallback.",
+    "This is a service-restart readback, not a database/bucket backup restore.",
+    "No raw-ingestion lineage was added or claimed; original 1.0.0 remains immutable."
+  ],
+  "releaseAccepted": false
+}
