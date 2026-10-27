@@ -40,6 +40,11 @@ the registered source points to a GitHub release page rather than the pinned
 PVGIS JSON. No successful raw artifact or publication input link is inferred.
 The [guided record](2026-10-27-guided-release-acceptance.md#odip-source-catalog-and-failed-pipeline-attempt)
 keeps this source-ingestion gap separate from the passed numerical regressions.
+The later [isolated lineage record](evidence/2026-10-27-ai10-isolated-lineage.json)
+passes protected capture and byte readback of the pinned PVGIS JSON, a linked
+raw artifact, validation/publication and all five artifact digests for a new
+synthetic test dataset. It does not alter the immutable release reference
+versions or repair the catalog URL's scheduled-download failure.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
@@ -52,7 +57,7 @@ keeps this source-ingestion gap separate from the passed numerical regressions.
 | GAP-07 | Schema conformance is implemented. The maintainer selected complete UTC calendar years in [DEC-08](../decisions/DEC-08-complete-calendar-year.md); VEF profile/import and ODIP energy validation enforce the rule with boundary tests. Hosted ODIP rejected the isolated 4,368-hour fixture 1.0.90; the later private hosted VEF probe rejected a missing hour even after its descriptor digest was updated. | Annual scope remains accepted and implemented. Additional non-AI acceptance checks are excepted under DEC-11. The private fake-transport boundary does not prove a mutated live ODIP read; carry the decision into the next release record. |
 | GAP-08 | 180-day terminal-run/candidate/audit cleanup implemented and tested; minimized ownership-read audit and reproducible model-source capture added. | **ACCEPTED_EXCEPTION (DEC-11):** additional retention/backlog/backup-semantics, durable retention and upgrade-replay verification. Missing evidence remains unverified; implemented controls are retained. |
 | GAP-09 | Historical retained envelopes from retired pods are readable for both projects; recent ODIP request correlation metadata and configured seven-day retention were captured. | **ACCEPTED_EXCEPTION (DEC-11):** additional security/rotation, collector/compactor and elapsed-expiry checks. AI-specific evidence required by an open AI case is not accepted by this exception. |
-| GAP-10 | Sanitized tracked local and hosted AI evidence summaries, the private hosted AI-10 report and hash-addressed source/corrected-publication bundle created. | **ACCEPTED_EXCEPTION (DEC-11):** additional non-AI storage/inventory/review checks. The complete AI-10 regression and final Gate 6 decision remain open. |
+| GAP-10 | Sanitized tracked local and hosted AI evidence summaries, both current-image numerical oracles, the isolated ODIP raw-input capture and hash-addressed source/corrected-publication bundle created. | **ACCEPTED_EXCEPTION (DEC-11):** additional non-AI storage/inventory/review checks. The complete AI-10 regression and final Gate 6 decision remain open. |
 | GAP-11 | Separate dependency metrics, concurrent reservation/claims, stale-claim recovery, timeout classification and exact-limit local compute measurement pass. | **ACCEPTED_EXCEPTION (DEC-11):** additional deployed workload time/memory, queue/persistence/serialization and interrupted-workload verification. No additional performance assurance is claimed. |
 | GAP-12 | 24 production-bundle browser/axe checks pass on desktop/mobile; focus/landmark/overflow and stale-poll issues fixed. | **ACCEPTED_EXCEPTION (DEC-11):** additional real-session keyboard/screen-reader/session-expiry review; no new accessibility compliance evidence is claimed. |
 | GAP-13 | Hosted ODIP is confirmed to use S3 with active database and bucket bindings. | **ACCEPTED_EXCEPTION:** joint restore under DEC-10; remaining S3 versioning/migration/outage checks under DEC-11. Storage controls remain; unperformed tests are not PASS. |

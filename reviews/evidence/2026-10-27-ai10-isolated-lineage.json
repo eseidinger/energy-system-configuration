@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-27",
+  "environment": "odip-test",
+  "scope": "isolated synthetic AI-10 raw-input lineage and publication validation",
+  "recordedAtUtc": "2026-10-27T19:33:01.561191+00:00",
+  "dataset": {
+    "name": "energy-ai10-lineage-20261027",
+    "id": "65bc1736-efee-4708-a44c-46418ca1b4f6",
+    "classification": "PUBLIC",
+    "sourceName": "energy-reference-wasserburg-am-inn-2024",
+    "version": "1.0.0",
+    "draftId": "9cd77d70-058c-47ed-ab4a-7507af293698",
+    "publicationStatus": "PUBLISHED",
+    "canonicalManifestSha256": "8e98f8efa93806fdda674beee198c4286a852ebbbf937fabe054b404c5d1d215"
+  },
+  "fixture": {
+    "source": "pinned contract-kit 0.5.0 synthetic PVGIS-derived reference",
+    "sourceFileSha256": "d82aff39f867cb3cd77f7f355ec164b2d43c19d27bb86b13e87306885d082f29",
+    "sourceBytes": 824681,
+    "manifestFileSha256": "5efaaf13b954d49d14345a2c831c671aecc69d13c08e314d3c92c66dde1bf73e",
+    "publisherWrapperSha256": "6557419cf4259084db68915efc401866280523c924a1e0ea5bf28b74f50819ae",
+    "preflight": "PASS: dataset name/source and worker READ/INGEST/VALIDATE checked before mutation"
+  },
+  "rawInput": {
+    "rawArtifactId": "736d9724-1f27-46d6-ac29-1ef6ba0a0a05",
+    "capturePipelineRunId": "cf7d7208-e9bd-4bf5-8501-5086b61c2322",
+    "linkedInputCount": 1,
+    "linkedSha256": "d82aff39f867cb3cd77f7f355ec164b2d43c19d27bb86b13e87306885d082f29",
+    "byteReadback": "PASS: 824681 bytes, SHA-256 equals pinned source"
+  },
+  "artifactReadback": {
+    "status": "PASS",
+    "allManifestDigestsMatch": true,
+    "artifacts": {
+      "pv-yield": "b934b5c6b1a671eb50fca67898c297f0ddda7adc995d919fcfc0182bf93641eb",
+      "import-tariff": "76b8897246dda10b6134fb6cfe01d7b22448b18b350ba87b96d9e531c74d1933",
+      "export-tariff": "c2ef3f7e59496dc07f5a8cc3ad6033a17af5c7ec08df3115c8467510abf8dbdc",
+      "component-catalog": "8f6638b879f95e3faf1b58883e46eebebe015598506ecdb6e290d4f1a62f231d",
+      "reference-load-shape": "ca14bce1740d7ac70667c772cd866e35aeabd797bf0f2e3b8c04e9221462d647"
+    }
+  },
+  "sessionHandling": {
+    "capture": "existing local capture-operator-session.py saved owner-only cookie file; no cookie value printed or committed",
+    "fileMode": "600",
+    "clipboardCleared": true,
+    "temporaryCookieFileRemoved": true
+  },
+  "workerGrantCleanup": {
+    "status": "OPERATOR_CONFIRMED",
+    "reportedAtUtc": "2026-10-27T19:35:44.433441+00:00",
+    "datasetId": "65bc1736-efee-4708-a44c-46418ca1b4f6",
+    "principalId": "prn_539e69affc154cd7a08e91c5c262f8c3",
+    "permissionsRemoved": [
+      "READ",
+      "INGEST",
+      "VALIDATE"
+    ],
+    "independentApiReadback": false
+  },
+  "caseDisposition": "AI-10 OPEN: isolated ODIP raw-input and publication path passes, but the unchanged complete deployed Gate 5 suite is not recorded as a single automated cross-project run",
+  "limits": [
+    "This is a new isolated synthetic test dataset, not the existing immutable energy-reference-wasserburg-am-inn-2024 versions 1.0.0 or 1.0.1.",
+    "The catalog source URL remains a GitHub release landing page; the successful test captured the pinned local JSON through ODIP reference-input API and did not retry the failing scheduled download.",
+    "The protected ODIP operator routes and stored raw bytes were checked; no VEF run on this isolated dataset or full Gate 5 suite is inferred."
+  ],
+  "overallGate6Accepted": false
+}

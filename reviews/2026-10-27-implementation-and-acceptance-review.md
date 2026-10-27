@@ -26,6 +26,10 @@ pass the complete original and corrected 252-candidate oracles. Their
 [sanitized report](evidence/2026-10-27-ai10-current-image-oracles.json) keeps
 deployment, export and oracle hashes. The full cross-project suite remains
 unrecorded as one automated run.
+An isolated ODIP test publication subsequently passed raw PVGIS byte capture,
+linked-input readback, publication and all five artifact digests; its
+[sanitized record](evidence/2026-10-27-ai10-isolated-lineage.json) keeps it
+separate from immutable reference versions and the failed catalog download.
 
 ## Same-day implementation follow-up
 

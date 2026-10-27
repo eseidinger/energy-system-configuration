@@ -499,4 +499,33 @@ captured pipeline input is claimed. The source catalog association and the
 manifest provenance text are separate facts. The failed attempt left the
 already published versions untouched. The sanitized current-image report
 retains the source record and a worker-log hash; a future isolated ingestion
-case must use the pinned JSON through an approved raw-input path.
+case uses the pinned JSON through an approved raw-input path, as recorded below.
+
+### Isolated ODIP raw-input lineage: PASS
+
+For the synthetic test dataset `energy-ai10-lineage-20261027`, the maintainer
+linked the existing energy source and temporarily granted the approved ODIP
+worker `READ`, `INGEST` and `VALIDATE` on this dataset only. A local wrapper
+verified the pinned PVGIS source SHA-256
+`d82aff39f867cb3cd77f7f355ec164b2d43c19d27bb86b13e87306885d082f29`,
+all five generated artifact digests, the dataset/source association and worker
+grants before writing. The protected reference-input API captured the raw JSON,
+and ODIP published isolated version `1.0.0`, draft
+`9cd77d70-058c-47ed-ab4a-7507af293698`, with canonical manifest SHA-256
+`8e98f8efa93806fdda674beee198c4286a852ebbbf937fabe054b404c5d1d215`.
+
+The published draft reports exactly one linked raw artifact
+`736d9724-1f27-46d6-ac29-1ef6ba0a0a05`, capture run
+`cf7d7208-e9bd-4bf5-8501-5086b61c2322`. Protected raw-byte readback
+returned 824,681 bytes with the pinned source digest. All five protected
+artifact downloads matched their manifest SHA-256 values. The temporary
+operator cookie file had mode `600` and was removed; the clipboard was cleared.
+The maintainer confirmed that the three temporary worker grants were revoked
+after publication. The [sanitized lineage evidence](evidence/2026-10-27-ai10-isolated-lineage.json)
+records IDs, hashes and the operator-confirmed cleanup limit.
+
+This closes the isolated ODIP source-capture/publication path. It does not
+retroactively add raw-input links to immutable reference versions `1.0.0` or
+`1.0.1`, and it is not a VEF run on the isolated dataset. The failed scheduled
+download of the catalog's GitHub release-page URL remains a separate finding.
+The unchanged complete deployed Gate 5 suite and AI-10 remain OPEN.
