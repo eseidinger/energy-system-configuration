@@ -94,7 +94,7 @@ This completes the hosted ODIP partial-year rejection and VEF publication-state
 rejection scenario. It does not test VEF against an invalid published payload,
 because ODIP correctly prevents publication of this fixture.
 
-### Prepared next case: missing hour (hosted result pending)
+### Missing hour: hosted publication rejection observed
 
 Synthetic version 1.0.99 retains the complete 2024 period but removes only
 PV yield's final hour (`2024-12-31T23:00:00Z`), leaving 8,783 PV values.
@@ -102,9 +102,24 @@ Its manifest SHA-256 is
 `9f2a70a78d26d17b276168712e5fd321580ba4afa29cb262db91da533e88bac7`.
 All five artifact schemas, manifest schema and recomputed digests pass; the
 current worker profile rejects it with "series has 8783 values; expected 8784".
-Local upload files are in `/tmp/energy-missing-hour-1.0.99/`; expected hosted
-result is FAILED / `profile_validation_failed`. Hosted execution is pending.
-Check whether 1.0.99 already exists before creation; preserve existing versions.
+Local upload files are in `/tmp/energy-missing-hour-1.0.99/`. Following the
+guided create/upload/validate instructions, the operator reported FAILED.
+This passes the hosted publication-status rejection check. The expected worker
+code is `profile_validation_failed`, but the operator did not separately report
+that code or export the validation report. VEF's independent hosted content
+check remains untested because ODIP does not publish this fixture.
+
+### Prepared next case: wrong tariff unit (hosted result pending)
+
+Synthetic version 1.0.91 changes only the import tariff's unit from EUR/kWh
+to USD/kWh, apart from version identity and recomputed digests. Its manifest
+SHA-256 is `ed3270e950e1a7b0304018f9685b7793d9f25ccf979f3b54d0d4bb7b13b6acdd`.
+The manifest schema, artifact integrity and other artifact schemas pass; the
+worker rejects the import-tariff unit's schema const. Restoring EUR/kWh and
+its digest makes the complete profile pass. Local upload files are in
+`/tmp/energy-wrong-unit-1.0.91/`; expected hosted result is FAILED /
+`profile_validation_failed`. Hosted execution is pending. Preserve any existing
+version 1.0.91 rather than replacing it.
 
 ## Evidence and limits
 
