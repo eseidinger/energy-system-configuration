@@ -17,17 +17,20 @@ Owners below are responsible project roles, not new individual assignments.
 The initial findings below describe the source at the start of October 27.
 The subsequent [VEF implementation and verification record](https://github.com/eseidinger/variability-engineering-framework/blob/main/docs/04-development/energy-gap-closure-verification.md)
 and [ODIP corrected-version runbook](https://github.com/eseidinger/open-data-intelligence-platform/blob/main/docs/energy-configuration-integration-runbook.md#corrected-version-regression-boundary)
-supersede their implementation-state statements as follows. Changes are local
-working-tree changes; they have not been deployed or granted final acceptance.
+supersede their implementation-state statements as follows. The subsequent
+[guided deployed record](2026-10-27-guided-release-acceptance.md) closes the
+configured test-environment version-isolation case and records two request
+rejections. Other local checks remain limited to their stated environment;
+Gate 6 and final release acceptance remain open.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
 | GAP-01 | Fresh controlled synthetic AI-05/06 live-model retest passed on October 27 after explicit consent; output/prompt digests and assistant review retained. | Hosted cases and final owner semantic review. |
 | GAP-02 | Extended local HTTP tests reject foreign run/source/pointer/value and preserve results; schema and exact UTF-8 boundary checks pass. | Hosted private fixture setup and AI-08/11 execution. |
-| GAP-03 | Local test deficiency fixed: changed 1.0.1 tariffs, failed draft moved to 1.0.99, original bytes preserved. ODIP restart/actual restore and VEF independent all-candidate comparison pass. | The maintainer approved the correction and expected deltas in [DEC-09](../decisions/DEC-09-corrected-tariff-acceptance-case.md). The deployed old/new owned-run regression remains open. |
-| GAP-04 | Existing local negatives and complete VEF API suite pass. | Complete release-specific deployed negative regression. |
+| GAP-03 | **Closed in the configured test environment.** DEC-09 correction published as 1.0.1; both owned runs and all 252 candidates/metrics/ranking/provenance match their independent oracles. Original 1.0.0 readback stays unchanged. See the [guided record](2026-10-27-guided-release-acceptance.md). | Retain evidence and refresh complete deployment pins under GAP-10. Other AI-10 negatives, ingestion/traceability observation and integrated recovery remain separate open work. |
+| GAP-04 | Local suites pass. Deployed non-empty-existing-list and unpublished-version requests now return the expected HTTP 422 codes. | Remaining tamper/unit/missing-hour/unsupported-schema/period negatives and complete release-specific regression. See the guided record for capture limits. |
 | GAP-05 | ODIP actual local restore and VEF transactional interrupted-claim/stale-token tests pass. | Joint deployed ODIP/VEF restore, real in-progress workload interruption and boundary reconciliation. |
-| GAP-06 | **Closed for this release by scope decision:** the maintainer selected new installations; [DEC-07](../decisions/DEC-07-new-equipment-release-scope.md), use case 0.3 and prose contract 0.5 record it. Existing-equipment support is deferred. | Include the decision in the next immutable kit release under GAP-10 and retain the deployed HTTP 422/no-run regression. No existing-equipment implementation is claimed. |
+| GAP-06 | **Closed for this release by scope decision:** the maintainer selected new installations; [DEC-07](../decisions/DEC-07-new-equipment-release-scope.md), use case 0.3 and prose contract 0.5 record it. Existing-equipment support is deferred. | Include the decision in the next immutable kit release under GAP-10. Deployed HTTP 422 existing_equipment_not_supported is now recorded; database run-count capture remains absent. No existing-equipment implementation is claimed. |
 | GAP-07 | Schema conformance is implemented. The maintainer selected complete UTC calendar years in [DEC-08](../decisions/DEC-08-complete-calendar-year.md); VEF profile/import and ODIP energy validation now enforce the rule with boundary tests. | Carry the rule in the next immutable kit release (GAP-10) and execute the deployed negative-period regression under AI-10. Local verification is recorded in the [VEF scope verification](https://github.com/eseidinger/variability-engineering-framework/blob/main/docs/04-development/energy-release-scope-verification.md). |
 | GAP-08 | 180-day terminal-run/candidate/audit cleanup implemented and tested; minimized ownership-read audit and reproducible model-source capture added. | Deployment/retention monitoring, backlog and backup semantics, durable source/image retention and executable upgrade replay. |
 | GAP-09 | No new hosted security/rotation/elapsed-expiry evidence. | Platform probes and retained release-linked observations. |
@@ -86,7 +89,8 @@ for the unchanged Gate 6 exit criteria.
 
 ## Recommended execution order
 
-1. Execute the approved corrected-data case from DEC-09 (`GAP-03`). The existing-equipment
+1. Retain the passed DEC-09 corrected-data evidence (`GAP-03`) and execute the
+   remaining deployed negative/recovery scenarios. The existing-equipment
    release scope (`GAP-06`) and annual period (`GAP-07`) are now resolved by
    maintainer-approved DEC-07/08: new installations and complete UTC calendar years.
    This prevents a technically passing suite from accepting the wrong scope.

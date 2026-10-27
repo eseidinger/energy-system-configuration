@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-27T11:35:01.707079+00:00",
+  "scope": "guided-deployed-test-version-isolation",
+  "projects": [
+    "odip-test",
+    "vareng-test"
+  ],
+  "result": "PASS",
+  "releaseAccepted": false,
+  "closedGap": "GAP-03 (configured test environment)",
+  "decision": "DEC-09",
+  "contractKitVersion": "0.5.0",
+  "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b",
+  "original": {
+    "verifiedAt": "2026-10-27T11:17:24.318039+00:00",
+    "scope": "protected-browser-export-full-oracle-comparison",
+    "result": "PASS",
+    "runId": "run-3c6e5462-9156-4bdd-a740-7258962fab6b",
+    "datasetVersion": "1.0.0",
+    "candidates": 252,
+    "feasibleCandidates": 194,
+    "checks": [
+      "result and provenance",
+      "complete candidate set",
+      "all candidate metrics and constraint objects",
+      "feasible ranking",
+      "recommendation"
+    ],
+    "fileSha256": {
+      "run.json": "7dab89f70e34382b7d154c79d4d0747f3923a7e97098074c3836962587e22cb6",
+      "page-0.json": "5e6e4494ee5972ed8319a6263934a46c457ec454b294e397d0847d599901355c",
+      "page-1.json": "828545f1e7f4637cb9aa5a6b67b6f0b934c0325de535f0e43ff38b8dee7f8e76",
+      "page-2.json": "d3b1921e71758efd191cb5030dd0c0f9206bc31e349b9f5e6cd8fa91dcf6ff8b"
+    },
+    "oracleSha256": "2f078373092a640e138649a2a589231ec6fd8a795538d18358f482481ac2a069",
+    "contractKitVersion": "0.5.0",
+    "releaseAccepted": false
+  },
+  "corrected": {
+    "verifiedAt": "2026-10-27T11:27:34.211655+00:00",
+    "scope": "protected-browser-export-full-corrected-oracle-comparison",
+    "result": "PASS",
+    "runId": "run-5e24cbd7-91a6-4b0b-8444-296cf8f9cdff",
+    "datasetVersion": "1.0.1",
+    "candidates": 252,
+    "feasibleCandidates": 194,
+    "checks": [
+      "result and provenance",
+      "complete candidate set",
+      "all candidate metrics and constraint objects",
+      "feasible ranking",
+      "recommendation",
+      "unchanged non-tariff metrics and assignments versus original",
+      "annualized costs match independent corrected oracle for every candidate"
+    ],
+    "fileSha256": {
+      "run.json": "286937eeb8a00536e14446e887f6a3962fb3f0d225d728bebf3decec1850315b",
+      "page-0.json": "096d225c91dafbf4d3d2e7ce991c3a79359d582576411d90521d7c14cff70c50",
+      "page-1.json": "cfd4f83eaef857fb298c5bc58cf0ee2af4005be22429bd029537e973ac4a92eb",
+      "page-2.json": "79e97b73afe32060a24e87db97730e6077f189c028fdde68f93158f4de86456a"
+    },
+    "oracleSha256": "8b2f66dd5774c001017f7b3d6158c7999ee4a03bb80031eb5214b25faaeafc13",
+    "contractKitVersion": "0.5.0",
+    "releaseAccepted": false
+  },
+  "originalReadback": {
+    "observedAt": "2026-10-27T11:13:22.633472+00:00",
+    "evidenceType": "user-confirmed-protected-GET-readback",
+    "datasetVersion": "1.0.0",
+    "status": "SUCCEEDED",
+    "annualizedCostEUR": 360.67
+  },
+  "negativeCases": [
+    {
+      "observedAt": "2026-10-27T11:30:53.702771+00:00",
+      "evidenceType": "user-reported-browser-network-response",
+      "project": "vareng-test",
+      "case": "non-empty-existing-component-list",
+      "datasetVersion": "1.0.1",
+      "submittedExistingComponentIds": [
+        "pv-standard-400"
+      ],
+      "response": {
+        "schemaVersion": "error/v1",
+        "status": 422,
+        "code": "existing_equipment_not_supported",
+        "message": "Existing equipment is not supported by this model version."
+      },
+      "result": "PASS",
+      "limitations": [
+        "Server-side before/after run count not captured; this response rejects before reservation in the inspected resource implementation."
+      ],
+      "releaseAccepted": false
+    },
+    {
+      "observedAt": "2026-10-27T11:32:48.888842+00:00",
+      "evidenceType": "user-reported-browser-network-response",
+      "project": "vareng-test",
+      "case": "unpublished-dataset-version",
+      "submittedDatasetVersion": "9.9.9",
+      "submittedExistingComponentIds": [],
+      "response": {
+        "schemaVersion": "error/v1",
+        "status": 422,
+        "code": "publication_not_found",
+        "message": "The requested publication version was not found."
+      },
+      "result": "PASS",
+      "limitations": [
+        "Server-side before/after run count not captured; the inspected resource rejects the dependency response before reserving a run."
+      ],
+      "releaseAccepted": false
+    }
+  ],
+  "knownLimits": [
+    "Raw HTTP exports were saved from the owning authenticated browser; the agent did not obtain browser credentials.",
+    "Current full deployment inventory still needs refreshing: the subsequent platform read failed because the human CLI session expired.",
+    "Test fixture has manifest provenance but no captured raw-input lineage or matching ingestion run was observed; this case does not establish hosted raw ingestion.",
+    "Remaining AI-10 negatives, recovery, security and final Gate 6 owner acceptance remain open."
+  ],
+  "lastObservedDeploymentSnapshots": {
+    "vef-deployment.json": {
+      "observedAt": "2026-10-27T10:04:40.503815+00:00",
+      "project": "vareng-test",
+      "ciRun": 40484479075,
+      "commit": "c7155b5182d04b2b27c3bf8fbfde71c443f1a70b",
+      "revision": 24,
+      "image": "eseidinger/variability-engineering-framework@sha256:bda91b2d67f0f3126060061418c1c4921a7499943dffc77a222e0931116a1b54",
+      "observedImage": "eseidinger/variability-engineering-framework@sha256:bda91b2d67f0f3126060061418c1c4921a7499943dffc77a222e0931116a1b54",
+      "readyReplicas": 1,
+      "state": "ready",
+      "releaseAccepted": false
+    },
+    "odip-deployment.json": {
+      "observedAt": "2026-10-27T10:12:17.608702+00:00",
+      "project": "odip-test",
+      "ciRun": 40484487664,
+      "commit": "1fe32519a57ffd896287c1937b135118253e9045",
+      "revision": 9,
+      "images": {
+        "web": "docker.io/eseidinger/odip-platform@sha256:47c21a18435bd58dc02ff2c9add56714d4c7abeb275d1c17ea74e43b28170985",
+        "ingestion-worker": "docker.io/eseidinger/odip-data-worker@sha256:49e82062c5034f2210d1f0e589c3afb1b114ac6b60d5d07cb090fedb3e8ed6b6"
+      },
+      "components": [
+        {
+          "name": "web",
+          "state": "ready",
+          "readyReplicas": 1,
+          "deploymentImage": "docker.io/eseidinger/odip-platform@sha256:47c21a18435bd58dc02ff2c9add56714d4c7abeb275d1c17ea74e43b28170985"
+        },
+        {
+          "name": "ingestion-worker",
+          "state": null,
+          "readyReplicas": null,
+          "deploymentImage": null
+        }
+      ],
+      "releaseAccepted": false
+    }
+  },
+  "localEvidenceArchive": {
+    "path": "apps/prototype/api/target/hosted-acceptance-20261027/version-isolation-evidence.tar.gz",
+    "sha256": "a6d839e074c0e04d568ad81241fbf1e8c8965a1cf2de237269f40810bddc9db3",
+    "retention": "Ignored local build storage; controlled release retention remains open under GAP-10."
+  }
+}
