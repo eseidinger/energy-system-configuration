@@ -1,7 +1,7 @@
 # AI-Assisted Energy System Configuration Integration Plan
 
-**Status:** Reconciled plan, version 0.2
-**Date:** 2026-10-27 (status reconciliation; gate requirements unchanged)
+**Status:** Reconciled release-scope plan, version 0.3
+**Date:** 2026-10-27 (DEC-07 scopes the current release to new equipment)
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
 
@@ -10,6 +10,8 @@
 The shared `0.4.0` baseline received [cross-project acceptance](reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md) on 2026-10-14. Kit `0.5.0` adds AI contracts without changing publication APIs or numerical fixtures. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
+
+The maintainer-approved [DEC-07](decisions/DEC-07-new-equipment-release-scope.md) limits the current release to new equipment and defers existing-equipment support. GAP-06 is closed by this explicit scope decision. [DEC-08](decisions/DEC-08-complete-calendar-year.md) resolves GAP-07's period question: energy optimization requires one complete UTC calendar year. Other Gate 6 requirements remain. Record the decision in the next immutable shared-kit release before final acceptance, without replacing kit 0.5.0 or its consumer pins.
 
 ## 1 Delivery strategy
 
@@ -47,6 +49,8 @@ Record these as short architecture decisions. Gate 0 closes only when every item
 | [`DEC-04`](decisions/DEC-04-identity.md) | Identity | Select issuer, token audience, claims, provisioning owner, and rotation process for VEF's read-only ODIP identity. |
 | [`DEC-05`](decisions/DEC-05-limits-retention-classification.md) | Limits and retention | Set artifact and publication size limits, candidate/search bounds, run timeout, retention, and customer-data classification. |
 | [`DEC-06`](decisions/DEC-06-contract-ownership-and-releases.md) | Contract ownership | Name the owner and release process for shared JSON Schema/OpenAPI definitions and fixtures. |
+| [`DEC-07`](decisions/DEC-07-new-equipment-release-scope.md) | Current release scope | Accepted October 27: new equipment only; reject non-empty existing-equipment inputs and defer support to a later release. |
+| [`DEC-08`](decisions/DEC-08-complete-calendar-year.md) | Annual optimization period | Accepted October 27: January 1 to the next January 1 UTC, 8,760 or 8,784 complete aligned hours; reject shorter, rolling or shifted periods. |
 
 If a decision changes a contract field or behavior, update the proposed contract before dependent implementation begins.
 

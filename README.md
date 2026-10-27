@@ -6,6 +6,9 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [Integration contract](energy-configuration-integration-contract.md) — normative APIs, schemas, calculations, security boundaries, and contract tests.
 - [Integration plan](energy-configuration-integration-plan.md) — decisions, repository work packages, ordered integration gates, handoffs, and completion criteria.
 - [Architecture decisions](decisions/) — accepted cross-project choices that establish the implementation baseline.
+- [New-equipment release scope](decisions/DEC-07-new-equipment-release-scope.md) — October 27 maintainer decision; existing-equipment support is deferred.
+- [Complete UTC calendar year](decisions/DEC-08-complete-calendar-year.md) — accepted period for annual optimization, enforced independently by both consumers.
+- [Corrected tariff acceptance case](decisions/DEC-09-corrected-tariff-acceptance-case.md) — approved synthetic correction and expected results for the deployed version-isolation check.
 - [VEF-to-ODIP authentication flow](architecture/vef-odip-authentication.md) — sequence, trust boundaries, threats, and required controls.
 - [Gate 0 domain review](reviews/2026-10-10-gate-0-domain-review.md) — approval and limitations of the version 0.2 implementation baseline.
 - [Gate 1 contract-kit review](reviews/2026-10-10-gate-1-domain-review.md) — reviewed fixture, numerical oracle, recommendation, and release prerequisite.
@@ -25,7 +28,8 @@ ODIP and VEF both pin contract kit **0.5.0**. Immutable publication, determinist
 new-equipment optimization and the AI-assisted workflow are implemented. Gate 5
 was accepted by maintainer direction on October 17; ODIP's handoff was accepted
 on October 19. **Gate 6 and final release acceptance remain open**, including
-AI-05, AI-06, AI-08, AI-10 and AI-11.
+AI-05, AI-06, AI-08, AI-10 and AI-11. The current release is explicitly limited
+to new installations under DEC-07; GAP-06 is closed by that scope decision.
 
 The [cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md)
 records source revisions, current coverage and executed checks. The subsequent

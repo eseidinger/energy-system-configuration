@@ -23,6 +23,16 @@ and 180-day cleanup are now implemented locally, ODIP uses genuinely corrected
 1.0.1 data in its local harness, and Kotlin lint/build passed. These changes do
 not rewrite the initial findings below or close hosted Gate 6 acceptance.
 
+## Subsequent maintainer scope decision
+
+On October 27 the maintainer selected new installations for the current release.
+[DEC-07](../decisions/DEC-07-new-equipment-release-scope.md) closes GAP-06 by explicit
+scope reduction. Use case 0.3 and prose contract 0.5 supersede the original
+existing-equipment obligations for this release. The maintainer subsequently
+selected complete UTC calendar years in [DEC-08](../decisions/DEC-08-complete-calendar-year.md);
+VEF and ODIP enforce that annual boundary. The initial assessment and
+released kit 0.5.0 remain historical baselines; Gate 6 is still open.
+
 ## Baseline and evidence rules
 
 The three working trees were clean at the start of this review. Reviewed source

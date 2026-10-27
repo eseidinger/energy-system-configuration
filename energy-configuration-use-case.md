@@ -1,13 +1,13 @@
 # AI-Assisted Energy System Configuration Use Case
 
-**Status:** Implementation baseline, version 0.2
-**Date:** 2026-10-09
+**Status:** Accepted current-release scope, version 0.3
+**Date:** 2026-10-27
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Define the user outcome, bounded scope, and observable behavior of the first end-to-end energy-system configuration demonstration.
 
 The normative system interfaces are defined in the [integration contract](energy-configuration-integration-contract.md). The work needed to deliver them is ordered in the [integration plan](energy-configuration-integration-plan.md).
 
-Implementation status is tracked in the [October 27 cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md), not by changing the requirements below. The current model supports new equipment only and rejects non-empty existing equipment. That difference from the intended scope remains explicit in [GAP-06](reviews/2026-10-27-gap-analysis.md); it requires implementation or a versioned scope decision before full use-case acceptance.
+The maintainer accepted a new-equipment-only current release on October 27 in [DEC-07](decisions/DEC-07-new-equipment-release-scope.md). Version 0.3 narrows the original 0.2 scope accordingly; existing-equipment support is deferred. Implementation and remaining acceptance evidence are tracked in the [cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md) and [gap register](reviews/2026-10-27-gap-analysis.md).
 
 ## 1 Use case summary
 
@@ -21,7 +21,7 @@ Implementation status is tracked in the [October 27 cross-project review](review
 | Result | A reproducible recommendation with cost and self-sufficiency estimates, or a precise infeasibility explanation. |
 | Release type | Bounded demonstration; not a certified engineering design or production quotation. |
 
-The consultant provides the building region, usable roof area, annual electricity demand, investment limit, existing equipment, and minimum desired self-sufficiency. The system evaluates technically valid combinations against identified reference data and a versioned simulation model. An AI assistant may turn the consultant's words into a proposed structured request and may explain the recorded result, but it does not determine feasibility or calculate numerical results.
+The consultant provides the building region, usable roof area, annual electricity demand, investment limit and minimum desired self-sufficiency for a new installation. Existing-equipment inputs must be empty in this release. The system evaluates technically valid combinations against identified reference data and a versioned simulation model. An AI assistant may turn the consultant's words into a proposed structured request and may explain the recorded result, but it does not determine feasibility or calculate numerical results.
 
 ## 2 Intended value and success condition
 
@@ -40,9 +40,9 @@ The use case succeeds when a consultant can submit a request, receive at least o
 The first release contains:
 
 - one reference region;
-- one calendar year of complete hourly reference data;
+- one complete Gregorian calendar year of hourly UTC reference data: January 1 at 00:00 UTC through January 1 of the following year, 8,760 or 8,784 aligned hours under [DEC-08](decisions/DEC-08-complete-calendar-year.md);
 - a small catalog of photovoltaic modules, inverters, and batteries;
-- customer constraints for roof area, investment, existing equipment, and self-sufficiency;
+- new-equipment configurations with customer constraints for roof area, investment and self-sufficiency;
 - a documented and versioned hourly simulation;
 - deterministic candidate ranking by annualized cost;
 - provenance from the recommendation back to the exact data, model, and simulation versions;
@@ -52,7 +52,7 @@ Synthetic fixtures are acceptable for the initial deployed demonstration. Real b
 
 ### 3.2 Excluded from the first release
 
-The first release excludes heat pumps, electric vehicles, grid-connection approval, installation labor, taxes, subsidies, dynamic degradation, automatic purchasing, multi-objective Pareto search, and conversational data exploration.
+The first release excludes partial-year and rolling-year optimization, reuse, expansion or replacement planning for existing equipment, as well as heat pumps, electric vehicles, grid-connection approval, installation labor, taxes, subsidies, dynamic degradation, automatic purchasing, multi-objective Pareto search, and conversational data exploration.
 
 ## 4 Actors and responsibilities
 
@@ -115,7 +115,7 @@ After a completed run:
 ## 9 Business rules
 
 1. The recommendation minimizes annualized cost among feasible candidates. Ties prefer lower initial investment and then lexical configuration ID.
-2. A candidate is feasible only when component availability, roof area, electrical ratings, battery limits, existing-equipment compatibility, investment limit, and minimum self-sufficiency all pass.
+2. A candidate is feasible only when component availability, roof area, electrical ratings, battery limits, investment limit, and minimum self-sufficiency all pass.
 3. Reference profiles estimate building behavior; they are not represented as measurements of the customer's building.
 4. The result discloses excluded costs and assumptions and does not represent a certified design or quotation.
 5. The system makes an optimality claim only when it evaluated the complete stated search space or holds an equivalent solver proof.
@@ -129,6 +129,8 @@ The precise formulas, state transitions, schemas, endpoints, and validation rule
 | --- | --- |
 | Successful recommendation | A valid request returns the expected feasible set and least-cost recommendation for the agreed fixture. |
 | Infeasible request | A deliberately impossible constraint returns an infeasibility explanation and no recommendation. |
+| Unsupported period | A partial, rolling, shifted or multiple-year profile cannot start an annual optimization run; no annualization is inferred. |
+| Unsupported existing equipment | A non-empty `existingComponentIds` list returns HTTP 422 with `existing_equipment_not_supported` and creates no run. |
 | Reproducibility | Re-running the same recorded inputs and versions returns the same metrics and recommendation. |
 | Data version isolation | Publishing corrected reference data does not change an earlier run; a new run can explicitly select the new version. |
 | Traceability | The result identifies the dataset, artifact checksums, model, simulation, optimizer, and configuration used. |

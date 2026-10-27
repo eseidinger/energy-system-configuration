@@ -1,13 +1,15 @@
 # AI-Assisted Energy System Configuration Integration Contract
 
-**Status:** Reconciled implementation baseline, version 0.4
-**Date:** 2026-10-11
+**Status:** Current-release scope revision, version 0.5
+**Date:** 2026-10-27
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Define the normative interfaces and operational boundaries between the three projects for the energy-system configuration use case.
 
 This contract implements the behavior described in the [use case definition](energy-configuration-use-case.md). Delivery order, repository work packages, and integration gates are defined in the [integration plan](energy-configuration-integration-plan.md). Use-case intent belongs in the use case definition; delivery status belongs in the plan. This document is limited to testable obligations at project boundaries.
 
-Implementation and acceptance status are recorded in the [October 27 cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md). ODIP publication and VEF deterministic/AI endpoints are implemented; remaining conformance and evidence gaps do not change the normative obligations below. This status clarification changes no API, schema, calculation or contract version. Version `0.4` reconciles the platform integration boundary with Developer Platform revision `b360ddee34444748c95705c597aa7b17491cd05b`. It retains the `0.3` deployment and identity reconciliation and adds the implemented component-monitoring and minimized central-log profile; energy payloads and numerical oracles are unchanged. Normative words such as **MUST** express baseline requirements, not claims about current repository behavior. Contract version `1.0.0` becomes the accepted release only after the integration and release gates pass.
+Version 0.5 applies the maintainer-approved [DEC-07](decisions/DEC-07-new-equipment-release-scope.md): the current release covers new equipment only. It supersedes the existing-equipment obligations in prose version 0.4 for this release. It also records [DEC-08](decisions/DEC-08-complete-calendar-year.md): energy optimization requires a complete UTC calendar year. Published kit 0.5.0 and consumer pins remain immutable; both decisions must accompany the next shared-kit release before final acceptance.
+
+Implementation and acceptance status are recorded in the [October 27 cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md). ODIP publication and VEF deterministic/AI endpoints are implemented; remaining conformance and evidence gaps do not change the normative obligations below. The October 27 status review itself changed no API, schema or calculation. The separately approved scope revision changes the release acceptance boundary, while retaining v1 wire fields and numerical results. Version `0.4` reconciles the platform integration boundary with Developer Platform revision `b360ddee34444748c95705c597aa7b17491cd05b`. It retains the `0.3` deployment and identity reconciliation and adds the implemented component-monitoring and minimized central-log profile; energy payloads and numerical oracles are unchanged. Normative words such as **MUST** express baseline requirements, not claims about current repository behavior. Contract version `1.0.0` becomes the accepted release only after the integration and release gates pass.
 
 ## Repositories
 
@@ -165,6 +167,8 @@ The energy profile requires all five artifact roles in the first release. The ge
 
 ### 3.2 Energy profile semantics
 
+Under DEC-08, the energy profile period MUST begin on January 1 at 00:00:00 UTC and end exclusively on January 1 at 00:00:00 UTC of the next Gregorian year, with no fractional boundary seconds. It MUST contain exactly 8,760 hourly UTC intervals, or 8,784 in a leap year, including February 29. All four time series MUST share the period and contain every expected timestamp exactly once in order. A matching hour count alone is insufficient. The ODIP energy adapter and VEF MUST reject partial, rolling, shifted or multiple-year periods before accepting them for annual optimization; they MUST NOT silently annualize shorter data. This restriction belongs to the energy profile, not the generic ODIP publication API.
+
 | Role | Required contents and validation |
 | --- | --- |
 | `PV_YIELD_PER_KWP` | Non-negative hourly DC energy per installed kWp, before inverter and battery losses, for the stated region and period. Method, source, orientation assumptions, and included upstream losses are versioned in provenance. |
@@ -218,15 +222,17 @@ Example request, with illustrative values:
 
 VEF MUST reject negative areas, demand, prices, or limits; a self-sufficiency threshold outside `[0, 1]`; an unsupported region, dataset version, or `schemaRef`; and requests exceeding published model or search bounds. A catalog contains at most 20 models of each component type. A configuration contains 1 to 100 PV modules, exactly one inverter, and 0 to 4 batteries. VEF estimates the search space before starting a run and returns `422 search_space_limit_exceeded` without creating a run if more than 100,000 candidate evaluations would be required. Candidate-list responses are paginated with at most 100 candidates per page. The limits are advertised by a capability endpoint. VEF derives the hourly load from `annualDemandKWh × REFERENCE_LOAD_SHAPE` and records the load-shape artifact digest.
 
+`site.existingComponentIds` MUST be `[]` for the current new-equipment release. A non-empty list MUST return `422 existing_equipment_not_supported` before run creation. All selected components MUST be new (`existing: false` in candidate selections). VEF MUST NOT silently ignore existing-equipment inputs. Support for existing equipment requires a later version with shared quantity, ownership, compatibility, costing and identity examples under DEC-07.
+
 ### 4.1 Feasibility and simulation
 
-VEF MUST version its energy feature model, compatibility rules, and simulation algorithm independently of the ODIP dataset publication. A candidate is feasible only if component availability, roof area, electrical ratings, battery limits, existing-equipment compatibility, investment limit, and minimum self-sufficiency all pass. The first release may enumerate a bounded catalog exhaustively; larger spaces require a solver and an explicit optimality statement.
+VEF MUST version its energy feature model, compatibility rules, and simulation algorithm independently of the ODIP dataset publication. A candidate is feasible only if component availability, roof area, electrical ratings, battery limits, investment limit, and minimum self-sufficiency all pass. The first release may enumerate a bounded catalog exhaustively; larger spaces require a solver and an explicit optimality statement.
 
 The v1 simulation uses one-hour intervals. DC generation is installed PV capacity in `kWp` multiplied by that interval's `PV_YIELD_PER_KWP`. Inverter efficiency is applied before the AC power limit: `pvAcKWh = min(pvDcKWh * inverterEfficiency, inverterAcPowerKW * 1 h)`. The difference between efficiency-adjusted potential output and the inverter limit is recorded as inverter clipping.
 
 PV generation serves the building load first. Surplus charges the battery within its usable-capacity and charge-power limits; remaining surplus is exported. When PV is insufficient, the battery discharges within its state-of-charge and discharge-power limits; the remainder is imported. Grid charging and simultaneous charging and discharging are prohibited. Battery charge and discharge power limits are AC-side limits. Charge and discharge efficiencies each use the square root of the battery's recorded round-trip efficiency. State of charge changes by `chargeAcKWh * chargeEfficiency - dischargeAcKWh / dischargeEfficiency` and begins at zero. Any state of charge remaining after the final interval is recorded as `terminalDiscardedEnergyKWh`, receives no cost or self-sufficiency credit, and is discarded so the modeled year ends at zero. A domain reviewer must approve these assumptions before v1 is accepted.
 
-The hourly simulation MUST conserve energy within a documented numeric tolerance, bound battery state of charge, and prevent simultaneous contradictory flows. It calculates yearly grid import, grid export, on-site solar use, and unmet demand. The first release treats unmet demand as invalid. Existing equipment is included in compatibility and output calculations but excluded from new initial investment. It computes:
+The hourly simulation MUST conserve energy within a documented numeric tolerance, bound battery state of charge, and prevent simultaneous contradictory flows. It calculates yearly grid import, grid export, on-site solar use, and unmet demand. The first release treats unmet demand as invalid. Every selected component is new in this release and contributes to the simulated output and initial investment. It computes:
 
 ```text
 selfSufficiency = 1 - annualGridImportKWh / annualDemandKWh
@@ -237,7 +243,7 @@ annualizedCostEUR = initialInvestmentEUR * capitalRecoveryFactor
 capitalRecoveryFactor = r(1+r)^n / ((1+r)^n - 1), or 1/n when r = 0
 ```
 
-`n` is `analysisYears`, and `r` is `discountRate`. The first release fixes these values at 20 years and `0.04`. Every component has a modeled economic lifetime of 20 years. Replacement, residual value, maintenance, installation labor, taxes, and subsidies are excluded, and `annualOperationsEUR` is zero. Initial investment is the sum of unit price multiplied by newly purchased component quantity; existing equipment is excluded. VEF must not compare candidates whose metrics were computed under different dataset, model, or simulation versions within one run. The recommendation minimizes `annualizedCostEUR` rounded to cents; ties use initial investment rounded to cents and then lexical configuration ID. The result discloses the excluded costs and assumptions.
+`n` is `analysisYears`, and `r` is `discountRate`. The first release fixes these values at 20 years and `0.04`. Every component has a modeled economic lifetime of 20 years. Replacement, residual value, maintenance, installation labor, taxes, and subsidies are excluded, and `annualOperationsEUR` is zero. Initial investment is the sum of unit price multiplied by every selected new component quantity. Existing-equipment costing is deferred under DEC-07. VEF must not compare candidates whose metrics were computed under different dataset, model, or simulation versions within one run. The recommendation minimizes `annualizedCostEUR` rounded to cents; ties use initial investment rounded to cents and then lexical configuration ID. The result discloses the excluded costs and assumptions.
 
 Implementations use IEEE-754 binary64 calculations without intermediate rounding. Energy outputs are serialized to six decimal places and monetary outputs to two decimal places using round-half-to-even. The absolute energy-balance tolerance is `1e-6 kWh` per hourly interval; dimensionless comparisons, including self-sufficiency, use an absolute tolerance of `1e-9`. Contract tests compare serialized monetary values exactly and serialized energy values within `1e-6 kWh`.
 
@@ -325,7 +331,7 @@ Before the contract is marked accepted, the teams MUST commit common fixtures wi
 
 1. Ingest source fixtures, publish energy dataset version `1.0.0` through the generic ODIP API, retrieve its manifest and all five artifacts, and verify checksums and quality status. Publish a non-energy fixture through the same API to prove that the core is domain independent.
 2. Submit a request using that exact dataset version and energy `schemaRef`; verify the expected feasible set, cost and self-sufficiency values, recommendation, and provenance.
-3. Reject a modified artifact, wrong unit, missing hour, unpublished version, unsupported schema major, invalid customer input, unauthorized caller, and repeated idempotency key with a changed body.
+3. Reject a modified artifact, wrong unit, missing hour, partial or non-calendar-year period, unpublished version, unsupported schema major, invalid customer input, non-empty existing-equipment list, unauthorized caller, and repeated idempotency key with a changed body.
 4. Publish dataset version `1.0.1`, confirm an existing run still names and reproduces `1.0.0`, then start a new run explicitly pinned to `1.0.1`.
 5. Verify public component probes separately from Kubernetes readiness and authenticated publication retrieval. Emit/propagate safe operational correlation and read it only through project-authorized retained-log access; prove foreign-project denial and treat backend-unavailable state as failure.
 6. Restart ODIP and VEF, verify retained state and one reproducible completed run, and verify retained operational events after pod retirement/restart. Capture collector/backend health and gaps; record separate seven-day expiry/compactor evidence and actual backup restore.

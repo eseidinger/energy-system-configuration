@@ -24,11 +24,11 @@ working-tree changes; they have not been deployed or granted final acceptance.
 | --- | --- | --- |
 | GAP-01 | Fresh controlled synthetic AI-05/06 live-model retest passed on October 27 after explicit consent; output/prompt digests and assistant review retained. | Hosted cases and final owner semantic review. |
 | GAP-02 | Extended local HTTP tests reject foreign run/source/pointer/value and preserve results; schema and exact UTF-8 boundary checks pass. | Hosted private fixture setup and AI-08/11 execution. |
-| GAP-03 | Local test deficiency fixed: changed 1.0.1 tariffs, failed draft moved to 1.0.99, original bytes preserved. ODIP restart/actual restore and VEF independent all-candidate comparison pass. | Shared review of the synthetic correction and deployed old/new owned-run regression. |
+| GAP-03 | Local test deficiency fixed: changed 1.0.1 tariffs, failed draft moved to 1.0.99, original bytes preserved. ODIP restart/actual restore and VEF independent all-candidate comparison pass. | The maintainer approved the correction and expected deltas in [DEC-09](../decisions/DEC-09-corrected-tariff-acceptance-case.md). The deployed old/new owned-run regression remains open. |
 | GAP-04 | Existing local negatives and complete VEF API suite pass. | Complete release-specific deployed negative regression. |
 | GAP-05 | ODIP actual local restore and VEF transactional interrupted-claim/stale-token tests pass. | Joint deployed ODIP/VEF restore, real in-progress workload interruption and boundary reconciliation. |
-| GAP-06 | No unilateral model/scope change. | Agreed existing-equipment quantities, cost/ownership/compatibility/identity examples or explicit versioned scope reduction. |
-| GAP-07 | Complete released schema validation implemented and tested, including optional fields and offline references. | Shared annual-profile scope decision; short periods remain admitted. |
+| GAP-06 | **Closed for this release by scope decision:** the maintainer selected new installations; [DEC-07](../decisions/DEC-07-new-equipment-release-scope.md), use case 0.3 and prose contract 0.5 record it. Existing-equipment support is deferred. | Include the decision in the next immutable kit release under GAP-10 and retain the deployed HTTP 422/no-run regression. No existing-equipment implementation is claimed. |
+| GAP-07 | Schema conformance is implemented. The maintainer selected complete UTC calendar years in [DEC-08](../decisions/DEC-08-complete-calendar-year.md); VEF profile/import and ODIP energy validation now enforce the rule with boundary tests. | Carry the rule in the next immutable kit release (GAP-10) and execute the deployed negative-period regression under AI-10. Local verification is recorded in the [VEF scope verification](https://github.com/eseidinger/variability-engineering-framework/blob/main/docs/04-development/energy-release-scope-verification.md). |
 | GAP-08 | 180-day terminal-run/candidate/audit cleanup implemented and tested; minimized ownership-read audit and reproducible model-source capture added. | Deployment/retention monitoring, backlog and backup semantics, durable source/image retention and executable upgrade replay. |
 | GAP-09 | No new hosted security/rotation/elapsed-expiry evidence. | Platform probes and retained release-linked observations. |
 | GAP-10 | Sanitized tracked local evidence summary and hash-addressed source/corrected-publication bundle created. | Controlled artifact storage, complete deployment inventory and final owner acceptance. |
@@ -86,8 +86,9 @@ for the unchanged Gate 6 exit criteria.
 
 ## Recommended execution order
 
-1. Resolve the shared test inputs and release scope: corrected data/oracle
-   (`GAP-03`), existing equipment (`GAP-06`), supported annual profile (`GAP-07`).
+1. Execute the approved corrected-data case from DEC-09 (`GAP-03`). The existing-equipment
+   release scope (`GAP-06`) and annual period (`GAP-07`) are now resolved by
+   maintainer-approved DEC-07/08: new installations and complete UTC calendar years.
    This prevents a technically passing suite from accepting the wrong scope.
 2. Complete VEF lifecycle/conformance work and the private hosted AI fixtures
    (`GAP-01/02/07/08`). Keep production calculations and the original oracle
