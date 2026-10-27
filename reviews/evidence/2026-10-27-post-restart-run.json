@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-27",
+  "evidenceType": "maintainer-reported-browser-run-and-candidate-summary",
+  "project": "vareng-test",
+  "afterOdipRestartOperation": "2b197f8a-f634-4456-b357-bd496ecf5f8c",
+  "datasetId": "energy-reference-wasserburg-am-inn-2024",
+  "datasetVersion": "1.0.1",
+  "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+  "runId": "run-36002a86-73ce-4445-bd66-aff03c7621f9",
+  "status": "SUCCEEDED",
+  "recommendedConfigurationId": "pv-standard-400-q18-inverter-5kw-battery-10kwh-q1",
+  "feasibleCandidateCount": 194,
+  "evaluatedCandidateCount": 252,
+  "modelVersion": "energy-model/1.0.0",
+  "simulationVersion": "energy-simulation/1.0.0",
+  "optimizerVersion": "energy-optimizer/1.0.0",
+  "optimalityStatus": "PROVEN_OPTIMAL",
+  "recommendedCandidateMetrics": {
+    "annualizedCostEUR": 365.64,
+    "initialInvestmentEUR": 8240,
+    "selfSufficiency": 0.889509006
+  },
+  "syntheticProfileWarningRetained": true,
+  "summaryMatchesIndependentCorrectedOracle": true,
+  "verdict": "PASS: reported deterministic function after ODIP service restart",
+  "limits": [
+    "No complete result/candidate-page export for this new run: this is not a fresh all-252-candidate comparison.",
+    "A successful VEF run alone does not establish fresh ODIP artifact-byte retrieval because the verified cache is supported.",
+    "Protected ODIP artifact readback and database/S3 restoration remain separate open checks."
+  ],
+  "releaseAccepted": false
+}

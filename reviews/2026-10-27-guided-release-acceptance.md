@@ -195,8 +195,19 @@ The agent restarted only ODIP test's service workload. Operation
 `2b197f8a-f634-4456-b357-bd496ecf5f8c` succeeded at revision 10, one ready
 replica, unchanged web image. The old web pod was replaced. The scheduled
 ingestion worker remained active with a successful preceding run. Protected
-publication-byte and end-to-end numerical readback after restart remain pending;
-a new corrected-version calculation has been requested from the operator.
+publication-byte readback remains pending. The operator subsequently created
+`run-36002a86-73ce-4445-bd66-aff03c7621f9` using corrected version 1.0.1:
+SUCCEEDED, 194 feasible of 252 evaluated, the unchanged recommendation,
+EUR 365.64 annualized cost, EUR 8,240 investment and self-sufficiency 0.889509006.
+The reported manifest digest, model/simulation/optimizer 1.0.0, PROVEN_OPTIMAL
+status and synthetic-calendar warning match the expected reference. The agent
+checked the supplied summary fields and candidate metrics against the independent
+corrected oracle. This passes the reported post-restart functional calculation.
+The [sanitized run observation](evidence/2026-10-27-post-restart-run.json) retains
+the result and limits. Complete candidate pages were not exported for this new
+run, and VEF supports verified-cache fallback; this alone does not establish
+fresh ODIP/S3 byte reads or a new all-candidate comparison. Direct artifact
+download/hash comparison is the next check.
 
 Both projects' bounded HTTP metrics and resource snapshots are readable.
 Snapshots without an acceptance workload do not prove worst-case runtime.
