@@ -449,3 +449,54 @@ as one run. Earlier protected 1.0.0/1.0.1 browser results and ODIP upload
 denials remain separate supporting evidence. **AI-10 and Gate 6 remain OPEN**;
 DEC-10/11 exceptions are retained without converting missing regression
 evidence into a PASS.
+
+### Current AI-enabled image: both deployed numerical oracles PASS
+
+On `vareng-test` revision 45, image
+`cea0b41b880201a3a24cce0191d508c5d5486226ef51c1e10b4232c9221d2d6c`,
+the deployment verifier confirmed one ready replica, enabled AI, model
+`gpt-6.1-sol` and the declared ODIP/identity/provider egress. The maintainer
+started two new owned runs through the protected browser using the same site
+and constraints. Corrected `1.0.1` run
+`run-9564f0a8-dfcb-433c-979a-29918000be0a` returned 365.64 EUR annualized
+cost; original `1.0.0` run `run-d484d00e-a109-4ce3-8d40-9affecd731d2`
+returned 360.67 EUR. Both reported the expected recommendation and 194 of
+252 feasible candidates.
+
+The maintainer saved each protected result and all three candidate pages to
+ignored local files. The independent checker passed **every one of the 252
+candidates**, all metrics and constraint objects, feasible ranking, result
+provenance and recommendation against each version's own oracle. A separate
+cross-version check found identical configurations, components, feasibility,
+constraints and all non-cost metrics. Tariff-sensitive costs and ranking were
+compared to their respective oracles rather than assumed identical. The
+[sanitized current-image record](evidence/2026-10-27-ai10-current-image-oracles.json)
+retains export and oracle hashes, deployment pins and limitations. The earlier
+published non-energy `1.0.0` fixture was also read back in ODIP with its pinned
+manifest digest; its source and the energy source appear in the ODIP catalog.
+
+These are new protected numerical regression passes on the current AI-enabled
+image. They do not constitute the unchanged Gate 5 suite as one automated
+cross-project run. Source ingestion/raw artifact lineage and the remaining
+end-to-end assertions are assessed separately. AI-10 and Gate 6 stay OPEN.
+
+### ODIP source catalog and failed pipeline attempt
+
+The maintainer read back the published non-energy fixture `1.0.0` with pinned
+manifest SHA-256 `f0d4f6b882c1a05154fb43283166953fda7a0dba7f2ed435dd7f46088663bbff`.
+The ODIP catalog lists one energy and one non-energy source; the energy dataset
+links to the energy source. The source record's `location` is the contract-kit
+GitHub **release page**, not the pinned PVGIS source JSON. A subsequent ODIP
+pipeline run for that source, `b54ea08e-441e-4835-972f-364dfcfaeb24`, ended
+`FAILED` at 19:05:17 UTC. The bounded worker log records `NewConnectionError`
+six milliseconds after ingestion started. The worker deployment does not
+declare GitHub egress; that configuration is a likely reason for the connection
+failure, but the exact network denial was not directly captured. Even if the
+page were reachable, its HTML would not be the pinned raw JSON.
+
+No successful raw artifact or link from the published reference versions to a
+captured pipeline input is claimed. The source catalog association and the
+manifest provenance text are separate facts. The failed attempt left the
+already published versions untouched. The sanitized current-image report
+retains the source record and a worker-log hash; a future isolated ingestion
+case must use the pinned JSON through an approved raw-input path.

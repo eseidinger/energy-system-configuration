@@ -21,6 +21,11 @@ on the CI-published image and was removed from `vareng-test`; its
 [sanitized record](evidence/2026-10-27-hosted-ai10-private-regression.json)
 closes the independent VEF invalid-content subcase, not the complete unchanged
 deployed Gate 5 regression. AI-10 and Gate 6 therefore remain open.
+Two subsequent protected browser runs on the current AI-enabled VEF image also
+pass the complete original and corrected 252-candidate oracles. Their
+[sanitized report](evidence/2026-10-27-ai10-current-image-oracles.json) keeps
+deployment, export and oracle hashes. The full cross-project suite remains
+unrecorded as one automated run.
 
 ## Same-day implementation follow-up
 

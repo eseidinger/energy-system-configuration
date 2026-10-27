@@ -28,6 +28,19 @@ The maintainer now accepts the other listed non-AI points without further testin
 under DEC-11. Hosted AI-05/06 and AI-08/11 now pass within their recorded
 evidence limits. Only AI-10 remains acceptance work; final Gate 6 is open.
 
+The later [current-image oracle report](evidence/2026-10-27-ai10-current-image-oracles.json)
+adds two protected browser runs on AI-enabled VEF revision 45. Both full
+252-candidate oracles, result provenance and per-version ranking pass; a
+cross-version comparison confirms unchanged non-cost metrics and constraints.
+The report also records ODIP non-energy publication readback and catalog source
+association. It does not convert the separately captured scenarios into the
+single unchanged deployed Gate 5 suite required by AI-10.
+An ODIP energy pipeline attempt ended `FAILED` with worker `NewConnectionError`;
+the registered source points to a GitHub release page rather than the pinned
+PVGIS JSON. No successful raw artifact or publication input link is inferred.
+The [guided record](2026-10-27-guided-release-acceptance.md#odip-source-catalog-and-failed-pipeline-attempt)
+keeps this source-ingestion gap separate from the passed numerical regressions.
+
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
 | GAP-01 | **Closed for hosted AI-05/06 review:** unproven optimality/missing replacement price and adversarial-metadata resistance pass; 32 and 33 rendered citations respectively match the oracle/fixtures, with assistant semantic review. Marked fixture copies were removed and the short grant revoked. | Retain recorded capture limits; these cases do not prove AI-10. |
