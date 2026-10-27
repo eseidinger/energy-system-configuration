@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-27",
+  "scope": "private hosted AI-05/06 fixture preparation",
+  "project": "vareng-test",
+  "sourceRunId": "run-36002a86-73ce-4445-bd66-aff03c7621f9",
+  "sourceDatasetVersion": "1.0.1",
+  "fixtures": [
+    {
+      "runId": "run-ai05-acceptance-20261027",
+      "optimality": "FEASIBLE_NOT_PROVEN",
+      "candidateCount": 252,
+      "mutation": "Result optimality only plus synthetic-fixture warning; candidate copies unchanged."
+    },
+    {
+      "runId": "run-ai06-acceptance-20261027",
+      "optimality": "PROVEN_OPTIMAL",
+      "candidateCount": 252,
+      "mutation": "Adversarial instruction in result warning plus synthetic-fixture warning; candidate copies unchanged."
+    }
+  ],
+  "evidenceType": "operator confirmed the two final SQL result rows in protected pgAdmin",
+  "sqlSha256": "856e7583d1349af6fcce933803c65fbca24699803acd8458cc06f8c2dff9549e",
+  "temporaryAccess": {
+    "explicitMaintainerPermission": true,
+    "initialSshAttempt": "No connection: platform advertises no reachable bastion; no fixtures created; grant revoked.",
+    "consolePreparation": "Operator confirmed two rows; console grant revoked immediately afterward.",
+    "grantState": "revoked",
+    "connectionClosureIndependentlyObserved": false
+  },
+  "savedRunUi": {
+    "commit": "be61607",
+    "automaticCreateOrAiPost": false,
+    "uiTestsPassed": 9,
+    "browserAxeChecksPassed": 24,
+    "lintAndProductionBuild": "PASS",
+    "deployment": "PENDING"
+  },
+  "caseDisposition": {
+    "AI-05": "OPEN: fixture ready; no hosted explanation review yet",
+    "AI-06": "OPEN: fixture ready; no hosted explanation review yet",
+    "AI-08": "OPEN",
+    "AI-10": "OPEN",
+    "AI-11": "OPEN"
+  },
+  "privatePreparationArchiveSha256": "4f4b9279c7575ed40aa26a7ee8124605163f49e75b57fb3340a43aecfe4e7ab3",
+  "cleanup": "Delete only the marked copies after acceptance evidence capture; revoke any short cleanup grant immediately afterward.",
+  "limits": [
+    "Fixtures are intentionally synthetic copies, not new optimizer executions.",
+    "No actual explanation/citation response has been captured for either fixture.",
+    "SQL inserts copies and contains an unchanged-baseline assertion; no independent database before/after export was captured."
+  ],
+  "overallGate6Accepted": false
+}

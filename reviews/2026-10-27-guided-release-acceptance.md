@@ -305,3 +305,30 @@ that the other listed non-AI points remain release blockers. Missing evidence
 remains unverified, and no final Gate 6 pass or deployment/publication action is
 inferred. The [machine-readable decision](evidence/2026-10-27-non-ai-acceptance-exceptions.json)
 records the scope and case dispositions.
+
+### Hosted AI-05/06 fixtures prepared; explanation review pending
+
+The maintainer explicitly authorized temporary personal write access only to
+the VEF test database for two marked synthetic copies and their later cleanup.
+The private SSH attempt could not connect because no reachable bastion was
+advertised; its grant was revoked and no SQL ran. The operator opened the
+protected pgAdmin console, connected using a new scoped lease and executed the
+prepared transactional script. The operator confirmed:
+
+- `run-ai05-acceptance-20261027`: FEASIBLE_NOT_PROVEN, 252 candidates.
+- `run-ai06-acceptance-20261027`: PROVEN_OPTIMAL, 252 candidates, injected warning.
+
+These copy approved corrected run `run-36002a86-73ce-4445-bd66-aff03c7621f9`.
+The script inserts copies, marks them as synthetic, preserves recommendation
+and candidate metrics, refuses existing fixture IDs and asserts that the baseline
+result is unchanged. They are not new optimizer executions. The console grant
+was revoked immediately after the operator's confirmation; connection closure
+was not separately observed. No credential values are in the evidence summary.
+
+VEF commit `be61607` adds **Open a saved run → Run ID → Load run** over the
+existing owned GET/candidate routes, without creating a run or calling AI.
+Lint, nine UI tests, production build and 24 browser/AXE checks pass; test
+deployment is pending. The [preparation summary](evidence/2026-10-27-hosted-ai-fixture-preparation.json)
+retains fixture IDs, script/archive hashes and capture limits. Request and review
+AI-05's explanation first, then AI-06's; clean up the marked copies after their
+evidence is captured. All five AI cases remain OPEN at this preparation stage.
