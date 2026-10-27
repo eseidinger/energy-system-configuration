@@ -139,7 +139,7 @@ The operator reported HTTP 422 `checksum_mismatch`, "Artifact digest does not
 match the manifest". The hosted upload integrity rejection passes. This does
 not exercise independently tampered ODIP read responses or VEF's verifier.
 
-### Prepared next case: unsupported schema (hosted result pending)
+### Unsupported schema: rejected at draft creation
 
 Version 1.0.93 declares `urn:portfolio:energy-configuration-input:v99`.
 The generic manifest envelope schema passes and artifact descriptors retain
@@ -148,8 +148,21 @@ the known valid 1.0.1 input hashes. Manifest SHA-256 is
 The file is `/tmp/energy-unsupported-schema-1.0.93/manifest.json`. ODIP's
 registered-profile lookup should reject draft creation with HTTP 422
 `unsupported_schema`, "Publication schema is not supported", before creating
-a publication. No artifact upload or worker validation is required. Hosted
-execution remains pending.
+a publication. No artifact upload or worker validation is required. The
+operator reported HTTP 422 `unsupported_schema`, "Publication schema is not
+supported". This passes hosted rejection at the draft-creation boundary.
+No independent hosted database count or VEF unsupported-content injection was
+captured.
+
+### Consolidated negative-case evidence
+
+The [sanitized negative-case summary](evidence/2026-10-27-negative-cases.json)
+retains the reported responses, prepared fixture hashes, tested boundaries and
+capture limits. Partial-year and missing-hour publication status, wrong-unit
+upload, checksum-mismatch upload and unsupported-schema draft creation have
+passing hosted observations. These are ODIP boundary checks; they do not close
+independent VEF invalid-content checks, complete deployment inventory, integrated
+restore or the remaining AI cases. AI-10 and Gate 6 remain open.
 
 ## Evidence and limits
 

@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-27",
+  "datasetId": "energy-reference-wasserburg-am-inn-2024",
+  "environments": [
+    "odip-test",
+    "vareng-test"
+  ],
+  "evidenceKind": "maintainer-reported-browser-status-and-error-responses with local synthetic preflight",
+  "cases": [
+    {
+      "observationFile": "invalid-calendar-publication.json",
+      "observation": {
+        "observedAt": "2026-10-27T12:11:34.888250+00:00",
+        "evidenceType": "user-reported-operator-publication-status",
+        "project": "odip-test",
+        "case": "incomplete-calendar-year",
+        "datasetId": "energy-reference-wasserburg-am-inn-2024",
+        "version": "1.0.90",
+        "manifestSha256": "657b6d6e293355e3c88e881dece819815cc9d0a5d9bb3b3c8454ee757c65901d",
+        "period": {
+          "start": "2024-01-01T00:00:00Z",
+          "endExclusive": "2024-07-01T00:00:00Z",
+          "step": "PT1H"
+        },
+        "hours": 4368,
+        "preflight": {
+          "genericReleasedKitSchemaAndSemanticValidation": "PASS",
+          "currentAnnualScopeValidation": "REJECTED"
+        },
+        "observedStatus": "FAILED",
+        "observedFailureCode": "profile_validation_failed",
+        "result": "PASS (hosted energy publication rejects partial calendar year)",
+        "limitations": [
+          "VEF hosted retest passed with HTTP 422 publication_not_published after correction 561887e; original 503 misclassification retained in separate observation.",
+          "Independent VEF rejection of an invalid but served publication has local verifier tests; this operator failure intentionally prevents serving it.",
+          "Hosted worker report body and logs have not been exported; manifest hash and failure status/code were reported by the operator."
+        ],
+        "releaseAccepted": false
+      }
+    },
+    {
+      "observationFile": "failed-publication-http-classification.json",
+      "observation": {
+        "evidenceType": "user-reported-protected-POST-error",
+        "project": "vareng-test",
+        "datasetId": "energy-reference-wasserburg-am-inn-2024",
+        "version": "1.0.90",
+        "observed": {
+          "schemaVersion": "error/v1",
+          "status": 503,
+          "code": "publication_unavailable",
+          "message": "The energy publication could not be verified now."
+        },
+        "verdict": "PASS after correction; initial misclassification retained in observed",
+        "rootCause": "Pinned ODIP GET returns 409 for an existing unpublished version; VEF previously translated only 404 to 422.",
+        "fixCommit": "561887e70b9b17b5b65d860ecb782629386cb641",
+        "expectedRetest": {
+          "status": 422,
+          "code": "publication_not_published"
+        },
+        "hostedRetest": {
+          "evidenceType": "user-reported-protected-POST-error",
+          "schemaVersion": "error/v1",
+          "status": 422,
+          "code": "publication_not_published",
+          "message": "The requested publication version is not published.",
+          "runIdInErrorEnvelope": false,
+          "databaseRunCountIndependentlyMeasured": false
+        },
+        "localVerification": {
+          "discovered": 95,
+          "passed": 93,
+          "skipped": 2,
+          "failures": 0,
+          "errors": 0,
+          "checkstyleViolations": 0
+        },
+        "releaseAccepted": false
+      }
+    },
+    {
+      "observationFile": "missing-hour-publication-observation.json",
+      "observation": {
+        "evidenceType": "user-reported-operator-publication-status",
+        "project": "odip-test",
+        "datasetId": "energy-reference-wasserburg-am-inn-2024",
+        "version": "1.0.99",
+        "manifestSha256Prepared": "9f2a70a78d26d17b276168712e5fd321580ba4afa29cb262db91da533e88bac7",
+        "observedStatus": "FAILED",
+        "failureCodeReported": false,
+        "validationReportCaptured": false,
+        "verdict": "PASS: hosted publication-status rejection",
+        "independentHostedVefContentValidation": "NOT_EXECUTED",
+        "releaseAccepted": false
+      }
+    },
+    {
+      "observationFile": "wrong-unit-upload-observation.json",
+      "observation": {
+        "evidenceType": "user-reported-operator-upload-error",
+        "project": "odip-test",
+        "datasetId": "energy-reference-wasserburg-am-inn-2024",
+        "version": "1.0.91",
+        "manifestSha256Prepared": "ed3270e950e1a7b0304018f9685b7793d9f25ccf979f3b54d0d4bb7b13b6acdd",
+        "priorIncompleteUploadResponse": {
+          "status": 422,
+          "code": "missing_artifact",
+          "message": "All declared artifacts must be uploaded"
+        },
+        "observed": {
+          "schemaVersion": "error/v1",
+          "status": 422,
+          "code": "schema_validation_failed",
+          "message": "Document fails schema energy-import-tariff-v1"
+        },
+        "verdict": "PASS: wrong unit rejected at upload schema boundary",
+        "workerValidationExecuted": false,
+        "publicationStatusObserved": false,
+        "independentHostedVefContentValidation": "NOT_EXECUTED",
+        "releaseAccepted": false
+      }
+    },
+    {
+      "observationFile": "tampered-upload-observation.json",
+      "observation": {
+        "evidenceType": "user-reported-operator-upload-error",
+        "project": "odip-test",
+        "datasetId": "energy-reference-wasserburg-am-inn-2024",
+        "version": "1.0.92",
+        "manifestSha256Prepared": "0a6b812d58f33dc6c155f91c75fcbf716218a2baf276fa03ee6df9a8ba23e5d5",
+        "observed": {
+          "schemaVersion": "error/v1",
+          "status": 422,
+          "code": "checksum_mismatch",
+          "message": "Artifact digest does not match the manifest"
+        },
+        "verdict": "PASS: artifact digest mismatch rejected at upload",
+        "independentHostedVefContentValidation": "NOT_EXECUTED",
+        "releaseAccepted": false
+      }
+    },
+    {
+      "observationFile": "unsupported-schema-observation.json",
+      "observation": {
+        "evidenceType": "user-reported-operator-draft-creation-error",
+        "project": "odip-test",
+        "datasetId": "energy-reference-wasserburg-am-inn-2024",
+        "version": "1.0.93",
+        "manifestSha256Prepared": "93afafe3200784dd51698461aa81fb3eedd7cd588383048f94436d4af6b5dba6",
+        "observed": {
+          "schemaVersion": "error/v1",
+          "status": 422,
+          "code": "unsupported_schema",
+          "message": "Publication schema is not supported"
+        },
+        "verdict": "PASS: unsupported publication schema rejected at draft creation",
+        "independentHostedVefContentValidation": "NOT_EXECUTED",
+        "releaseAccepted": false
+      }
+    }
+  ],
+  "knownLimits": [
+    "No browser authorization headers, cookies or credentials retained.",
+    "Fixture hashes are prepared local inputs; complete hosted artifact exports and validation reports were not captured for these negatives.",
+    "Missing-hour FAILED status was reported without worker failure code.",
+    "Hosted database run/publication counts were not independently measured.",
+    "ODIP upload/create/publication denials do not prove independent VEF invalid-content verification.",
+    "CI 40502827158 deployed correction 561887e; full current platform image inventory awaits renewed human CLI login.",
+    "Integrated recovery, remaining hosted AI cases and final owner acceptance remain open."
+  ],
+  "releaseAccepted": false
+}
