@@ -388,3 +388,14 @@ verdict were not captured. AI-06 passes within these recorded limits. Remaining
 acceptance cases are AI-08, AI-10 and AI-11. The authorized next action is to
 remove only the two marked AI-05/06 copies, preserving their reference run, and
 immediately revoke the short cleanup grant.
+
+### AI-05/06 synthetic fixture cleanup complete
+
+The maintainer ran the guarded cleanup in the protected pgAdmin console and
+confirmed its final result row: `remaining_test_runs=0` and
+`reference_status=SUCCEEDED`. The short personal write grant was revoked
+immediately afterward; the platform returned `state=revoked` at
+2026-10-27T17:10:23.785099Z. The [sanitized cleanup record](evidence/2026-10-27-hosted-ai-fixture-cleanup.json)
+pins the two deleted IDs and cleanup script SHA-256. This is operator-confirmed
+console evidence, not an independent database readback; connection closure was
+not separately observed. AI-08, AI-10 and AI-11 remain open, as does Gate 6.

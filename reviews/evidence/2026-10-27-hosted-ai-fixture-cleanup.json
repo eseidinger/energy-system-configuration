@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-27",
+  "project": "vareng-test",
+  "scope": "authorized cleanup of two marked synthetic AI acceptance copies",
+  "deletedRunIds": [
+    "run-ai05-acceptance-20261027",
+    "run-ai06-acceptance-20261027"
+  ],
+  "preservedReferenceRunId": "run-36002a86-73ce-4445-bd66-aff03c7621f9",
+  "cleanupSqlSha256": "5f5cf725a0b287e8e9d368d6e3bd2ff3b2cabdd071ac02722bf5e2010e5203a7",
+  "observation": {
+    "source": "maintainer-confirmed final result row in protected pgAdmin console",
+    "remainingTestRuns": 0,
+    "referenceStatus": "SUCCEEDED",
+    "independentDatabaseReadback": false
+  },
+  "temporaryAccess": {
+    "cleanupGrantId": "15771377-737f-490a-b12e-65fd267e1bc8",
+    "grantState": "revoked",
+    "revokedAtUtc": "2026-10-27T17:10:23.785099+00:00",
+    "connectionClosureIndependentlyObserved": false
+  },
+  "remainingAcceptanceCases": ["AI-08", "AI-10", "AI-11"],
+  "overallGate6Accepted": false
+}
