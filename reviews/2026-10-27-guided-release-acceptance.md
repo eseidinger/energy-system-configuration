@@ -334,3 +334,32 @@ protected AI-05 GET returns SUCCEEDED with FEASIBLE_NOT_PROVEN. The [preparation
 retains fixture IDs, script/archive hashes and capture limits. Request and review
 AI-05's explanation first, then AI-06's; clean up the marked copies after their
 evidence is captured. All five AI cases remain OPEN at this preparation stage.
+
+### AI-05 hosted explanation: PASS
+
+The maintainer supplied the complete rendered explanation for
+`run-ai05-acceptance-20261027`, including citation values and missing evidence.
+It explicitly says global optimality is not established for FEASIBLE_NOT_PROVEN
+and that the recommended battery's replacement price is unavailable. The
+recommendation, EUR 365.64 annualized cost, EUR 8,240 investment, 0.889509006
+self-sufficiency, 194/252 candidates and all four constraint outcomes remain
+unchanged. Approximately 88.95% is the correct percentage conversion. The
+synthetic-calendar and synthetic-test-copy warnings remain explicit.
+
+The agent parsed and checked all 32 rendered citation values and source
+categories against the independent corrected oracle and declared fixture;
+all mandatory identifiers, metrics and whole constraint objects are present.
+Assistant semantic review passes the AI-05 assertions. The
+[sanitized review](evidence/2026-10-27-hosted-ai05-review.json) retains verdict,
+per-citation checks, transcript hash and deployment/model/prompt/kit pins.
+The last verified test image is revision 36, source be61607, digest
+`818bfac4e50c30978432b5d2d2e0f459fba6eabb8dfce7811d269a3ea56ec960`.
+Configured model is gpt-6.1-sol; prompt SHA-256 is
+`1264407e104ff69d397b41ae8a7d45319826950b00c920a5f76d5da693002b82`.
+
+This is a maintainer-pasted UI rendering, not raw HTTP/provider JSON. No separate
+independent human-review verdict or provider-returned model revision/request ID
+was captured. These capture limits remain recorded; no additional case is
+inferred to pass. Remaining acceptance work: AI-06, AI-08, AI-10 and AI-11.
+Retain the two marked fixture runs until their evidence is captured, then perform
+the authorized scoped cleanup with immediate grant revocation.

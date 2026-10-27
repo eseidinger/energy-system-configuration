@@ -11,7 +11,7 @@ The maintainer accepted a new-equipment-only current release on October 27 in [D
 
 Version 0.4 also records [DEC-10](decisions/DEC-10-current-release-recovery-test-exception.md): the maintainer accepts the current release without an isolated joint backup/restore test. This is an explicit acceptance exception with restoration unverified; remaining acceptance cases and backup/storage/security duties are unchanged.
 
-Version 0.5 applies [DEC-11](decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md): the other listed non-AI acceptance points are accepted without further verification for this release. AI-05, AI-06, AI-08, AI-10 and AI-11 remain open. The exceptions do not turn missing evidence into passed tests.
+Version 0.5 applies [DEC-11](decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md): the other listed non-AI acceptance points are accepted without further verification for this release. The AI cases are outside that exception; their current dispositions are in the guided record. The exceptions do not turn missing evidence into passed tests.
 
 ## 1 Use case summary
 

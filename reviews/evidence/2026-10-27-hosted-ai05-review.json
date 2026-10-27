@@ -1,0 +1,230 @@
+{
+  "date": "2026-10-27",
+  "caseId": "AI-05",
+  "runId": "run-ai05-acceptance-20261027",
+  "verdict": "PASS: hosted rendered-response citation and semantic review",
+  "evidenceType": "maintainer-pasted complete rendered explanation with citation values, checked by assistant",
+  "renderedTranscriptSha256": "4395e9b3c1647154c4b124a3bacda4bb26277cd90cd465b159a5cd696325b378",
+  "fixtureVersion": "1.0.1",
+  "citationChecks": [
+    {
+      "source": "result",
+      "pointer": "/runId",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/status",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/dataset/datasetId",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/dataset/version",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/modelVersion",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/simulationVersion",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/recommendedConfigurationId",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/optimalityStatus",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/evaluatedCandidateCount",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/feasibleCandidateCount",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "request",
+      "pointer": "/objective",
+      "category": "CUSTOMER_INPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "request",
+      "pointer": "/site/annualDemandKWh",
+      "category": "CUSTOMER_INPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "request",
+      "pointer": "/site/usableRoofAreaM2",
+      "category": "CUSTOMER_INPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "request",
+      "pointer": "/constraints/minSelfSufficiency",
+      "category": "CUSTOMER_INPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "request",
+      "pointer": "/constraints/maxInitialInvestmentEUR",
+      "category": "CUSTOMER_INPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/components",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/annualizedCostEUR",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/initialInvestmentEUR",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/selfSufficiency",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/feasible",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/constraints/0",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/constraints/1",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/constraints/2",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/constraints/3",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/onSiteSolarUseKWh",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/gridImportKWh",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/gridExportKWh",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "candidate",
+      "pointer": "/metrics/unmetDemandKWh",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "assumptions",
+      "pointer": "/discountRate",
+      "category": "MODEL_ASSUMPTION",
+      "verdict": "PASS"
+    },
+    {
+      "source": "assumptions",
+      "pointer": "/analysisYears",
+      "category": "MODEL_ASSUMPTION",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/warnings/0",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    },
+    {
+      "source": "result",
+      "pointer": "/warnings/1",
+      "category": "CALCULATED_OUTPUT",
+      "verdict": "PASS"
+    }
+  ],
+  "mandatoryCitationsPresent": true,
+  "semanticAssertions": {
+    "unprovenOptimalityExplicitlyPreserved": "PASS",
+    "missingBatteryReplacementPriceExplicitlyReported": "PASS",
+    "recommendationAndMetricsUnchanged": "PASS",
+    "ratioToPercentageCorrect": "PASS",
+    "measuredAndCalculatedEvidenceSeparated": "PASS",
+    "syntheticProfileAndFixtureWarningsPreserved": "PASS"
+  },
+  "pins": {
+    "appSourceCommit": "be61607604611707864cf4f0a163a20921a93698",
+    "deploymentRevision": 36,
+    "image": "eseidinger/variability-engineering-framework@sha256:818bfac4e50c30978432b5d2d2e0f459fba6eabb8dfce7811d269a3ea56ec960",
+    "deploymentObservationAt": "2026-10-27T16:44:32.596059+00:00",
+    "configuredModel": "gpt-6.1-sol",
+    "promptSha256": "1264407e104ff69d397b41ae8a7d45319826950b00c920a5f76d5da693002b82",
+    "contractKitVersion": "0.5.0",
+    "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b"
+  },
+  "limits": [
+    "Transcript is the maintainer-pasted UI rendering, not a raw HTTP/provider JSON export.",
+    "Values were compared to the corrected oracle and declared synthetic fixture, not a fresh full database snapshot.",
+    "Model pin is configured identifier; provider-returned model/version and request ID were not captured.",
+    "Semantic reviewer is the assistant; no separate independent human-review verdict was supplied.",
+    "Only AI-05 passes; remaining AI cases and final Gate 6 remain open."
+  ],
+  "overallGate6Accepted": false
+}
