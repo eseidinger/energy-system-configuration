@@ -25,12 +25,12 @@ supersede their implementation-state statements as follows. The subsequent
 configured test-environment version-isolation case and records request,
 publication, upload-integrity, unit and unsupported-schema rejections. Other local checks remain limited to their stated environment;
 The maintainer now accepts the other listed non-AI points without further testing
-under DEC-11. After the hosted AI-05 pass, AI-06/08/10/11 remain acceptance work. Their AI-specific
+under DEC-11. After the hosted AI-05/06 passes, AI-08/10/11 remain acceptance work. Their AI-specific
 evidence obligations are preserved; final Gate 6 remains open for these cases.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
-| GAP-01 | Controlled local AI-05/06 checks pass. Hosted AI-05 now passes: the supplied rendering preserves unproven optimality and missing battery replacement price; 32 citations match the corrected oracle/fixture, with assistant semantic review. | Hosted AI-06 and its semantic review remain open; see the guided record for capture limits. |
+| GAP-01 | **Closed for hosted AI-05/06 review:** unproven optimality/missing replacement price and adversarial-metadata resistance pass; 32 and 33 rendered citations respectively match the oracle/fixtures, with assistant semantic review. | Retain recorded capture limits; no remaining AI-05/06 assertion is inferred to prove AI-08/10/11. Marked fixture cleanup is the next authorized action. |
 | GAP-02 | Extended local HTTP tests reject foreign run/source/pointer/value and preserve results; schema and exact UTF-8 boundary checks pass. | Hosted private fixture setup and AI-08/11 execution. |
 | GAP-03 | **Closed in the configured test environment.** DEC-09 correction published as 1.0.1; both owned runs and all 252 candidates/metrics/ranking/provenance match their independent oracles. Original 1.0.0 readback stays unchanged. See the [guided record](2026-10-27-guided-release-acceptance.md). | Version isolation remains PASS. Additional non-AI archive/inventory checks are ACCEPTED_EXCEPTION (DEC-11); distinct AI-10 obligations remain open. |
 | GAP-04 | Local suites pass. Deployed non-empty-existing-list and nonexistent-version requests return the expected HTTP 422 codes. ODIP rejects partial-year 1.0.90 as FAILED; after correction 561887e, VEF's hosted retest returns 422 publication_not_published. ODIP missing-hour 1.0.99 is FAILED (worker report/code not captured); wrong-unit 1.0.91 is rejected at upload with 422 schema_validation_failed; tampered 1.0.92 is rejected at upload with 422 checksum_mismatch; unsupported-schema 1.0.93 is rejected at draft creation with 422 unsupported_schema. | Publication-state classification and ODIP missing-hour status checks pass; independent hosted VEF invalid-content checks remain open. Tampered read-response checks and complete release-specific regression remain open. See the guided record for capture limits. |
@@ -96,9 +96,9 @@ its CI/test deployment and hosted retest also passed. See the guided record.
 
 ## Remaining acceptance execution order
 
-1. Review the prepared hosted AI-06 fixture and prepare the private AI-08/11
-   cases. Retain the now-passed hosted AI-05 and other existing evidence.
-2. Execute the four open AI cases, including AI-10's outstanding independent
+1. Clean up the two marked AI-05/06 fixtures after preserving their passed
+   hosted evidence; prepare the private AI-08/11 cases.
+2. Execute the three open AI cases, including AI-10's outstanding independent
    VEF invalid-content and AI-enabled regression assertions. Preserve the
    explicit DEC-10 restore exception; DEC-11 does not accept additional AI claims.
 3. Capture the evidence and semantic review needed for those AI cases, then
