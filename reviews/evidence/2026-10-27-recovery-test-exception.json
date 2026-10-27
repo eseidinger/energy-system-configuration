@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-27",
+  "decisionId": "DEC-10",
+  "authority": "explicit cross-project maintainer instruction in guided review",
+  "maintainerStatement": "Akzeptiere auch ohne Recovery Test.",
+  "scope": "current bounded energy release reviewed in odip-test and vareng-test",
+  "disposition": "ACCEPTED_EXCEPTION",
+  "exceptedAssertions": [
+    "isolated joint restore of ODIP PostgreSQL and retained S3 versions together with VEF PostgreSQL",
+    "restore-specific access/grant/credential/binding reconciliation and readback within that exercise",
+    "recovery VM provisioning as a prerequisite to this release"
+  ],
+  "affectedCompositeCases": [
+    "GAP-05 restore portion",
+    "GAP-13 restore portion",
+    "AI-10 restore portion"
+  ],
+  "recoveryTestExecuted": false,
+  "recoveryDemonstrated": false,
+  "recoveryVmRequiredForCurrentRelease": false,
+  "previousEvidenceRetained": [
+    "service workload restart",
+    "reported corrected-version calculation matching independent oracle summary",
+    "all five protected artifact downloads match manifest digests and reference bytes"
+  ],
+  "unchangedDuties": [
+    "backup and retention",
+    "access control and storage integrity",
+    "hosted in-progress workload interruption",
+    "remaining AI semantic/citation/boundary assertions",
+    "remaining operational and release-evidence assertions"
+  ],
+  "overallGate6Accepted": false,
+  "productionDeploymentAuthorizedByThisDecision": false,
+  "releasedContractKitChanged": false,
+  "releasedContractKitVersion": "0.5.0",
+  "proseVersions": {
+    "useCase": "0.4",
+    "integrationContract": "0.6",
+    "integrationPlan": "0.4"
+  },
+  "decisionDocument": "decisions/DEC-10-current-release-recovery-test-exception.md"
+}

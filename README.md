@@ -9,6 +9,7 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [New-equipment release scope](decisions/DEC-07-new-equipment-release-scope.md) — October 27 maintainer decision; existing-equipment support is deferred.
 - [Complete UTC calendar year](decisions/DEC-08-complete-calendar-year.md) — accepted period for annual optimization, enforced independently by both consumers.
 - [Corrected tariff acceptance case](decisions/DEC-09-corrected-tariff-acceptance-case.md) — approved synthetic correction and expected results for the deployed version-isolation check.
+- [Recovery-test acceptance exception](decisions/DEC-10-current-release-recovery-test-exception.md) — maintainer accepts this release without a restore drill; restoration remains unverified.
 - [Guided deployed acceptance](reviews/2026-10-27-guided-release-acceptance.md) — full old/new-run oracle comparison and recorded negative checks; final release remains open.
 - [VEF-to-ODIP authentication flow](architecture/vef-odip-authentication.md) — sequence, trust boundaries, threats, and required controls.
 - [Gate 0 domain review](reviews/2026-10-10-gate-0-domain-review.md) — approval and limitations of the version 0.2 implementation baseline.

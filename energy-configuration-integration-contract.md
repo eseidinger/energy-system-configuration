@@ -1,6 +1,6 @@
 # AI-Assisted Energy System Configuration Integration Contract
 
-**Status:** Current-release scope revision, version 0.5
+**Status:** Current-release scope revision, version 0.6
 **Date:** 2026-10-27
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Define the normative interfaces and operational boundaries between the three projects for the energy-system configuration use case.
@@ -8,6 +8,8 @@
 This contract implements the behavior described in the [use case definition](energy-configuration-use-case.md). Delivery order, repository work packages, and integration gates are defined in the [integration plan](energy-configuration-integration-plan.md). Use-case intent belongs in the use case definition; delivery status belongs in the plan. This document is limited to testable obligations at project boundaries.
 
 Version 0.5 applies the maintainer-approved [DEC-07](decisions/DEC-07-new-equipment-release-scope.md): the current release covers new equipment only. It supersedes the existing-equipment obligations in prose version 0.4 for this release. It also records [DEC-08](decisions/DEC-08-complete-calendar-year.md): energy optimization requires a complete UTC calendar year. Published kit 0.5.0 and consumer pins remain immutable; both decisions must accompany the next shared-kit release before final acceptance.
+
+Version 0.6 additionally applies [DEC-10](decisions/DEC-10-current-release-recovery-test-exception.md): the maintainer accepts this current release without an isolated joint backup/restore test. This explicit exception supersedes the restore-execution acceptance clauses below for this release only; backup, retention and access duties remain. Restoration is unverified, and all other open acceptance cases remain open. Released kit 0.5.0 and consumer pins are unchanged.
 
 Implementation and acceptance status are recorded in the [October 27 cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md). ODIP publication and VEF deterministic/AI endpoints are implemented; remaining conformance and evidence gaps do not change the normative obligations below. The October 27 status review itself changed no API, schema or calculation. The separately approved scope revision changes the release acceptance boundary, while retaining v1 wire fields and numerical results. Version `0.4` reconciles the platform integration boundary with Developer Platform revision `b360ddee34444748c95705c597aa7b17491cd05b`. It retains the `0.3` deployment and identity reconciliation and adds the implemented component-monitoring and minimized central-log profile; energy payloads and numerical oracles are unchanged. Normative words such as **MUST** express baseline requirements, not claims about current repository behavior. Contract version `1.0.0` becomes the accepted release only after the integration and release gates pass.
 

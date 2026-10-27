@@ -229,7 +229,7 @@ bucket restore. The private local archive is VEF's ignored
 SHA-256 `e6e20631548cd45e2cda07089bf56a12efeb3266932a75e5a835ae2287232969`.
 Controlled long-term storage remains open.
 
-### Next recovery prerequisite
+### Recovery prerequisite preflight (superseded for this release by DEC-10)
 
 The platform's existing isolated restore procedure requires a fresh Ubuntu
 recovery VM, an explicit verified snapshot and privately supplied restic/S3
@@ -274,3 +274,17 @@ review. Do not retroactively modify immutable 1.0.0 or claim captured raw data.
 The remaining hosted AI cases, negative profile/data scenarios, integrated
 restore, runtime/security/retention evidence and final owner acceptance stay
 open in the [gap register](2026-10-27-gap-analysis.md).
+
+### Maintainer accepts the release without the recovery test
+
+After the preflight, the maintainer stated "Akzeptiere auch ohne Recovery Test."
+[DEC-10](../decisions/DEC-10-current-release-recovery-test-exception.md) records
+the accepted current-release exception (also retained in the
+[machine-readable decision](evidence/2026-10-27-recovery-test-exception.json)):
+no isolated joint database/S3 restore
+drill or recovery VM is required for this release. The earlier preflight and
+restore procedure remain historical/planning evidence, not pending prerequisites.
+Restoration and restore-specific access reconciliation remain unverified; the
+exception is ACCEPTED_EXCEPTION, not PASS. Backup, retention, security, storage
+integrity and the other open AI/operational/evidence assertions are unchanged.
+AI-10 as a composite case and final Gate 6 acceptance remain open.
