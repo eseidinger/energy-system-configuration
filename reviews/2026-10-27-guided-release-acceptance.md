@@ -83,8 +83,28 @@ classifies a permanent publication-state rejection as a temporary outage.
 The pinned ODIP contract specifies HTTP 409 for an existing version that is
 not published; VEF previously translated only upstream 404 to a 422 response.
 The VEF correction maps 409 to HTTP 422 `publication_not_published` and retains
-404 as `publication_not_found` and upstream outages as 503. Its hosted retest
-is pending; do not count this VEF negative case as passed yet.
+404 as `publication_not_found` and upstream outages as 503. Commit `561887e`
+passed [CI and test deployment](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40502827158).
+The operator's hosted retest then returned HTTP 422, `publication_not_published`,
+with message "The requested publication version is not published." and no
+run ID in the supplied error envelope. This classification regression passes.
+The HTTP regression test also asserts an unchanged database run count; the
+operator did not independently measure the hosted database count.
+This completes the hosted ODIP partial-year rejection and VEF publication-state
+rejection scenario. It does not test VEF against an invalid published payload,
+because ODIP correctly prevents publication of this fixture.
+
+### Prepared next case: missing hour (hosted result pending)
+
+Synthetic version 1.0.99 retains the complete 2024 period but removes only
+PV yield's final hour (`2024-12-31T23:00:00Z`), leaving 8,783 PV values.
+Its manifest SHA-256 is
+`9f2a70a78d26d17b276168712e5fd321580ba4afa29cb262db91da533e88bac7`.
+All five artifact schemas, manifest schema and recomputed digests pass; the
+current worker profile rejects it with "series has 8783 values; expected 8784".
+Local upload files are in `/tmp/energy-missing-hour-1.0.99/`; expected hosted
+result is FAILED / `profile_validation_failed`. Hosted execution is pending.
+Check whether 1.0.99 already exists before creation; preserve existing versions.
 
 ## Evidence and limits
 
