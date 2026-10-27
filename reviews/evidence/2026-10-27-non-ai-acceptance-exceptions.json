@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-27",
+  "decisionId": "DEC-11",
+  "authority": "explicit cross-project maintainer instruction in guided review",
+  "maintainerStatement": "akzeptiere die weiteren offenen abnahmepunkte ohne pr\u00fcfung. Die AI Abnahmef\u00e4lle bleiben noch offen.",
+  "scope": "current bounded energy release reviewed in odip-test and vareng-test",
+  "nonAiDisposition": "ACCEPTED_EXCEPTION",
+  "additionalTestsPerformedForThisDecision": false,
+  "acceptedWithoutFurtherVerification": [
+    "hosted active-run interruption",
+    "security denial and credential rotation/revocation checks",
+    "retention and monitoring checks",
+    "durable model/source/image retention and upgrade replay",
+    "deployed workload time/memory and queue/persistence/serialization measurements",
+    "real-session keyboard/screen-reader and session-expiry review",
+    "remaining S3 versioning/migration/outage checks",
+    "additional non-AI evidence storage, final inventory and release-review checks"
+  ],
+  "priorRecoveryException": "DEC-10 remains effective",
+  "remainingAcceptanceCases": {
+    "AI-05": "OPEN",
+    "AI-06": "OPEN",
+    "AI-08": "OPEN",
+    "AI-10": "OPEN",
+    "AI-11": "OPEN"
+  },
+  "aiSpecificObligationsInSharedChecks": "remain open; no additional AI assertion is accepted",
+  "missingEvidenceBecomesPassedTest": false,
+  "overallGate6Accepted": false,
+  "productionDeploymentAuthorizedByThisDecision": false,
+  "releasedContractKitChanged": false,
+  "releasedContractKitVersion": "0.5.0",
+  "proseVersions": {
+    "useCase": "0.5",
+    "integrationContract": "0.7",
+    "integrationPlan": "0.5"
+  },
+  "decisionDocument": "decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md"
+}

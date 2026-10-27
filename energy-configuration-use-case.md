@@ -1,6 +1,6 @@
 # AI-Assisted Energy System Configuration Use Case
 
-**Status:** Accepted current-release scope, version 0.4
+**Status:** Accepted current-release scope, version 0.5
 **Date:** 2026-10-27
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Define the user outcome, bounded scope, and observable behavior of the first end-to-end energy-system configuration demonstration.
@@ -10,6 +10,8 @@ The normative system interfaces are defined in the [integration contract](energy
 The maintainer accepted a new-equipment-only current release on October 27 in [DEC-07](decisions/DEC-07-new-equipment-release-scope.md). Version 0.3 narrows the original 0.2 scope accordingly; existing-equipment support is deferred. Implementation and remaining acceptance evidence are tracked in the [cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md) and [gap register](reviews/2026-10-27-gap-analysis.md).
 
 Version 0.4 also records [DEC-10](decisions/DEC-10-current-release-recovery-test-exception.md): the maintainer accepts the current release without an isolated joint backup/restore test. This is an explicit acceptance exception with restoration unverified; remaining acceptance cases and backup/storage/security duties are unchanged.
+
+Version 0.5 applies [DEC-11](decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md): the other listed non-AI acceptance points are accepted without further verification for this release. AI-05, AI-06, AI-08, AI-10 and AI-11 remain open. The exceptions do not turn missing evidence into passed tests.
 
 ## 1 Use case summary
 

@@ -288,3 +288,20 @@ Restoration and restore-specific access reconciliation remain unverified; the
 exception is ACCEPTED_EXCEPTION, not PASS. Backup, retention, security, storage
 integrity and the other open AI/operational/evidence assertions are unchanged.
 AI-10 as a composite case and final Gate 6 acceptance remain open.
+
+### Maintainer accepts the other non-AI points without testing
+
+The maintainer stated: "akzeptiere die weiteren offenen abnahmepunkte ohne
+prüfung. Die AI Abnahmefälle bleiben noch offen."
+[DEC-11](../decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md)
+records ACCEPTED_EXCEPTION for the previously listed additional non-AI checks:
+active-run interruption, security/rotation, retention/monitoring, reproducibility,
+workload measurements, real-session accessibility, S3 and additional non-AI
+release-evidence/review checks. DEC-10 remains the restore exception.
+
+AI-05, AI-06, AI-08, AI-10 and AI-11 remain OPEN, including their own evidence
+obligations in shared checks. This later decision supersedes earlier statements
+that the other listed non-AI points remain release blockers. Missing evidence
+remains unverified, and no final Gate 6 pass or deployment/publication action is
+inferred. The [machine-readable decision](evidence/2026-10-27-non-ai-acceptance-exceptions.json)
+records the scope and case dispositions.
