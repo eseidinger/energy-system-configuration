@@ -29,25 +29,27 @@ Gate 6 and final release acceptance remain open.
 | GAP-02 | Extended local HTTP tests reject foreign run/source/pointer/value and preserve results; schema and exact UTF-8 boundary checks pass. | Hosted private fixture setup and AI-08/11 execution. |
 | GAP-03 | **Closed in the configured test environment.** DEC-09 correction published as 1.0.1; both owned runs and all 252 candidates/metrics/ranking/provenance match their independent oracles. Original 1.0.0 readback stays unchanged. See the [guided record](2026-10-27-guided-release-acceptance.md). | Retain evidence and refresh complete deployment pins under GAP-10. Other AI-10 negatives, ingestion/traceability observation and integrated recovery remain separate open work. |
 | GAP-04 | Local suites pass. Deployed non-empty-existing-list and nonexistent-version requests return the expected HTTP 422 codes. ODIP rejects partial-year 1.0.90 as FAILED; after correction 561887e, VEF's hosted retest returns 422 publication_not_published. ODIP missing-hour 1.0.99 is FAILED (worker report/code not captured); wrong-unit 1.0.91 is rejected at upload with 422 schema_validation_failed; tampered 1.0.92 is rejected at upload with 422 checksum_mismatch; unsupported-schema 1.0.93 is rejected at draft creation with 422 unsupported_schema. | Publication-state classification and ODIP missing-hour status checks pass; independent hosted VEF invalid-content checks remain open. Tampered read-response checks and complete release-specific regression remain open. See the guided record for capture limits. |
-| GAP-05 | ODIP actual local restore and VEF transactional interrupted-claim/stale-token tests pass. | Joint deployed ODIP/VEF restore, real in-progress workload interruption and boundary reconciliation. |
+| GAP-05 | ODIP actual local restore and VEF transactional interrupted-claim/stale-token tests pass. Hosted ODIP service restart succeeded with a new pod and unchanged image; post-restart functional/byte readback pending. | Joint deployed ODIP/VEF database and ODIP S3 object-version restore, real in-progress workload interruption and boundary reconciliation. |
 | GAP-06 | **Closed for this release by scope decision:** the maintainer selected new installations; [DEC-07](../decisions/DEC-07-new-equipment-release-scope.md), use case 0.3 and prose contract 0.5 record it. Existing-equipment support is deferred. | Include the decision in the next immutable kit release under GAP-10. Deployed HTTP 422 existing_equipment_not_supported is now recorded; database run-count capture remains absent. No existing-equipment implementation is claimed. |
 | GAP-07 | Schema conformance is implemented. The maintainer selected complete UTC calendar years in [DEC-08](../decisions/DEC-08-complete-calendar-year.md); VEF profile/import and ODIP energy validation enforce the rule with boundary tests. Hosted ODIP rejected the isolated 4,368-hour fixture 1.0.90. | Carry the rule in the next immutable kit release (GAP-10). The hosted VEF HTTP-classification retest passed under GAP-04; the failed ODIP publication is intentionally unavailable for independent hosted VEF content validation. Local verification is recorded in the [VEF scope verification](https://github.com/eseidinger/variability-engineering-framework/blob/main/docs/04-development/energy-release-scope-verification.md). |
 | GAP-08 | 180-day terminal-run/candidate/audit cleanup implemented and tested; minimized ownership-read audit and reproducible model-source capture added. | Deployment/retention monitoring, backlog and backup semantics, durable source/image retention and executable upgrade replay. |
-| GAP-09 | No new hosted security/rotation/elapsed-expiry evidence. | Platform probes and retained release-linked observations. |
-| GAP-10 | Sanitized tracked local evidence summary and hash-addressed source/corrected-publication bundle created. | Controlled artifact storage, complete deployment inventory and final owner acceptance. |
-| GAP-11 | Separate dependency metrics, concurrent reservation/claims, stale-claim recovery, timeout classification and exact-limit local compute measurement pass. | Hosted collection, queue/persistence/serialization resource measurements and deployment recovery. |
+| GAP-09 | Historical retained envelopes from retired pods are readable for both projects; recent ODIP request correlation metadata and configured seven-day retention were captured. | Security denial/rotation probes, collector/compactor health and actual elapsed expiry remain open. |
+| GAP-10 | Sanitized tracked local evidence summary and hash-addressed source/corrected-publication bundle created. | Fresh timestamped ODIP/VEF image/source inventories now captured in the guided operational snapshot; controlled artifact storage, final platform revision and release-pinned complete inventory/owner acceptance remain open. |
+| GAP-11 | Separate dependency metrics, concurrent reservation/claims, stale-claim recovery, timeout classification and exact-limit local compute measurement pass. | Hosted bounded HTTP metrics and current usage snapshots are readable; workload-specific queue/persistence/serialization resource measurements and in-progress recovery remain open. |
 | GAP-12 | 24 production-bundle browser/axe checks pass on desktop/mobile; focus/landmark/overflow and stale-poll issues fixed. | Real platform sessions and manual assistive-technology review; mocked HTTP checks do not establish full WCAG compliance. |
-| GAP-13 | Conditional S3 scope unchanged. | Joint database/bucket restore only for installations enabling S3. |
+| GAP-13 | Hosted ODIP is confirmed to use S3 with active database and bucket bindings. | GAP-13 applies here: joint database/bucket-version restore is required, not optional for this installation. |
 
-The full VEF API run found 88 tests: 87 passed and one deployed-only test skipped.
+The initial October 27 VEF API run found 88 tests: 87 passed and one deployed-only test skipped.
 An additional 100,000-candidate × 8,784-hour compute benchmark passed in 15.4 s
 with a verified 512-MiB heap limit; it excludes HTTP/database/platform overhead.
-The final combined API XML inventory is 91 discovered, 90 passed and 1 skipped,
+The combined API XML inventory at that checkpoint was 91 discovered, 90 passed and 1 skipped,
 including the benchmark and two freshly passed controlled AI-05/06 live tests.
 There are also 7 passing VEF UI tests, 32 VEF script tests, 87 ODIP worker tests,
 and 24 successful browser checks. ODIP Kotlin lint and jar build now pass; the
 initial sandbox-related lint limitation was resolved. No local result substitutes
-for the unchanged Gate 6 exit criteria.
+for the unchanged Gate 6 exit criteria. The later publication-classification fix
+passed the full API suite with 95 discovered, 93 passed and two explicit skips;
+its CI/test deployment and hosted retest also passed. See the guided record.
 
 ## Initial gaps and required closure evidence
 

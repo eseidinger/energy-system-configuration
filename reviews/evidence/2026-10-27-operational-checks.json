@@ -1,0 +1,464 @@
+{
+  "date": "2026-10-27",
+  "scope": "read-only test-platform inventory and reversible odip-test service restart",
+  "projects": {
+    "vareng-test": {
+      "observedAt": "2026-10-27T13:27:19.440695+00:00",
+      "revision": 29,
+      "components": [
+        {
+          "name": "web",
+          "image": "eseidinger/variability-engineering-framework@sha256:38cb0d1b9ded9fb140edbd18a325d00ebe498da939b9c1ca2e3ad043b9dc4c8a",
+          "sourceCommitFromOci": "9bbb5772cb4a24468d96eee2f851b58bbe395ba9",
+          "state": "ready",
+          "outbound": [
+            {
+              "dns": "web-odip-test.apps.eseidinger.de",
+              "port": 443
+            },
+            {
+              "dns": "identity.eseidinger.de",
+              "port": 443
+            },
+            {
+              "dns": "api.openai.com",
+              "port": 443
+            }
+          ]
+        }
+      ],
+      "dataServices": {
+        "project": "vareng-test",
+        "services": [
+          {
+            "resource_id": "ae75ae91-1297-4644-82d3-32f6835e1d4e",
+            "owner_project": "vareng-test",
+            "name": "primary",
+            "type": "postgresql",
+            "state": "available",
+            "observed_state": "active",
+            "reason": null
+          }
+        ],
+        "bindings": [
+          {
+            "binding_id": "7828556f-fa1f-4d01-83e2-66b3f9c31abe",
+            "resource_id": "ae75ae91-1297-4644-82d3-32f6835e1d4e",
+            "component": "web",
+            "state": "active",
+            "observed_state": "active",
+            "reason": null,
+            "credential_active": true
+          }
+        ],
+        "latest_recovery_request": null
+      },
+      "applicationHttpMetrics": {
+        "project": "vareng-test",
+        "component": "web",
+        "observed_at": "2026-10-27T13:24:31.527068+00:00",
+        "window_seconds": 300,
+        "source": "prometheus:application-metrics",
+        "state": "ok",
+        "request_rate_per_second": 0.2,
+        "server_error_rate_per_second": null,
+        "mean_request_duration_seconds": 0.0031207945925925914
+      },
+      "resourceSnapshot": {
+        "sample": {
+          "state": "ok",
+          "reason": null,
+          "pods": [
+            {
+              "name": "web-847d6978df-m9kvv",
+              "cpu_millicores": 7.743,
+              "memory_bytes": 167997440,
+              "sampled_at": "2026-10-27T13:24:13+00:00"
+            }
+          ],
+          "totals": {
+            "cpu_millicores": 7.743,
+            "memory_bytes": 167997440
+          },
+          "stale_after_seconds": 120,
+          "observed_at": "2026-10-27T13:24:30.647337+00:00"
+        },
+        "declaredTotals": {
+          "requests": {
+            "cpu_millicores": 125.0,
+            "memory_bytes": 335544320
+          },
+          "limits": {
+            "cpu_millicores": 600.0,
+            "memory_bytes": 671088640
+          }
+        },
+        "limit": "Snapshot without acceptance workload; not a worst-case benchmark."
+      },
+      "retainedLogChecks": [
+        {
+          "query": "retained",
+          "observedAt": "2026-10-27T13:24:31.918646+00:00",
+          "state": "ok",
+          "count": 30,
+          "truncated": true,
+          "retention": {
+            "source": "loki",
+            "state": "configured",
+            "seconds": 604800,
+            "format": "application-json-v1"
+          },
+          "retiredPodLines": 30,
+          "linesWithCorrelationId": 0,
+          "sanitizedSamples": [
+            {
+              "timestampNs": "1792540802001557682",
+              "pod": "web-d67d8d66-q6jz9",
+              "component": "web",
+              "revision": "7",
+              "operationId": "6abed83e-01e6-4e38-832c-bf59c1872123",
+              "event": null,
+              "correlationId": null,
+              "podAbsentFromCurrentInventory": true
+            },
+            {
+              "timestampNs": "1792584002001553646",
+              "pod": "web-d67d8d66-q6jz9",
+              "component": "web",
+              "revision": "7",
+              "operationId": "6abed83e-01e6-4e38-832c-bf59c1872123",
+              "event": null,
+              "correlationId": null,
+              "podAbsentFromCurrentInventory": true
+            },
+            {
+              "timestampNs": "1792627204001589439",
+              "pod": "web-d67d8d66-q6jz9",
+              "component": "web",
+              "revision": "7",
+              "operationId": "6abed83e-01e6-4e38-832c-bf59c1872123",
+              "event": null,
+              "correlationId": null,
+              "podAbsentFromCurrentInventory": true
+            }
+          ]
+        },
+        {
+          "query": "retained-recent",
+          "observedAt": "2026-10-27T13:25:32.091063+00:00",
+          "state": "no_output",
+          "count": 0,
+          "truncated": false,
+          "retention": {
+            "source": "loki",
+            "state": "configured",
+            "seconds": 604800,
+            "format": "application-json-v1"
+          },
+          "retiredPodLines": 0,
+          "linesWithCorrelationId": 0,
+          "sanitizedSamples": []
+        }
+      ],
+      "deploymentChecks": {
+        "revision": 29,
+        "image": "eseidinger/variability-engineering-framework@sha256:38cb0d1b9ded9fb140edbd18a325d00ebe498da939b9c1ca2e3ad043b9dc4c8a",
+        "readyReplicas": 1,
+        "aiEnabled": true,
+        "model": "gpt-6.1-sol",
+        "outbound": [
+          "api.openai.com:443",
+          "identity.eseidinger.de:443",
+          "web-odip-test.apps.eseidinger.de:443"
+        ]
+      },
+      "concurrentChange": "Normal documentation CI deployment advanced revision 28 to 29 during collection; no VEF restart was requested by this audit."
+    },
+    "odip-test": {
+      "observedAt": "2026-10-27T13:27:18.101121+00:00",
+      "revision": 10,
+      "components": [
+        {
+          "name": "web",
+          "image": "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+          "sourceCommitFromOci": "31c4602a256be89287a8df305670269a5da22c1c",
+          "state": "ready",
+          "outbound": []
+        },
+        {
+          "name": "ingestion-worker",
+          "image": "docker.io/eseidinger/odip-data-worker@sha256:6acce327d1b15fc0223dddeb7a0f5e1e0f397f3b71a9a7dfbb2ca357465eca02",
+          "sourceCommitFromOci": "31c4602a256be89287a8df305670269a5da22c1c",
+          "state": "active",
+          "outbound": [
+            {
+              "dns": "web-odip-test.apps.eseidinger.de",
+              "port": 443
+            },
+            {
+              "dns": "identity.eseidinger.de",
+              "port": 443
+            },
+            {
+              "dns": "re.jrc.ec.europa.eu",
+              "port": 443
+            },
+            {
+              "dns": "ec.europa.eu",
+              "port": 443
+            },
+            {
+              "dns": "jsonplaceholder.typicode.com",
+              "port": 443
+            }
+          ]
+        }
+      ],
+      "dataServices": {
+        "project": "odip-test",
+        "services": [
+          {
+            "resource_id": "bba3b8b4-44b3-47c9-b575-a37a9c4dd0a4",
+            "owner_project": "odip-test",
+            "name": "artifacts",
+            "type": "s3",
+            "state": "available",
+            "observed_state": "active",
+            "reason": null
+          },
+          {
+            "resource_id": "2d16ee91-ac6b-4868-a82f-33876e4d4bde",
+            "owner_project": "odip-test",
+            "name": "database",
+            "type": "postgresql",
+            "state": "available",
+            "observed_state": "active",
+            "reason": null
+          }
+        ],
+        "bindings": [
+          {
+            "binding_id": "a9b8abfd-0709-4ecb-8c1d-683352ff603b",
+            "resource_id": "bba3b8b4-44b3-47c9-b575-a37a9c4dd0a4",
+            "component": "web",
+            "state": "active",
+            "observed_state": "active",
+            "reason": null,
+            "credential_active": true
+          },
+          {
+            "binding_id": "e87b203a-8768-49db-9ee3-fee237877635",
+            "resource_id": "2d16ee91-ac6b-4868-a82f-33876e4d4bde",
+            "component": "web",
+            "state": "active",
+            "observed_state": "active",
+            "reason": null,
+            "credential_active": true
+          }
+        ],
+        "latest_recovery_request": null
+      },
+      "applicationHttpMetrics": {
+        "project": "odip-test",
+        "component": "web",
+        "observed_at": "2026-10-27T13:24:31.247463+00:00",
+        "window_seconds": 300,
+        "source": "prometheus:application-metrics",
+        "state": "ok",
+        "request_rate_per_second": 0.014814814814814815,
+        "server_error_rate_per_second": 0.0,
+        "mean_request_duration_seconds": 0.004148796250000086
+      },
+      "resourceSnapshot": {
+        "sample": {
+          "state": "ok",
+          "reason": null,
+          "pods": [
+            {
+              "name": "ingestion-worker-29885124-lv6qd",
+              "cpu_millicores": 34.362,
+              "memory_bytes": 16445440,
+              "sampled_at": "2026-10-27T13:24:19+00:00"
+            },
+            {
+              "name": "web-5ff555cd84-cmhhb",
+              "cpu_millicores": 4.911,
+              "memory_bytes": 467238912,
+              "sampled_at": "2026-10-27T13:24:13+00:00"
+            }
+          ],
+          "totals": {
+            "cpu_millicores": 39.273,
+            "memory_bytes": 483684352
+          },
+          "stale_after_seconds": 120,
+          "observed_at": "2026-10-27T13:24:32.458704+00:00"
+        },
+        "declaredTotals": {
+          "requests": {
+            "cpu_millicores": 275.0,
+            "memory_bytes": 335544320
+          },
+          "limits": {
+            "cpu_millicores": 600.0,
+            "memory_bytes": 671088640
+          }
+        },
+        "limit": "Snapshot without acceptance workload; not a worst-case benchmark."
+      },
+      "retainedLogChecks": [
+        {
+          "query": "retained",
+          "observedAt": "2026-10-27T13:24:31.722044+00:00",
+          "state": "ok",
+          "count": 30,
+          "truncated": true,
+          "retention": {
+            "source": "loki",
+            "state": "configured",
+            "seconds": 604800,
+            "format": "application-json-v1"
+          },
+          "retiredPodLines": 30,
+          "linesWithCorrelationId": 15,
+          "sanitizedSamples": [
+            {
+              "timestampNs": "1792502718553796047",
+              "pod": "ingestion-worker-29875045-rvs69",
+              "component": "ingestion-worker",
+              "revision": "6",
+              "operationId": "60ce902c-1aa5-442c-9e2b-55000941a5b6",
+              "event": "job.started",
+              "correlationId": null,
+              "podAbsentFromCurrentInventory": true
+            },
+            {
+              "timestampNs": "1792502718752873730",
+              "pod": "web-5fc6c89b9d-8twh4",
+              "component": "web",
+              "revision": "6",
+              "operationId": "60ce902c-1aa5-442c-9e2b-55000941a5b6",
+              "event": "request.completed",
+              "correlationId": "cd90d609-819c-4add-9f05-d25ce3f673b7",
+              "podAbsentFromCurrentInventory": true
+            },
+            {
+              "timestampNs": "1792502718793579945",
+              "pod": "web-5fc6c89b9d-8twh4",
+              "component": "web",
+              "revision": "6",
+              "operationId": "60ce902c-1aa5-442c-9e2b-55000941a5b6",
+              "event": "request.completed",
+              "correlationId": "b0378ec0-3e70-44f9-b02a-8e291b84cc28",
+              "podAbsentFromCurrentInventory": true
+            }
+          ]
+        },
+        {
+          "query": "retained-recent",
+          "observedAt": "2026-10-27T13:25:33.939913+00:00",
+          "state": "ok",
+          "count": 50,
+          "truncated": true,
+          "retention": {
+            "source": "loki",
+            "state": "configured",
+            "seconds": 604800,
+            "format": "application-json-v1"
+          },
+          "retiredPodLines": 50,
+          "linesWithCorrelationId": 28,
+          "sanitizedSamples": [
+            {
+              "timestampNs": "1793106634181632237",
+              "pod": "web-5ff555cd84-cmhhb",
+              "component": "web",
+              "revision": "10",
+              "operationId": "d32c4210-ee32-445b-8d91-bc7fb10199ef",
+              "event": "request.failed",
+              "correlationId": "3f6bc136-4ffe-496b-b0c3-0984872b4480",
+              "podAbsentFromCurrentInventory": true
+            },
+            {
+              "timestampNs": "1793106677357651748",
+              "pod": "ingestion-worker-29885111-tjnxh",
+              "component": "ingestion-worker",
+              "revision": "10",
+              "operationId": "d32c4210-ee32-445b-8d91-bc7fb10199ef",
+              "event": "job.started",
+              "correlationId": null,
+              "podAbsentFromCurrentInventory": true
+            },
+            {
+              "timestampNs": "1793106677489468881",
+              "pod": "web-5ff555cd84-cmhhb",
+              "component": "web",
+              "revision": "10",
+              "operationId": "d32c4210-ee32-445b-8d91-bc7fb10199ef",
+              "event": "request.completed",
+              "correlationId": "12dba443-5341-4cea-bf5f-3dc3f9a70a3b",
+              "podAbsentFromCurrentInventory": true
+            }
+          ]
+        }
+      ],
+      "artifactStorageBackend": "s3",
+      "restart": {
+        "operation_id": "2b197f8a-f634-4456-b357-bd496ecf5f8c",
+        "state": "succeeded",
+        "revision": 10,
+        "error_code": null,
+        "readiness": {
+          "state": "ready",
+          "reason": null,
+          "desired_replicas": 1,
+          "ready_replicas": 1,
+          "desired_image": "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+          "deployment_image": "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+          "active_images": [
+            "docker.io/library/developer-platform-telemetry-forwarder:local",
+            "sha256:cb01f6544d637f7e4a8a4c6d5aaadaf17cee3963b730392db8b97fdfa07019d9"
+          ],
+          "active_image_ids": [
+            "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+            "sha256:b55c8b4d7c0733116d9ddfbda4ba2fb18d6e548fa965d77a00c63beca6ed0f47"
+          ],
+          "observed_at": "2026-10-27T13:26:39.109743+00:00"
+        },
+        "result_version": 1,
+        "result": {
+          "host": "odip-test.apps.eseidinger.de",
+          "status": "restarted",
+          "project": "odip-test",
+          "namespace": "project-odip-test"
+        },
+        "previousWebPods": [
+          "web-5ff555cd84-cmhhb"
+        ],
+        "currentWebPods": [
+          "web-78868c746-kr6h8"
+        ]
+      }
+    }
+  },
+  "recoveryCapabilities": {
+    "tenantCli": "data-services recovery request records an operator-assistance request; no direct tenant backup/restore operation is exposed by the installed CLI.",
+    "performed": "No recovery request sent and no data service restored.",
+    "requiredScope": [
+      "VEF PostgreSQL",
+      "ODIP PostgreSQL and retained S3 object versions",
+      "access/grant/binding/credential reconciliation before routes reopen",
+      "publication-byte, lineage, result and candidate verification"
+    ]
+  },
+  "knownLimits": [
+    "Operational snapshot only; automatic CI deployments may subsequently change images.",
+    "ODIP service restart/readiness passed; protected publication bytes and end-to-end numerical readback after restart remain pending.",
+    "No database/bucket backup restoration or in-progress workload interruption performed.",
+    "Seven-day retained-log policy is configured; actual elapsed expiry is unproven.",
+    "A no_output recent VEF log query is not proof of collector failure; historical retained VEF entries are readable.",
+    "Source commits come from OCI labels; full platform source revision and complete release evidence inventory remain open.",
+    "No security denial, credential rotation, worst-case runtime or assistive-technology claims are made."
+  ],
+  "releaseAccepted": false
+}

@@ -179,13 +179,39 @@ storage before cleaning build outputs; long-term retention remains GAP-10 work.
 Raw browser cookies, credentials and request authorization headers are not in
 the bundle or summary.
 
-The last recorded VEF platform snapshot is revision 24 at commit `c7155b5`,
-image `sha256:bda91b2d67f0f3126060061418c1c4921a7499943dffc77a222e0931116a1b54`.
-The last ODIP snapshot is revision 9 at `1fe3251`; it predates the native source
-reuse UI change `31c4602`, whose CI/test deployment succeeded. A fresh complete
-image inventory could not be read after the human CLI login expired. Do not
-present the old ODIP snapshot as the current image inventory. Refresh these
-pins in the final release bundle before final acceptance.
+The original version-isolation summary retains its historical deployment pins.
+After renewed CLI login, the [operational snapshot](evidence/2026-10-27-operational-checks.json)
+records ODIP revision 10 (web/worker OCI source `31c4602`) and VEF revision 29
+(OCI source `9bbb577`). VEF advanced from revision 28 during normal CI
+deployment while these observations were collected. The snapshot contains
+resolved image digests, observed readiness, data-service bindings and sanitized
+operational evidence. It is an observation at the stated times, not a freeze of
+the automatically updated test deployments. Platform source revision and final
+release inventory remain open.
+
+### Operational follow-up after renewed CLI login
+
+The agent restarted only ODIP test's service workload. Operation
+`2b197f8a-f634-4456-b357-bd496ecf5f8c` succeeded at revision 10, one ready
+replica, unchanged web image. The old web pod was replaced. The scheduled
+ingestion worker remained active with a successful preceding run. Protected
+publication-byte and end-to-end numerical readback after restart remain pending;
+a new corrected-version calculation has been requested from the operator.
+
+Both projects' bounded HTTP metrics and resource snapshots are readable.
+Snapshots without an acceptance workload do not prove worst-case runtime.
+Historical retained log envelopes from pods absent from current inventories
+are readable for both projects. Recent ODIP requests contain correlation IDs
+and operation/revision metadata. Recent VEF query returned no output; historical
+VEF entries remain available. Seven-day retention is configured, but actual
+elapsed expiry and collector/compactor health remain unproven.
+
+ODIP's deployed setting is `ODIP_ARTIFACT_STORAGE_BACKEND=s3`, with active S3
+and PostgreSQL bindings. GAP-13 therefore applies to this installation. A real
+restore must retain both database state and referenced S3 object versions,
+plus VEF's database and reconciled access/bindings. The installed tenant CLI
+offers an operator-assistance request, not direct backup restoration. No
+request was sent and no data was restored; the joint restore gate stays open.
 
 ### Observation: hosted raw-input lineage
 
