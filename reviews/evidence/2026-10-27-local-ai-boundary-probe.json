@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-27",
+  "scope": "local, network-isolated container rehearsal for AI-08 and AI-11",
+  "vefCommit": "edc4157976487ac14e723fc110db56c40a8002b4",
+  "localContainerImageId": "sha256:6e38357cc5cd71d745fa37d88d008c8fb823c650b8fac32f1e57e4496d9586cb",
+  "containerNetwork": "none",
+  "resourceBindings": [],
+  "externalModelCalls": 0,
+  "fixtureSource": "unmodified synthetic examples in contract kit 0.5.0",
+  "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b",
+  "fixtureSha256": {
+    "ai-explanation.json": "600f7e5fe956a54cdd6cd8b4e36863689dd91fc7565ae49c54910d1152655d55",
+    "candidate.json": "d8fbc2a5296976202f8654b733772ac8a473fe8a5ab23d7a1065c1736d6aee9b",
+    "optimization-request.json": "708f7c77910f86d7942bffd10eae9d345edd7a9219bb76c90ed86c8022b89f94",
+    "optimization-result.json": "0c718a2a7a05017a37afa44369be7ee97850f14e6cf5da26370ac19dfd6d127c"
+  },
+  "cases": {
+    "AI08.foreign_source": "PASS: controlled output rejected with 502 invalid_ai_explanation",
+    "AI08.unresolved_pointer": "PASS: controlled output rejected with 502 invalid_ai_explanation",
+    "AI08.changed_value": "PASS: controlled output rejected with 502 invalid_ai_explanation",
+    "AI08.foreign_run": "PASS: controlled output rejected with 502 invalid_ai_explanation",
+    "AI11.source_count": "PASS: 16 sources accepted internally, 17 rejected before model access",
+    "AI11.byte_limit": "PASS: oversized approved snapshot returns 422 evidence_unavailable without model call",
+    "AI11.missing_version": "PASS: missing result model version returns 422 evidence_unavailable without model call"
+  },
+  "completedResultReadback": "PASS through the owned resource method after each rejection",
+  "containerExitCode": 0,
+  "sanitizedLogSha256": "e3452c5638cdb10480a21587b704002a1dab4a3d5eb01e837bf25e547e143d42",
+  "ci": {
+    "runId": 40550620333,
+    "apiTests": "PASS on attempts 1 and 2",
+    "contractKitAndDocumentation": "PASS on attempts 1 and 2",
+    "browserJob": "still installing Chromium at record creation; no deployed image claimed"
+  },
+  "hostedCaseDisposition": {
+    "AI-08": "OPEN",
+    "AI-11": "OPEN"
+  },
+  "limitations": [
+    "This is local container evidence, not execution in vareng-test.",
+    "The route methods were called inside the container without the public gateway.",
+    "The 17-source branch is an internal bound; the normal builder produces three or four sources.",
+    "No independent database snapshot was used; the fixture repository is in memory."
+  ]
+}
