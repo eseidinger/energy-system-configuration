@@ -33,7 +33,8 @@
     "uiTestsPassed": 9,
     "browserAxeChecksPassed": 24,
     "lintAndProductionBuild": "PASS",
-    "deployment": "PENDING"
+    "deployment": "PASS: CI 40541725793 and vareng-test deployment succeeded",
+    "ciRunId": 40541725793
   },
   "caseDisposition": {
     "AI-05": "OPEN: fixture ready; no hosted explanation review yet",
@@ -49,5 +50,11 @@
     "No actual explanation/citation response has been captured for either fixture.",
     "SQL inserts copies and contains an unchanged-baseline assertion; no independent database before/after export was captured."
   ],
-  "overallGate6Accepted": false
+  "overallGate6Accepted": false,
+  "ai05ProtectedGetObservation": {
+    "evidenceType": "maintainer-confirmed-authenticated-browser-GET",
+    "status": "SUCCEEDED",
+    "optimalityStatus": "FEASIBLE_NOT_PROVEN",
+    "matchesFixture": true
+  }
 }

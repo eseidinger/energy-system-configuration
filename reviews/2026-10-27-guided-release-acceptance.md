@@ -327,8 +327,10 @@ was not separately observed. No credential values are in the evidence summary.
 
 VEF commit `be61607` adds **Open a saved run → Run ID → Load run** over the
 existing owned GET/candidate routes, without creating a run or calling AI.
-Lint, nine UI tests, production build and 24 browser/AXE checks pass; test
-deployment is pending. The [preparation summary](evidence/2026-10-27-hosted-ai-fixture-preparation.json)
+Lint, nine UI tests, production build and 24 browser/AXE checks pass.
+[CI 40541725793](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40541725793)
+including deployment to vareng-test succeeded. The operator also confirmed the
+protected AI-05 GET returns SUCCEEDED with FEASIBLE_NOT_PROVEN. The [preparation summary](evidence/2026-10-27-hosted-ai-fixture-preparation.json)
 retains fixture IDs, script/archive hashes and capture limits. Request and review
 AI-05's explanation first, then AI-06's; clean up the marked copies after their
 evidence is captured. All five AI cases remain OPEN at this preparation stage.
