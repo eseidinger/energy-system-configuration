@@ -422,3 +422,30 @@ AI-11 passes its private hosted boundary checks. These invalid payloads were
 injected inside the private job at the deployed resource methods; no public
 mutation route or real database fixture was introduced. **Only AI-10 and final
 Gate 6 acceptance remain open.**
+
+### Hosted AI-10 private publication regression: ten checks PASS, case OPEN
+
+VEF commit `5cb913f` passed [CI run 40558758302](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40558758302),
+including API, browser, packaged integration and image publication. The deployed
+`vareng-test` image digest is
+`f6f4c6ac212eccb2bc9ebcfb1e401b36f956c776e542eccf9e746a1378278c88`.
+A private scheduled `ai10-regression` component ran this exact image once in
+revision 43. It had no database binding, external egress or public port. The
+platform reported `succeeded` at 18:29:26 UTC. Eleven untruncated log lines
+contained ten PASS markers and `cases=10`: original and corrected full
+252-candidate oracles, version isolation, exact-import/ETag revalidation,
+tampered read bytes, wrong unit, missing hour with a matching descriptor digest,
+unsupported schema, unpublished state and cross-version cache denial. The
+original verified cache remained unchanged after invalid inputs. Revision 44
+removed the job; only `web` remained ready on the same image. The
+[sanitized evidence](evidence/2026-10-27-hosted-ai10-private-regression.json)
+pins fixture, declaration, log, image and cleanup hashes.
+
+This closes the independent hosted VEF invalid-content subcase. The job used
+the deployed VEF verifier, publication client and optimizer with a synthetic
+in-memory ODIP transport. It did not mutate a real ODIP read response, invoke
+the public VEF gateway or execute the complete unchanged deployed Gate 5 suite
+as one run. Earlier protected 1.0.0/1.0.1 browser results and ODIP upload
+denials remain separate supporting evidence. **AI-10 and Gate 6 remain OPEN**;
+DEC-10/11 exceptions are retained without converting missing regression
+evidence into a PASS.

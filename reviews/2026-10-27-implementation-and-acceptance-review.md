@@ -16,6 +16,11 @@ and the private hosted AI-08/11 validation boundary now pass within their
 recorded limits. Only AI-10 and final Gate 6 remain open. The five-case count
 above is the original review snapshot; see the [guided acceptance](2026-10-27-guided-release-acceptance.md)
 and [current gap status](2026-10-27-gap-analysis.md) for subsequent evidence.
+The later private hosted AI-10 probe passed ten verifier/client/optimizer checks
+on the CI-published image and was removed from `vareng-test`; its
+[sanitized record](evidence/2026-10-27-hosted-ai10-private-regression.json)
+closes the independent VEF invalid-content subcase, not the complete unchanged
+deployed Gate 5 regression. AI-10 and Gate 6 therefore remain open.
 
 ## Same-day implementation follow-up
 

@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-27",
+  "environment": "vareng-test",
+  "scope": "private hosted synthetic AI-10 publication-client and optimizer regression",
+  "vefCommit": "5cb913f25229209d1d6b5414ec7a7f0c5e7eed65",
+  "ciRunId": 40558758302,
+  "ciConclusion": "success",
+  "image": "eseidinger/variability-engineering-framework@sha256:f6f4c6ac212eccb2bc9ebcfb1e401b36f956c776e542eccf9e746a1378278c88",
+  "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b",
+  "fixtureArchiveSha256": "8fbb0cf6fb7d65da84be8ee554b5ae48abc808bd4cdb048787f99649d46e9d74",
+  "originalManifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715",
+  "correctedManifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+  "deployment": {
+    "beforeRevision": 42,
+    "probeRevision": 43,
+    "declarationSha256": "8ea6331d79b92ece6b2f67c80e4a074afb3f7e5729e750f7841ecf71d31a1e70",
+    "component": "ai10-regression",
+    "type": "scheduled",
+    "schedule": "29 18 27 10 *",
+    "timeZone": "UTC",
+    "retryLimit": 0,
+    "maxRunSeconds": 180,
+    "bindings": [],
+    "outbound": [],
+    "ports": [],
+    "webDeclarationUnchanged": true,
+    "applyState": "succeeded",
+    "applyOperationId": "e229c54d-dde1-4277-868b-e3e498531536"
+  },
+  "execution": {
+    "lastRunAtUtc": "2026-10-27T18:29:00Z",
+    "lastCompletedAtUtc": "2026-10-27T18:29:26Z",
+    "lastResult": "succeeded",
+    "activeRunsAfterCompletion": 0,
+    "pod": "ai10-regression-29885429-dq4xh",
+    "logState": "ok",
+    "logLineCount": 11,
+    "logTruncated": false,
+    "unavailableContainers": 0,
+    "rawCliLogEnvelopeSha256": "28d4d39deffa59204dce50c7020a744edd4ee69338f8e9bd97adc03cf7ef6329",
+    "completionMarker": "energy_ai10_acceptance status=PASS cases=10"
+  },
+  "checks": {
+    "original_oracle": "PASS: 252 candidates, feasible count, ranking, recommendation, constraints and metrics against kit 0.5.0 oracle",
+    "corrected_oracle": "PASS: 252 candidates, feasible count, ranking, recommendation, constraints and metrics against approved 1.0.1 oracle",
+    "version_isolation": "PASS: distinct verified 1.0.0 and 1.0.1 profiles",
+    "exact_import_cache": "PASS: exact 1.0.0 import and six conditional artifact/manifest revalidations",
+    "tampered_read": "PASS: byte-modified artifact rejected; original verified cache unchanged",
+    "wrong_unit": "PASS: altered manifest unit rejected; original verified cache unchanged",
+    "missing_hour_matching_digest": "PASS: shortened profile rejected despite updated descriptor digest; original cache unchanged",
+    "unsupported_schema": "PASS: unsupported schema rejected; original cache unchanged",
+    "unpublished": "PASS: draft state rejected; original cache unchanged",
+    "cross_version_cache": "PASS: 1.0.0 cache cannot satisfy a 1.0.1 request"
+  },
+  "externalModelCalls": 0,
+  "odipNetworkCalls": 0,
+  "cleanup": {
+    "revision": 44,
+    "state": "succeeded",
+    "operationId": "aa7ba330-0e03-4f59-9cb8-bf27d987a0df",
+    "remainingComponents": ["web"],
+    "webState": "ready",
+    "webImageUnchanged": true,
+    "jobRemoved": true
+  },
+  "caseDisposition": {
+    "AI-10": "OPEN: this hosted internal probe closes the independent VEF invalid-content subcase; the unchanged deployed cross-project Gate 5 suite is not captured as one complete run"
+  },
+  "limits": [
+    "The hosted probe invoked real VEF verifier, client and optimizer classes with an in-memory fake ODIP transport; it did not mutate a live ODIP read response or call the public VEF gateway.",
+    "The two 252-candidate oracle comparisons ran inside the deployed image on synthetic fixtures. Earlier protected browser runs supplied independent live 1.0.0/1.0.1 result evidence.",
+    "This is not the unchanged end-to-end Gate 5 suite: source ingestion, non-energy publication, authorization and idempotency, outage, restart, retained-state and observability assertions were not all rerun together on this image. Joint restore is excepted under DEC-10, and other non-AI checks have the DEC-11 exception; the AI-10 explicit regression clause remains open."
+  ],
+  "overallGate6Accepted": false
+}
