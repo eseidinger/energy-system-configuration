@@ -109,7 +109,7 @@ code is `profile_validation_failed`, but the operator did not separately report
 that code or export the validation report. VEF's independent hosted content
 check remains untested because ODIP does not publish this fixture.
 
-### Prepared next case: wrong tariff unit (hosted result pending)
+### Wrong tariff unit: rejected at upload
 
 Synthetic version 1.0.91 changes only the import tariff's unit from EUR/kWh
 to USD/kWh, apart from version identity and recomputed digests. Its manifest
@@ -117,9 +117,25 @@ SHA-256 is `ed3270e950e1a7b0304018f9685b7793d9f25ccf979f3b54d0d4bb7b13b6acdd`.
 The manifest schema, artifact integrity and other artifact schemas pass; the
 worker rejects the import-tariff unit's schema const. Restoring EUR/kWh and
 its digest makes the complete profile pass. Local upload files are in
-`/tmp/energy-wrong-unit-1.0.91/`; expected hosted result is FAILED /
-`profile_validation_failed`. Hosted execution is pending. Preserve any existing
-version 1.0.91 rather than replacing it.
+`/tmp/energy-wrong-unit-1.0.91/`. The operator first observed 422
+`missing_artifact` when requesting validation before every upload succeeded.
+The subsequent upload attempt returned HTTP 422 `schema_validation_failed`,
+"Document fails schema energy-import-tariff-v1". This passes the hosted
+wrong-unit rejection at the upload boundary. The earlier guidance incorrectly
+expected a worker FAILED result: upload-time schema enforcement prevents the
+invalid artifact from reaching that stage. No FAILED publication status or
+worker validation report is claimed for this case.
+
+### Prepared next case: artifact tamper (hosted result pending)
+
+Version 1.0.92 has manifest SHA-256
+`0a6b812d58f33dc6c155f91c75fcbf716218a2baf276fa03ee6df9a8ba23e5d5`.
+Its first import tariff value is increased by EUR 0.001/kWh after declaring
+the original artifact digest. The complete profile passes when supplied with
+the corrected digest; the upload fixture intentionally retains the old one.
+Files are in `/tmp/energy-tampered-1.0.92/`. Create the draft and upload only
+`artifacts/import-tariff.json`; expected result is 422 `checksum_mismatch`.
+This checks the upload integrity boundary; hosted execution is pending.
 
 ## Evidence and limits
 
