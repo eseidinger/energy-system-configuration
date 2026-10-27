@@ -7,6 +7,8 @@
 
 The normative system interfaces are defined in the [integration contract](energy-configuration-integration-contract.md). The work needed to deliver them is ordered in the [integration plan](energy-configuration-integration-plan.md).
 
+Implementation status is tracked in the [October 27 cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md), not by changing the requirements below. The current model supports new equipment only and rejects non-empty existing equipment. That difference from the intended scope remains explicit in [GAP-06](reviews/2026-10-27-gap-analysis.md); it requires implementation or a versioned scope decision before full use-case acceptance.
+
 ## 1 Use case summary
 
 | Field | Definition |

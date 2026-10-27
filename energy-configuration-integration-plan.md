@@ -1,11 +1,13 @@
 # AI-Assisted Energy System Configuration Integration Plan
 
 **Status:** Reconciled plan, version 0.2
-**Date:** 2026-10-17
+**Date:** 2026-10-27 (status reconciliation; gate requirements unchanged)
 **Owners:** Developer Platform, Open Data Intelligence Platform, and Variability Engineering Framework maintainers
 **Purpose:** Turn the [use case](energy-configuration-use-case.md) and [integration contract](energy-configuration-integration-contract.md) into an ordered, independently testable delivery plan.
 
-**Current gate:** Gate 5 accepted on 2026-10-17 by maintainer direction; Gate 6 is next. ODIP and VEF implement contract kit `0.4.0`, are deployed to Developer Platform, and the workflow is operational. The [Gate 5 acceptance record](reviews/2026-10-17-gate-5-acceptance.md) records this decision. Gates 0–4 are complete for progression to Gate 6. The shared kit was published as `0.4.0` and received [cross-project acceptance](reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md) on 2026-10-14. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
+**Current gate:** Gate 6 implementation is present; acceptance and final release remain open. Both ODIP and VEF pin released kit `0.5.0`. [Gate 5](reviews/2026-10-17-gate-5-acceptance.md) remains accepted by maintainer direction on 2026-10-17, with Gates 0–4 complete for progression. ODIP's `0.5.0` handoff was accepted on 2026-10-19; VEF's deployed AI journey and subsequent guided checks are recorded through 2026-10-26. AI-05, AI-06, AI-08, AI-10 and AI-11 remain incomplete. The [current review](reviews/2026-10-27-implementation-and-acceptance-review.md) separates implementation, explicit acceptance and test evidence; the [gap analysis](reviews/2026-10-27-gap-analysis.md) tracks follow-up owners and exit evidence.
+
+The shared `0.4.0` baseline received [cross-project acceptance](reviews/2026-10-14-contract-kit-0.4.0-cross-project-acceptance.md) on 2026-10-14. Kit `0.5.0` adds AI contracts without changing publication APIs or numerical fixtures. The bounded demonstration received maintainer domain review because there is only one cross-project collaborator. Independent qualified review remains required before production or certified-engineering use.
 
 The plan deliberately integrates a thin deterministic path before the AI-assisted workflow. Each gate leaves a testable result and prevents later work from hiding contract or numerical defects.
 
@@ -158,7 +160,7 @@ Execute the following in one automated environment:
 
 ### Gate 6 — Add AI assistance and release
 
-**Status (2026-10-17):** Next delivery milestone; `VEF-05` and release acceptance remain open. Kit `0.5.0` packages the [VEF AI assistance profile](contract-kit/ai/README.md), schemas, examples, semantic citation checks, and consumer acceptance cases. VEF implementation/acceptance remains required; ODIP APIs and the numerical baseline are unchanged.
+**Status (2026-10-27):** AI proposals, mandatory current-request confirmation, bounded evidence and validated explanations are implemented in VEF. `VEF-05` acceptance and the final release remain open: AI-05/06/08/10/11 still need evidence. Kit `0.5.0` packages the [VEF AI assistance profile](contract-kit/ai/README.md), schemas, examples, semantic citation checks, and consumer cases. ODIP APIs and the numerical baseline are unchanged. Use the [current review](reviews/2026-10-27-implementation-and-acceptance-review.md) and [gap register](reviews/2026-10-27-gap-analysis.md), rather than the historical baselines below, for remaining work.
 
 1. Add natural-language-to-request proposal generation behind mandatory user confirmation.
 2. Restrict explanation input to the bounded run result and approved evidence view.
