@@ -11,6 +11,12 @@ IDs remain incomplete, and the original use-case scope exceeds the implemented
 new-equipment model. The subsequent [gap analysis](2026-10-27-gap-analysis.md)
 separates missing implementation, missing evidence, and scope decisions.
 
+Latest same-day acceptance state: hosted AI-05/06 citation and semantic reviews
+and the private hosted AI-08/11 validation boundary now pass within their
+recorded limits. Only AI-10 and final Gate 6 remain open. The five-case count
+above is the original review snapshot; see the [guided acceptance](2026-10-27-guided-release-acceptance.md)
+and [current gap status](2026-10-27-gap-analysis.md) for subsequent evidence.
+
 ## Same-day implementation follow-up
 
 This review preserves the initial source/evidence assessment. After that audit,

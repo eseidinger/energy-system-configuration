@@ -399,3 +399,26 @@ immediately afterward; the platform returned `state=revoked` at
 pins the two deleted IDs and cleanup script SHA-256. This is operator-confirmed
 console evidence, not an independent database readback; connection closure was
 not separately observed. AI-08, AI-10 and AI-11 remain open, as does Gate 6.
+
+### Hosted AI-08/11 boundary probe: PASS
+
+VEF commit `edc4157` passed all CI jobs on [run 40550620333, attempt 3](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40550620333/attempts/3),
+including browser, API and packaged integration tests. Its image digest is
+`a3b0f884c4186072fe3fdb673d032c0c1e5e51aa46d71b3ab8cc34528eff8a75`.
+The private `ai-boundary` scheduled component ran that exact image once in
+`vareng-test` revision 40, with no database binding, egress or public port.
+The platform reported `last_result=succeeded` at 18:08:09 UTC. Its eight
+untruncated log lines contained the seven expected AI-08/11 PASS markers and
+`cases=7`; the checked resource methods returned 502 for invalid explanations
+and 422 for oversized/incomplete evidence. The test asserted no model call for
+invalid evidence and unchanged readback of its in-memory completed result.
+
+The scheduled component was removed in revision 41. A subsequent platform
+status showed only `web`, ready on the same image. The
+[sanitized hosted record](evidence/2026-10-27-hosted-ai-boundary-probe.json)
+contains fixture, declaration and log hashes, exact revision and cleanup
+evidence. Together with the earlier public cross-user 404 checks, AI-08 passes.
+AI-11 passes its private hosted boundary checks. These invalid payloads were
+injected inside the private job at the deployed resource methods; no public
+mutation route or real database fixture was introduced. **Only AI-10 and final
+Gate 6 acceptance remain open.**

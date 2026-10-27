@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-27",
+  "environment": "vareng-test",
+  "scope": "private hosted synthetic AI-08/11 validation boundary",
+  "vefCommit": "edc4157976487ac14e723fc110db56c40a8002b4",
+  "ciRunId": 40550620333,
+  "ciAttempt": 3,
+  "ciConclusion": "success",
+  "image": "eseidinger/variability-engineering-framework@sha256:a3b0f884c4186072fe3fdb673d032c0c1e5e51aa46d71b3ab8cc34528eff8a75",
+  "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b",
+  "fixtureSource": "unmodified synthetic contract-kit 0.5.0 examples packaged in VEF",
+  "fixtureSha256": {
+    "ai-explanation.json": "600f7e5fe956a54cdd6cd8b4e36863689dd91fc7565ae49c54910d1152655d55",
+    "candidate.json": "d8fbc2a5296976202f8654b733772ac8a473fe8a5ab23d7a1065c1736d6aee9b",
+    "optimization-request.json": "708f7c77910f86d7942bffd10eae9d345edd7a9219bb76c90ed86c8022b89f94",
+    "optimization-result.json": "0c718a2a7a05017a37afa44369be7ee97850f14e6cf5da26370ac19dfd6d127c"
+  },
+  "deployment": {
+    "beforeRevision": 39,
+    "probeRevision": 40,
+    "declarationSha256": "a76500eddd0cbeaa8bec1d6562fd828e6731c8cbd2d384c803165d167a122adf",
+    "component": "ai-boundary",
+    "type": "scheduled",
+    "schedule": "8 18 27 10 *",
+    "timeZone": "UTC",
+    "retryLimit": 0,
+    "maxRunSeconds": 180,
+    "bindings": [],
+    "outbound": [],
+    "ports": [],
+    "webDeclarationUnchanged": true,
+    "applyState": "succeeded",
+    "applyOperationId": "b21c8312-70d5-4973-ba0d-5db583c49641"
+  },
+  "execution": {
+    "lastRunAtUtc": "2026-10-27T18:08:00Z",
+    "lastCompletedAtUtc": "2026-10-27T18:08:09Z",
+    "lastResult": "succeeded",
+    "activeRunsAfterCompletion": 0,
+    "pod": "ai-boundary-29885408-x99dd",
+    "logState": "ok",
+    "logLineCount": 8,
+    "logTruncated": false,
+    "unavailableContainers": 0,
+    "rawCliLogEnvelopeSha256": "3ddf2e26af21cb891a00315e5617a9e56074a812a83844701d50d6cbdba37635",
+    "completionMarker": "energy_ai_acceptance status=PASS cases=7"
+  },
+  "checks": {
+    "AI08.foreign_source": "PASS: 502 invalid_ai_explanation; original result read route unchanged",
+    "AI08.unresolved_pointer": "PASS: 502 invalid_ai_explanation; original result read route unchanged",
+    "AI08.changed_value": "PASS: 502 invalid_ai_explanation; original result read route unchanged",
+    "AI08.foreign_run": "PASS: 502 invalid_ai_explanation; original result read route unchanged",
+    "AI11.source_count": "PASS: internal bound admits 16 and rejects 17 sources without silent truncation",
+    "AI11.byte_limit": "PASS: schema-valid in-memory result with compact JSON under 64 KiB produces evidence over 64 KiB; route returns 422 evidence_unavailable without model call",
+    "AI11.missing_version": "PASS: missing required result model version returns 422 evidence_unavailable without model call"
+  },
+  "externalModelCalls": 0,
+  "crossUserPublicRouteEvidence": "Earlier guided vareng-test checks returned 404 run_not_found for a second user on run GET, candidate GET and explanation POST; see VEF energy-contract-kit-verification.md.",
+  "cleanup": {
+    "revision": 41,
+    "state": "succeeded",
+    "operationId": "4fd99110-fcc6-4c94-973b-955d4a9c2891",
+    "remainingComponents": ["web"],
+    "webState": "ready",
+    "webImageUnchanged": true,
+    "jobRemoved": true
+  },
+  "caseDisposition": {
+    "AI-08": "PASS within recorded hosted internal-boundary and prior public cross-user evidence",
+    "AI-11": "PASS within recorded hosted internal-boundary evidence",
+    "AI-10": "OPEN"
+  },
+  "limits": [
+    "The injected invalid explanations and oversized evidence were exercised by a private scheduled component using the deployed application classes and resource methods, not by a public HTTP gateway request.",
+    "The synthetic fixture repository was in memory; no production or test database run was mutated.",
+    "The normal evidence builder produces three or four sources, so the 17-source assertion was checked at its internal bound.",
+    "The evidence is a sanitized CLI status/log capture, not a raw provider response; no external model was called."
+  ],
+  "overallGate6Accepted": false
+}
