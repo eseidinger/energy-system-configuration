@@ -32,11 +32,26 @@ were not changed by that wording edit.
 
 | Consumer | Adoption commit | Verification |
 | --- | --- | --- |
-| VEF | `b64e0e111bbb22092f6d041dec7bbe1c46e76151` | Lock pins published URL and archive SHA-256 above; local upstream kit suite (82 tests), packaged API schema-byte comparison, 32 script tests and documentation checks pass. [CI run 40881986516](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40881986516). |
-| ODIP | `55a11c47fbb27389527ab0def8e6bcf11fd0828a` | Lock and vendored archive pin the same SHA-256; extracted vendor content passed the byte comparison; 89 worker tests pass. [CI run 40882017308](https://github.com/eseidinger/open-data-intelligence-platform/actions/runs/40882017308). |
+| VEF | `b64e0e111bbb22092f6d041dec7bbe1c46e76151` | Lock pins published URL and archive SHA-256 above; local upstream kit suite (82 tests), packaged API schema-byte comparison, 32 script tests and documentation checks pass. [CI run 40881986516](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40881986516) PASS, including API, UI, package integration, image publication and test deployment. |
+| ODIP | `55a11c47fbb27389527ab0def8e6bcf11fd0828a` | Lock and vendored archive pin the same SHA-256; extracted vendor content passed the byte comparison; 89 worker tests pass. [CI run 40882017308](https://github.com/eseidinger/open-data-intelligence-platform/actions/runs/40882017308) PASS, including Web, worker, Platform API, image publication and test deployment. |
 
 Both consumer commits were pushed to `main`. The published 0.5.0 release remains
 immutable as a historical baseline. The acceptance scope remains new equipment,
 complete UTC calendar years and synthetic reference data. DEC-10/11/12 limits
 remain attached to the bounded Gate 6 acceptance; publication does not convert
 accepted exceptions into passed tests.
+
+## Test deployment observations
+
+The successful VEF CI job applied `vareng-test` revision **56** and reported
+readiness `ready` at 2026-10-29 13:34:04 UTC. Its desired and deployment image
+was `eseidinger/variability-engineering-framework@sha256:f58c9dd95341eed561b295041deb5f4348e06c9a260a0469c58038dee37b9889`.
+
+The successful ODIP CI job applied `odip-test` revision **11**. The web image
+was `docker.io/eseidinger/odip-platform@sha256:dc27abd5589f7a8532e9a9bb27a357361f5ffeff37ff1e5eb3c49a9cc326f053`;
+the published worker image was
+`docker.io/eseidinger/odip-data-worker@sha256:944db50e63a0b32d70cf06b5801bdfbef0730b55a17501c9ed20f29ba1d8500f`.
+The deployment operation succeeded, but its last CI response still reported
+web readiness `progressing` while the new container was being created. A later
+readback is needed to confirm the active image. Production deployment jobs
+were skipped in both CI workflows.
