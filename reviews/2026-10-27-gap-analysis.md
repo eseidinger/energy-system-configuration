@@ -45,6 +45,13 @@ passes protected capture and byte readback of the pinned PVGIS JSON, a linked
 raw artifact, validation/publication and all five artifact digests for a new
 synthetic test dataset. It does not alter the immutable release reference
 versions or repair the catalog URL's scheduled-download failure.
+The [October 29 current-image report](evidence/2026-10-29-ai10-current-image-regression.json)
+adds new protected 1.0.0/1.0.1 runs, both complete 252-candidate oracles,
+selected 422 boundaries, a verified zero-budget infeasible result, unchanged
+run JSON after denials and an AI explanation, and a fresh ten-check private
+probe on the same AI-enabled VEF image. The temporary job was removed and the
+web image remained ready. The probe used an in-memory ODIP transport; the
+single unchanged deployed cross-project Gate 5 suite is still unrecorded.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |

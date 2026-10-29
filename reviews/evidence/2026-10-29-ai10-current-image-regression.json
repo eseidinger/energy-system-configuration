@@ -74,7 +74,7 @@
     "rankingChanged": true,
     "rankingOfEachVersionMatchesOwnOracle": true
   },
-  "caseDisposition": "AI-10 OPEN: current-image numerical, version-isolation, selected negative, infeasible, result-retention and rendered-AI subcases pass; complete unchanged deployed Gate 5 suite remains unrecorded",
+  "caseDisposition": "AI-10 OPEN: current-image numerical, version-isolation, selected negative, infeasible, result-retention, rendered-AI and private verifier/client probe subcases pass; complete unchanged deployed cross-project Gate 5 suite remains unrecorded",
   "rawExports": "ignored local VEF target directory; hashes retained above",
   "overallGate6Accepted": false,
   "negativeBrowserObservations": [
@@ -142,6 +142,50 @@
       "jsonSemanticEquality": true,
       "byteEquality": false,
       "afterSha256": "d818dd70940771474199469cab61ec075cd00aa22f5d7633e8b26bdf544368d2"
+    }
+  },
+  "privateCurrentImageProbe": {
+    "type": "temporary scheduled synthetic job",
+    "scope": "real VEF publication client, verifier and optimizer with in-memory ODIP transport; no live ODIP read mutation or public gateway call",
+    "image": "eseidinger/variability-engineering-framework@sha256:3187cc48a5f04fdfb2485194c58f2b12ac69703a15ee585f486b7418359aba89",
+    "deploymentRevision": 48,
+    "declarationSha256": "ce81a104e3d3be30dbbc52bb25ab50fd10b1904416685260eb3487ecff215f51",
+    "scheduleUtc": "2026-10-29T08:53:00Z",
+    "applyOperationId": "87c3f219-d675-4b69-a80a-69bbc666ed2b",
+    "jobBindings": [],
+    "jobOutbound": [],
+    "jobPorts": [],
+    "webDeclarationUnchanged": true,
+    "execution": {
+      "startedAtUtc": "2026-10-29T08:53:00Z",
+      "completedAtUtc": "2026-10-29T08:53:23Z",
+      "result": "succeeded",
+      "pod": "ai10-regression-29887733-bqwxm",
+      "logLineCount": 11,
+      "logTruncated": false,
+      "logEnvelopeSha256": "2064b23a6f6b6991aa75abfad2ad57cce35c557add70cc8f1ca83f0881aac4fe",
+      "completionMarker": "energy_ai10_acceptance status=PASS cases=10",
+      "cases": [
+        "original_oracle",
+        "corrected_oracle",
+        "version_isolation",
+        "exact_import_cache",
+        "tampered_read",
+        "wrong_unit",
+        "missing_hour_matching_digest",
+        "unsupported_schema",
+        "unpublished",
+        "cross_version_cache"
+      ]
+    },
+    "cleanup": {
+      "revision": 49,
+      "applyOperationId": "a43f8914-2396-4626-9e36-6efd72e74c5b",
+      "remainingComponents": [
+        "web"
+      ],
+      "webState": "ready",
+      "webImageUnchanged": true
     }
   }
 }

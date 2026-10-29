@@ -559,5 +559,16 @@ count, 365.64 EUR cost, recommendation and synthetic-profile warning correctly.
 The protected run JSON remained semantically identical after that AI call.
 This rendered review does not establish the raw provider response or every
 citation value; those have separate earlier AI-05/06 evidence.
+The same CI-published VEF image then ran the private synthetic AI-10 probe as
+a temporary scheduled component in revision 48. All ten checks and its final
+`cases=10` marker appeared in eleven complete log lines. The checks include
+both full oracles, exact-version cache behavior and rejection of tampered
+bytes, wrong units, a missing hour with updated digest, unsupported schema,
+unpublished state and cross-version cache reuse. The job had no bindings,
+network egress or public port. Revision 49 removed it; the single ready web
+component retained the same image digest. Its fixture transport was in memory,
+so this does not establish a live ODIP read-response mutation or public-route
+handling of those injected cases. The sanitized evidence also records the
+deployment declaration, operation IDs, log hash and cleanup.
 These subcases pass; the complete unchanged deployed Gate 5 suite, AI-10 and
 final Gate 6 decision remain open.
