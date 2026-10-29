@@ -5,6 +5,10 @@
 **Decision owner:** Integration Contract Maintainer
 **Scope revision:** 1
 
+**Later status:** [DEC-12](DEC-12-proposed-ai10-equivalent-regression.md)
+subsequently accepted AI-10 with documented limits on 2026-10-29. The AI
+case status below records the state when DEC-11 was made.
+
 ## Decision
 
 The maintainer stated: "akzeptiere die weiteren offenen abnahmepunkte ohne

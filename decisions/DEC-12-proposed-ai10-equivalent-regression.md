@@ -1,6 +1,6 @@
-# DEC-12: Proposed AI-10 equivalent deployed regression acceptance
+# DEC-12: AI-10 equivalent deployed regression acceptance
 
-**Status:** PROPOSED — not approved
+**Status:** ACCEPTED_WITH_LIMITATIONS
 
 **Date:** 2026-10-29
 
@@ -8,13 +8,13 @@
 
 **Scope:** Current bounded energy release in `odip-test` and `vareng-test`
 
-## Proposed decision
+## Decision
 
-For this release only, accept AI-10 on the basis of the newly executed,
+For this release only, AI-10 is accepted on the basis of the newly executed,
 automated [source-to-consumer regression](../reviews/evidence/2026-10-29-deployed-source-to-consumer-regression.json),
 the separate [private VEF invalid-content probe](../reviews/evidence/2026-10-29-ai10-current-image-regression.json),
-and the current-release DEC-10/11 exceptions. Classify AI-10 as
-**ACCEPTED_WITH_LIMITATIONS**, rather than claiming that an unchanged historical
+and the current-release DEC-10/11 exceptions. AI-10 is classified as
+**ACCEPTED_WITH_LIMITATIONS**, without claiming that an unchanged historical
 Gate 5 suite passed. The October 17 [Gate 5 acceptance](../reviews/2026-10-17-gate-5-acceptance.md)
 explicitly recorded maintainer acceptance without an executable suite or test
 report; that historical suite cannot literally be rerun.
@@ -44,12 +44,14 @@ infeasibility and unchanged stored success also passed.
 - The three rejected VEF responses contained no run ID. An independent run
   inventory was not queried for those requests.
 
-This proposal does not approve Gate 6, production deployment, contract-kit
+This decision does not approve Gate 6, production deployment, contract-kit
 1.0.0 publication or any new exception beyond the listed current-release
 limits. Final release acceptance still requires the cross-project owner record
 and immutable kit, implementation, image and deployment pins. Future releases
 need an executable Gate 5 baseline and a safe isolated read-fault test seam if
 that boundary remains mandatory.
 
-**Approval:** Pending explicit maintainer decision. Until approved, AI-10 and
-Gate 6 remain OPEN.
+**Approval:** On 2026-10-29, the integration contract maintainer explicitly
+stated: "Ich bestätige DEC-12". The accepted scope is exactly the bounded
+decision and limits above. AI-10 is closed as ACCEPTED_WITH_LIMITATIONS for
+this release; Gate 6 remains OPEN pending its separate final owner decision.

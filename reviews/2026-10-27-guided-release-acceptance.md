@@ -4,6 +4,11 @@ This record follows the maintainer's DEC-07/08/09 decisions and the earlier
 implementation/gap review. It covers the deployed test projects `odip-test`
 and `vareng-test`. It does not grant Gate 6 or production release acceptance.
 
+**Current disposition (October 29):** The maintainer approved
+[DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md). AI-10 is
+ACCEPTED_WITH_LIMITATIONS for this bounded release; Gate 6 remains OPEN.
+Earlier OPEN statements below describe the status at their dated checkpoints.
+
 ## Passed corrected-version isolation — GAP-03
 
 The maintainer approved DEC-09's synthetic increase of every hourly import
@@ -640,7 +645,7 @@ This is a newly specified equivalent suite, because the October 17 Gate 5
 acceptance had no historical executable suite to rerun. The source publication
 used a separate synthetic dataset and live ODIP read bytes were not mutated;
 the private VEF probe covers that invalid-content boundary with in-memory
-transport. [Proposed DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md)
-offers explicit current-release acceptance with these limits. Until the
-maintainer approves it or requires a literal clean-baseline test, AI-10 and
-Gate 6 remain OPEN.
+transport. The maintainer approved
+[DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md) on October
+29 with those limits. AI-10 is ACCEPTED_WITH_LIMITATIONS for the current
+release. Gate 6 remains OPEN for its separate final decision.

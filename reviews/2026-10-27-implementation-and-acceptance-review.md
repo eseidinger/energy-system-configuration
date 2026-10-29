@@ -4,6 +4,11 @@ Date: 2026-10-27. Scope: `UC-ENERGY-01` across Energy System Configuration,
 Variability Engineering Framework (VEF), and Open Data Intelligence Platform
 (ODIP). This is a source and evidence review, not a new maintainer acceptance.
 
+**Current disposition (October 29):** The maintainer approved
+[DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md). AI-10 is
+ACCEPTED_WITH_LIMITATIONS for this release; Gate 6 remains OPEN. The older
+case counts and OPEN statements below are historical review checkpoints.
+
 The bounded new-equipment workflow and AI assistance are implemented. Gate 5
 remains accepted by maintainer direction; ODIP's publication handoff also remains
 accepted. Gate 6 and the final cross-project release are **open**. Five AI case
