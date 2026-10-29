@@ -15,6 +15,7 @@ tagging.
 | --- | --- |
 | Shared source | `energy-system-configuration` `f804f79bb65a0336fef842c4bbc77e9e4ab15170`; [Contract kit CI](https://github.com/eseidinger/energy-system-configuration/actions/runs/40869477423) PASS. |
 | Released consumer contract | Kit `0.5.0`, archive SHA-256 `ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b`; immutable `contract-kit-v0.5.0` source commit `a244b1e9596fee5c2bc99f7e29b7a42d572cc993`. Both consumers pin this archive hash. |
+| Unreleased kit candidate | [Review patch](candidates/contract-kit-v1.0.0.patch) SHA-256 `fb49846c9b2f5e0a5d426c42e128ea90bf2427a50d9844bea83997ea4bf04350` against shared-source commit `103af36`. It changes kit version/package lock and release documentation, adding DEC-07/08 scope notes; schemas, APIs, fixtures and numerical oracles are unchanged. Two independently built local `contract-kit-v1.0.0.tar.gz` archives match at SHA-256 `80e2f2f62d90c06dd252f2aacec18195aa0e70fa661cd14046d5c96fb7e0a65a`. Local source and extracted-archive suites each passed 82 tests; `SHA256SUMS` and offline frozen no-dev lock checks passed. The archive remains local and unpublished. |
 | VEF source and CI | `a31b3363987a1075c55845077011238ef854c39e`; [Build, test and publish](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40869477768) PASS, including API, UI, packaged integration and contract checks. Compared with tested implementation commit `5cb913f`, the later changes are documentation files only. |
 | VEF test deployment | `vareng-test` revision **54**, web image `eseidinger/variability-engineering-framework@sha256:a9a3e10dc9e60d6c65a6b03e0e05e9cf9b8228620209d0d7fc4f6805e1aa322c`, `ready` at 12:08:48 UTC. Canonical JSON SHA-256 of applied spec: `c7a1d54f91dd37be86ba6961e5cdfa9a0db96898231c528d170545cfcafeb901`. Image and revision match the VEF CI run above. |
 | ODIP source and CI | Runtime image source `31c4602a256be89287a8df305670269a5da22c1c`; [build and publish](https://github.com/eseidinger/open-data-intelligence-platform/actions/runs/40490378594) PASS. Current repository head `931e11ce08cc9e3910b27be7239e8884d92ebe0a` differs from that build in documentation files only. |
@@ -50,16 +51,18 @@ if the owners require it; do not infer one from application revision numbers.
    case dispositions and DEC-10/11/12 limits. Record who accepts the bounded
    `VEF-05`/Gate 6 outcome and contract version 1.0.0, or record any objection.
    One maintainer's DEC-12 approval is not this final multi-boundary decision.
-2. **Version 1.0.0 candidate:** Incorporate approved DEC-07/08 scope and
-   compatibility notes into a new immutable kit candidate, review affected
-   contracts/consumers, run schema, OpenAPI, example, canonicalization,
-   checksum and numerical tests, and produce a deterministic archive plus
-   `SHA256SUMS`. Keep the existing 0.5.0 archive and consumer locks unchanged
-   until coordinated adoption is approved.
+2. **Version 1.0.0 candidate review:** The patch and reproducible local archive
+   above are ready for cross-project review. Confirm the DEC-07/08 compatibility
+   wording and unchanged schemas, APIs and numerical fixtures. Re-run the
+   full frozen environment suite in CI after applying the reviewed patch;
+   the local source and extracted-archive suites and checksum already pass.
+   Keep the existing 0.5.0 archive and consumer locks unchanged until
+   coordinated adoption is approved.
 3. **Release only after Gate 6 approval:** Annotated
    `contract-kit-v1.0.0` tag, release archive, checksum and compatibility notes,
    plus coordinated consumer pins and immutable implementation/image/deployment
    identifiers. Production deployment is a separate action requiring explicit
    authorization. Neither tag nor production deployment has been performed.
 
-**Gate 6 decision:** PENDING. **Contract kit 1.0.0 publication:** NOT STARTED.
+**Gate 6 decision:** PENDING. **Contract kit 1.0.0 candidate:** BUILT LOCALLY,
+UNRELEASED. **Contract kit 1.0.0 publication:** NOT STARTED.

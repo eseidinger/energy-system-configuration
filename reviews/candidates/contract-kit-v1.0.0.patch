@@ -1,0 +1,108 @@
+--- a/contract-kit/VERSION
++++ b/contract-kit/VERSION
+@@ -1 +1 @@
+-0.5.0
++1.0.0
+--- a/contract-kit/pyproject.toml
++++ b/contract-kit/pyproject.toml
+@@ -1,6 +1,6 @@
+ [project]
+ name = "energy-system-contract-kit"
+-version = "0.5.0"
++version = "1.0.0"
+ description = "Executable contracts and fixtures for energy-system configuration"
+ requires-python = ">=3.12,<3.15"
+ license = "Apache-2.0"
+--- a/contract-kit/uv.lock
++++ b/contract-kit/uv.lock
+@@ -31,7 +31,7 @@
+ 
+ [[package]]
+ name = "energy-system-contract-kit"
+-version = "0.5.0"
++version = "1.0.0"
+ source = { virtual = "." }
+ 
+ [package.dev-dependencies]
+--- a/contract-kit/README.md
++++ b/contract-kit/README.md
+@@ -1,13 +1,12 @@
+ # Energy System Configuration Contract Kit
+ 
+-Version `0.5.0` adds the [VEF AI assistance contract](ai/README.md), request
+-proposal and explanation schemas, cited-evidence examples, semantic citation
+-validation, and consumer acceptance cases for Gate 6. This is an additive
+-implementation handoff for VEF, not Gate 6 acceptance. The
+-[versioned release page](https://github.com/eseidinger/energy-system-configuration/releases/tag/contract-kit-v0.5.0)
+-is the publication record for the archive and checksum.
+-ODIP APIs and the numerical fixtures remain unchanged. See the
+-[compatibility notes](ai/README.md#version-and-release-handoff).
++Version `1.0.0` is a Gate 6 release **candidate** until cross-project approval,
++tagging and archive publication. It retains the `0.5.0` AI assistance contract,
++schemas, examples, semantic citation validation and consumer acceptance cases.
++ODIP APIs, numerical fixtures and expected results remain unchanged. The
++[candidate compatibility notes](RELEASE-NOTES-1.0.0.md) state the accepted
++new-equipment and complete-calendar-year deployment scope. Consumers continue
++to pin the released `0.5.0` archive until a coordinated `1.0.0` handoff.
+ 
+ The accepted `0.4.0` baseline reconciles the integration contract with Developer
+ Platform revision `b360ddee34444748c95705c597aa7b17491cd05b`. It retains the
+--- a/contract-kit/ai/README.md
++++ b/contract-kit/ai/README.md
+@@ -97,13 +97,15 @@
+ 
+ ## Version and release handoff
+ 
+-`0.5.0` is an additive implementation handoff, not Gate 6 acceptance or the final
+-release. Existing immutable `0.4.0` archives and consumer pins remain valid.
+-VEF adopts the new released archive version/checksum after publication; ODIP may
+-retain its accepted `0.4.0` pin until coordinated release adoption. No numerical
+-fixture or expected result is changed by this profile.
++This AI profile first appeared in the immutable `0.5.0` implementation handoff.
++The `1.0.0` candidate retains it without schema, API or numerical changes.
++Existing immutable `0.4.0` and `0.5.0` archives and consumer pins remain valid.
++VEF and ODIP adopt a newly released archive and checksum only through a
++coordinated handoff. No numerical fixture or expected result is changed.
+ 
+-Gate 6 closes after `VEF-05`, the AI acceptance cases, and the unchanged Gate 5
+-regression suite pass. All three project owners then accept the release contract,
+-and immutable versions identify the kit, implementations, images, and deployment
+-definitions. Publish kit `1.0.0` only after those integration and release gates.
++Gate 6 closes after `VEF-05`, the AI acceptance cases and deterministic
++regression receive the explicit cross-project owner decision. For the current
++bounded release, DEC-10/11/12 document accepted evidence limits and exceptions;
++they do not turn unexecuted checks into test passes. Immutable versions must
++identify the kit, implementations, images and deployment definitions. Publish
++kit `1.0.0` only after those integration and release gates.
+--- /dev/null
++++ b/contract-kit/RELEASE-NOTES-1.0.0.md
+@@ -0,0 +1,29 @@
++# Contract kit 1.0.0 candidate compatibility notes
++
++**Status:** Candidate for cross-project review; not tagged or published.
++
++This candidate keeps the schemas, OpenAPI descriptions, fixture bytes, expected
++numerical results, model and simulation semantics, and AI contract behavior of
++the released `0.5.0` kit. The version, release documentation and scope notes
++are the proposed changes. Existing `0.5.0` consumer locks remain valid until
++coordinated adoption of a published `1.0.0` archive and checksum.
++
++For the bounded first release, [DEC-07](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-07-new-equipment-release-scope.md)
++limits optimization to new equipment. A nonempty `existingComponentIds` request
++is rejected by the VEF model; this kit does not add existing-equipment planning.
++[DEC-08](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-08-complete-calendar-year.md)
++limits deployed energy optimization to complete UTC calendar years with 8,760
++or 8,784 consecutive hourly values. ODIP and VEF enforce that deployment
++boundary; the existing schema and fixture are unchanged.
++
++The first release also carries the current-release acceptance scope from
++[DEC-10](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-10-current-release-recovery-test-exception.md),
++[DEC-11](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md)
++and [DEC-12](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-12-proposed-ai10-equivalent-regression.md).
++These decisions classify specified tests and limits for this release; they do
++not modify the data contracts or claim that excepted tests passed.
++
++Publishing this candidate requires the separate Gate 6 owner decision,
++deterministic archive and checksum validation, an annotated immutable tag, and
++coordinated consumer pins. No publication or production authorization is
++implied by this candidate.

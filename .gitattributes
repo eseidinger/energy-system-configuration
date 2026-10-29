@@ -3,3 +3,4 @@ LICENSE text eol=lf
 NOTICE text eol=lf
 LICENSES/** text eol=lf
 .github/** text eol=lf
+reviews/candidates/*.patch text eol=lf
