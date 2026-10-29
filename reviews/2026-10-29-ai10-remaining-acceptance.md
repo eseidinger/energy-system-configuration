@@ -4,7 +4,9 @@
 
 The maintainer approved [DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md).
 AI-10 is **ACCEPTED_WITH_LIMITATIONS** for this release. The alternatives below
-record the choice as it stood before that approval; Gate 6 remains OPEN.
+record the choice as it stood before that approval. The later
+[DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md) accepts bounded
+Gate 6 with DEC-10/11/12 limits.
 
 **Environment:** `odip-test` and `vareng-test`
 
@@ -53,5 +55,6 @@ equivalence must not be reported as a same-image execution.
    there is no old executable suite to rerun unchanged.
 
 The maintainer chose option 1 and recorded its exact limits in DEC-12. AI-10
-is therefore ACCEPTED_WITH_LIMITATIONS; final Gate 6 remains OPEN. This
-decision does not authorize production deployment or kit 1.0.0 publication.
+is therefore ACCEPTED_WITH_LIMITATIONS; DEC-13 subsequently accepted bounded
+Gate 6. Neither decision authorizes production deployment or kit 1.0.0
+publication.

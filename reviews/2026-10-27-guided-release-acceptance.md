@@ -6,8 +6,10 @@ and `vareng-test`. It does not grant Gate 6 or production release acceptance.
 
 **Current disposition (October 29):** The maintainer approved
 [DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md). AI-10 is
-ACCEPTED_WITH_LIMITATIONS for this bounded release; Gate 6 remains OPEN.
-Earlier OPEN statements below describe the status at their dated checkpoints.
+ACCEPTED_WITH_LIMITATIONS for this bounded release. The later
+[DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md) accepts Gate 6 for
+the test release with DEC-10/11/12 limits. Earlier OPEN statements below
+describe the status at their dated checkpoints.
 
 ## Passed corrected-version isolation — GAP-03
 
@@ -648,4 +650,5 @@ the private VEF probe covers that invalid-content boundary with in-memory
 transport. The maintainer approved
 [DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md) on October
 29 with those limits. AI-10 is ACCEPTED_WITH_LIMITATIONS for the current
-release. Gate 6 remains OPEN for its separate final decision.
+release. DEC-13 subsequently accepted bounded Gate 6 while leaving kit
+publication and production deployment unauthorized.

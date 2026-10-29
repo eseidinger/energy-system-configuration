@@ -6,7 +6,9 @@ Variability Engineering Framework (VEF), and Open Data Intelligence Platform
 
 **Current disposition (October 29):** The maintainer approved
 [DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md). AI-10 is
-ACCEPTED_WITH_LIMITATIONS for this release; Gate 6 remains OPEN. The older
+ACCEPTED_WITH_LIMITATIONS for this release; the later
+[DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md) accepts bounded
+Gate 6 with DEC-10/11/12 limits. The older
 case counts and OPEN statements below are historical review checkpoints.
 
 The bounded new-equipment workflow and AI assistance are implemented. Gate 5

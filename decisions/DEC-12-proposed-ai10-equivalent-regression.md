@@ -8,6 +8,10 @@
 
 **Scope:** Current bounded energy release in `odip-test` and `vareng-test`
 
+**Later status:** [DEC-13](DEC-13-bounded-gate-6-acceptance.md) separately
+accepted bounded Gate 6 with this decision's limits. The OPEN statement at the
+end records the state when DEC-12 alone was approved.
+
 ## Decision
 
 For this release only, AI-10 is accepted on the basis of the newly executed,

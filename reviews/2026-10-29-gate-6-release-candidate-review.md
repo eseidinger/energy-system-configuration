@@ -1,13 +1,15 @@
 # Gate 6 release candidate review — bounded energy configuration
 
-**Status:** DRAFT for cross-project owner review; Gate 6 OPEN
+**Status:** Reviewed and accepted with limits under
+[DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md); kit 1.0.0 remains
+unpublished
 
 **Observed:** 2026-10-29 12:08–12:09 UTC in `vareng-test` and `odip-test`
 
 **Scope:** New installations, complete UTC calendar years, synthetic Wasserburg
-reference data. This record prepares an acceptance decision. It does not
-authorize production deployment, contract-kit 1.0.0 publication or release
-tagging.
+reference data. This record is the reviewed evidence inventory for DEC-13.
+It does not authorize production deployment, contract-kit 1.0.0 publication
+or release tagging.
 
 ## Exact candidate inventory
 
@@ -44,13 +46,12 @@ if the owners require it; do not infer one from application revision numbers.
 | Recovery and other operations | [DEC-10](../decisions/DEC-10-current-release-recovery-test-exception.md) and [DEC-11](../decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md) are ACCEPTED_EXCEPTION for their stated current-release checks, not test PASS. |
 | User-visible scope | New equipment only under DEC-07; complete calendar years under DEC-08. Results warn that the 2024 calendar profile derives from PVGIS 2023 with a synthesized leap day. |
 
-## Exact remaining decisions and release actions
+## Accepted decision and remaining release actions
 
-1. **Cross-project owner review:** The Integration Contract Maintainer and the
-   ODIP, VEF and Developer Platform boundary maintainers review this inventory,
-   case dispositions and DEC-10/11/12 limits. Record who accepts the bounded
-   `VEF-05`/Gate 6 outcome and contract version 1.0.0, or record any objection.
-   One maintainer's DEC-12 approval is not this final multi-boundary decision.
+1. **Cross-project owner review:** The maintainer confirmed authority to
+   represent all four responsibility areas and accepted bounded Gate 6 with
+   DEC-10/11/12 limits in DEC-13. This accepts `VEF-05` for the test release;
+   it does not publish the kit candidate or authorize production.
 2. **Version 1.0.0 candidate review:** The integration maintainer stated
    "Ich akzeptiere den PR" on October 29 and PR #3 was merged. This records
    acceptance of the candidate change, not final Gate 6 or publication.
@@ -65,5 +66,6 @@ if the owners require it; do not infer one from application revision numbers.
    identifiers. Production deployment is a separate action requiring explicit
    authorization. Neither tag nor production deployment has been performed.
 
-**Gate 6 decision:** PENDING. **Contract kit 1.0.0 candidate:** MERGED,
+**Gate 6 decision:** ACCEPTED_WITH_LIMITATIONS (DEC-13).
+**Contract kit 1.0.0 candidate:** MERGED,
 CI PASS, UNRELEASED. **Contract kit 1.0.0 publication:** NOT STARTED.

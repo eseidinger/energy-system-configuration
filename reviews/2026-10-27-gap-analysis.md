@@ -12,9 +12,11 @@ and does not grant final acceptance or silently waive other requirements.
 
 **Current disposition (2026-10-29):** The maintainer approved
 [DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md). AI-10 is
-ACCEPTED_WITH_LIMITATIONS for this release. Gate 6 and final cross-project
-release acceptance remain OPEN. Earlier OPEN statements below describe the
-state when each test or review was recorded.
+ACCEPTED_WITH_LIMITATIONS for this release. The later
+[DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md) accepts Gate 6 for
+the bounded test release with DEC-10/11/12 limits. Kit 1.0.0 publication and
+production deployment remain separate, unauthorized actions. Earlier OPEN
+statements below describe the state when each test or review was recorded.
 
 **P1** blocks a claim of complete use-case / Gate 6 release acceptance.
 **P2** is operational or usability follow-up that must be resolved or explicitly
@@ -32,7 +34,8 @@ configured test-environment version-isolation case and records request,
 publication, upload-integrity, unit and unsupported-schema rejections. Other local checks remain limited to their stated environment;
 The maintainer now accepts the other listed non-AI points without further testing
 under DEC-11. Hosted AI-05/06 and AI-08/11 now pass within their recorded
-evidence limits. Only AI-10 remains acceptance work; final Gate 6 is open.
+evidence limits. At that checkpoint, AI-10 and final Gate 6 remained open;
+DEC-12/13 later accepted them with recorded limits.
 
 The later [current-image oracle report](evidence/2026-10-27-ai10-current-image-oracles.json)
 adds two protected browser runs on AI-enabled VEF revision 45. Both full
@@ -76,20 +79,21 @@ consumer negative/idempotency cases in one automated invocation. It uses a
 new isolated source version, so it is an equivalent new suite rather than a
 literal rerun of a historical unchanged suite. The
 [approved DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md)
-classifies AI-10 as ACCEPTED_WITH_LIMITATIONS; Gate 6 remains open.
+classifies AI-10 as ACCEPTED_WITH_LIMITATIONS; DEC-13 subsequently accepts
+bounded Gate 6 with those limits.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
 | GAP-01 | **Closed for hosted AI-05/06 review:** unproven optimality/missing replacement price and adversarial-metadata resistance pass; 32 and 33 rendered citations respectively match the oracle/fixtures, with assistant semantic review. Marked fixture copies were removed and the short grant revoked. | Retain recorded capture limits; these cases do not prove AI-10. |
 | GAP-02 | **Closed within recorded scope:** the private synthetic probe in VEF commit `edc4157` passed seven AI-08/11 checks in local and hosted image execution. The scheduled component succeeded in `vareng-test` revision 40, then was removed in revision 41; earlier public cross-user route checks also passed. See the [hosted record](evidence/2026-10-27-hosted-ai-boundary-probe.json). | Retain the internal resource-method versus public gateway distinction and the in-memory fixture limit. No further AI-08/11 test is required for this release. |
 | GAP-03 | **Closed in the configured test environment.** DEC-09 correction published as 1.0.1; both owned runs and all 252 candidates/metrics/ranking/provenance match their independent oracles. Original 1.0.0 readback stays unchanged. See the [guided record](2026-10-27-guided-release-acceptance.md). | Version isolation remains PASS. Additional non-AI archive/inventory checks are ACCEPTED_EXCEPTION (DEC-11); AI-10 is accepted with the DEC-12 limits. |
-| GAP-04 | ODIP's deployed request/upload/status denials and VEF's ten private verifier/client checks passed within their recorded boundaries. The new isolated source-to-consumer suite and both full 252-candidate oracles also passed. See the [current-image record](evidence/2026-10-29-ai10-current-image-regression.json) and [full-run report](evidence/2026-10-29-deployed-source-to-consumer-regression.json). | **ACCEPTED_WITH_LIMITATIONS (DEC-12):** no live ODIP read-response mutation, no literal rerun of a historical unchanged Gate 5 suite, and distinct pinned images for the private probe and new suite. Carry these limits into final Gate 6 review. |
+| GAP-04 | ODIP's deployed request/upload/status denials and VEF's ten private verifier/client checks passed within their recorded boundaries. The new isolated source-to-consumer suite and both full 252-candidate oracles also passed. See the [current-image record](evidence/2026-10-29-ai10-current-image-regression.json) and [full-run report](evidence/2026-10-29-deployed-source-to-consumer-regression.json). | **ACCEPTED_WITH_LIMITATIONS (DEC-12):** no live ODIP read-response mutation, no literal rerun of a historical unchanged Gate 5 suite, and distinct pinned images for the private probe and new suite. DEC-13 carries these limits into bounded Gate 6 acceptance. |
 | GAP-05 | ODIP actual local restore and VEF transactional interrupted-claim/stale-token tests pass. Hosted ODIP service restart succeeded with a new pod and unchanged image; post-restart corrected-run summary matches the independent oracle. All five subsequent protected operator artifact downloads match manifest hashes and reference bytes. | **ACCEPTED_EXCEPTION:** joint restore under DEC-10; additional non-AI interrupted-workload checks under DEC-11. No recovery VM is required and no unexecuted test is claimed PASS. AI-10 carries the DEC-12 limits. |
 | GAP-06 | **Closed for this release by scope decision:** the maintainer selected new installations; [DEC-07](../decisions/DEC-07-new-equipment-release-scope.md), use case 0.3 and prose contract 0.5 record it. Existing-equipment support is deferred. | New-equipment scope remains accepted. Additional non-AI release-review checks are ACCEPTED_EXCEPTION (DEC-11). Carry scope decisions into the next release record without rewriting the immutable kit. |
 | GAP-07 | Schema conformance is implemented. The maintainer selected complete UTC calendar years in [DEC-08](../decisions/DEC-08-complete-calendar-year.md); VEF profile/import and ODIP energy validation enforce the rule with boundary tests. Hosted ODIP rejected the isolated 4,368-hour fixture 1.0.90; the later private hosted VEF probe rejected a missing hour even after its descriptor digest was updated. | Annual scope remains accepted and implemented. Additional non-AI acceptance checks are excepted under DEC-11. The private fake-transport boundary does not prove a mutated live ODIP read; carry the decision into the next release record. |
 | GAP-08 | 180-day terminal-run/candidate/audit cleanup implemented and tested; minimized ownership-read audit and reproducible model-source capture added. | **ACCEPTED_EXCEPTION (DEC-11):** additional retention/backlog/backup-semantics, durable retention and upgrade-replay verification. Missing evidence remains unverified; implemented controls are retained. |
 | GAP-09 | Historical retained envelopes from retired pods are readable for both projects; recent ODIP request correlation metadata and configured seven-day retention were captured. | **ACCEPTED_EXCEPTION (DEC-11):** additional security/rotation, collector/compactor and elapsed-expiry checks. AI-specific evidence required by an open AI case is not accepted by this exception. |
-| GAP-10 | Sanitized tracked local and hosted AI evidence summaries, both current-image numerical oracles, the isolated ODIP raw-input capture and hash-addressed source/corrected-publication bundle created. | **ACCEPTED_EXCEPTION (DEC-11):** additional non-AI storage/inventory/review checks. AI-10 is ACCEPTED_WITH_LIMITATIONS under DEC-12; final Gate 6 remains open. |
+| GAP-10 | Sanitized tracked local and hosted AI evidence summaries, both current-image numerical oracles, the isolated ODIP raw-input capture and hash-addressed source/corrected-publication bundle created. | **ACCEPTED_EXCEPTION (DEC-11):** additional non-AI storage/inventory/review checks. AI-10 and bounded Gate 6 are accepted with limits under DEC-12/13; kit publication and production remain separate. |
 | GAP-11 | Separate dependency metrics, concurrent reservation/claims, stale-claim recovery, timeout classification and exact-limit local compute measurement pass. | **ACCEPTED_EXCEPTION (DEC-11):** additional deployed workload time/memory, queue/persistence/serialization and interrupted-workload verification. No additional performance assurance is claimed. |
 | GAP-12 | 24 production-bundle browser/axe checks pass on desktop/mobile; focus/landmark/overflow and stale-poll issues fixed. | **ACCEPTED_EXCEPTION (DEC-11):** additional real-session keyboard/screen-reader/session-expiry review; no new accessibility compliance evidence is claimed. |
 | GAP-13 | Hosted ODIP is confirmed to use S3 with active database and bucket bindings. | **ACCEPTED_EXCEPTION:** joint restore under DEC-10; remaining S3 versioning/migration/outage checks under DEC-11. Storage controls remain; unperformed tests are not PASS. |
