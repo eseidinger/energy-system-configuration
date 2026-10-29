@@ -80,3 +80,10 @@ no new numerical-run claim is made for revision 55.
 **Gate 6 decision:** ACCEPTED_WITH_LIMITATIONS (DEC-13).
 **Contract kit 1.0.0 candidate:** MERGED,
 CI PASS, UNRELEASED. **Contract kit 1.0.0 publication:** NOT STARTED.
+
+**Subsequent release:** The maintainer separately authorized publication after
+this candidate review. Kit 1.0.0 was published and adopted by both consumers;
+see the [publication record](2026-10-29-contract-kit-1.0.0-release.md) for the
+final archive checksum and consumer CI. The candidate checksum above is a
+historical review pin and differs from the final archive after release wording
+was updated. This does not change the evidence or limits accepted by DEC-13.

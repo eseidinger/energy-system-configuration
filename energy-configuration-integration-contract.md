@@ -15,6 +15,8 @@ Version 0.7 applies [DEC-11](decisions/DEC-11-current-release-non-ai-acceptance-
 
 Subsequently, the maintainer approved [DEC-12](decisions/DEC-12-proposed-ai10-equivalent-regression.md): AI-10 is ACCEPTED_WITH_LIMITATIONS for the current bounded release. [DEC-13](decisions/DEC-13-bounded-gate-6-acceptance.md) accepts Gate 6/`VEF-05` for the bounded test release with DEC-10/11/12 limits. These decisions do not change the contract schema or immutable kit 0.5.0; the merged kit 1.0.0 candidate is not published and production deployment is not authorized.
 
+**Current release update (2026-10-29):** After DEC-13, the maintainer separately authorized publication. [Contract kit 1.0.0](reviews/2026-10-29-contract-kit-1.0.0-release.md) is now published and pinned by ODIP and VEF. The preceding paragraph records the state at the time of DEC-13; the accepted evidence limits still apply. Production deployment has not been authorized.
+
 Implementation and acceptance status are recorded in the [October 27 cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md). ODIP publication and VEF deterministic/AI endpoints are implemented; remaining conformance and evidence gaps do not change the normative obligations below. The October 27 status review itself changed no API, schema or calculation. The separately approved scope revision changes the release acceptance boundary, while retaining v1 wire fields and numerical results. Version `0.4` reconciles the platform integration boundary with Developer Platform revision `b360ddee34444748c95705c597aa7b17491cd05b`. It retains the `0.3` deployment and identity reconciliation and adds the implemented component-monitoring and minimized central-log profile; energy payloads and numerical oracles are unchanged. Normative words such as **MUST** express baseline requirements, not claims about current repository behavior. Contract version `1.0.0` becomes the accepted release only after the integration and release gates pass.
 
 ## Repositories
@@ -291,6 +293,8 @@ schemas, examples, semantic citation checks, and consumer acceptance cases.
 This additive VEF handoff leaves the accepted `0.4.0` ODIP and numerical
 contracts unchanged. The `0.5.0` implementation handoff does not establish
 Gate 6 acceptance or authorize the final `1.0.0` release.
+Kit `1.0.0` subsequently retained these AI contracts and was published after
+the bounded Gate 6 acceptance and separate maintainer release authorization.
 
 The AI layer belongs to the VEF user journey in the first release. It may propose a structured customer request from natural language and explain a completed run. The structured request is shown to the user for confirmation before optimization. The AI layer reads only a bounded result and approved evidence from ODIP and VEF; it does not call database connections, change component rules, publish ODIP data, or choose a recommendation independently of the optimizer.
 
