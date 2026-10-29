@@ -30,8 +30,19 @@ or release tagging.
 
 The Developer Platform CLI exposes API capabilities and the applied project
 specs but did not return an immutable control-plane source/image revision in
-these read-only queries. Record that platform build pin before final acceptance
-if the owners require it; do not infer one from application revision numbers.
+these read-only queries. DEC-13 accepts this inventory limit under DEC-11 for
+the bounded release; do not infer a platform build from application revisions.
+
+**Post-decision test-deployment observation:** The VEF documentation-only
+commit `c8d9e00422a5af2023ddcf509a3874c2e372490a` passed the full
+[CI workflow](https://github.com/eseidinger/variability-engineering-framework/actions/runs/40874064177)
+and automatically deployed `vareng-test` revision 55, image
+`eseidinger/variability-engineering-framework@sha256:446d7748551277058722b061e1403575d91d3e356caafc602f01bc08839d168c`,
+ready at 2026-10-29 12:39 UTC. Its applied-spec SHA-256 is
+`ba18af36ad958b866aa7940ae4af028bd3e3806c90d6d93cb4fb6e49feacbdff`.
+Source changes from the accepted revision 54 commit `a31b336` are documentation
+files only. DEC-13's original runtime evidence remains pinned to revision 54;
+no new numerical-run claim is made for revision 55.
 
 ## Acceptance evidence and limits
 
