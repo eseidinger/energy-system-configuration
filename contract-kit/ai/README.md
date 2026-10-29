@@ -97,13 +97,15 @@ egress, depending on the chosen VEF integration.
 
 ## Version and release handoff
 
-`0.5.0` is an additive implementation handoff, not Gate 6 acceptance or the final
-release. Existing immutable `0.4.0` archives and consumer pins remain valid.
-VEF adopts the new released archive version/checksum after publication; ODIP may
-retain its accepted `0.4.0` pin until coordinated release adoption. No numerical
-fixture or expected result is changed by this profile.
+This AI profile first appeared in the immutable `0.5.0` implementation handoff.
+The `1.0.0` candidate retains it without schema, API or numerical changes.
+Existing immutable `0.4.0` and `0.5.0` archives and consumer pins remain valid.
+VEF and ODIP adopt a newly released archive and checksum only through a
+coordinated handoff. No numerical fixture or expected result is changed.
 
-Gate 6 closes after `VEF-05`, the AI acceptance cases, and the unchanged Gate 5
-regression suite pass. All three project owners then accept the release contract,
-and immutable versions identify the kit, implementations, images, and deployment
-definitions. Publish kit `1.0.0` only after those integration and release gates.
+Gate 6 closes after `VEF-05`, the AI acceptance cases and deterministic
+regression receive the explicit cross-project owner decision. For the current
+bounded release, DEC-10/11/12 document accepted evidence limits and exceptions;
+they do not turn unexecuted checks into test passes. Immutable versions must
+identify the kit, implementations, images and deployment definitions. Publish
+kit `1.0.0` only after those integration and release gates.
