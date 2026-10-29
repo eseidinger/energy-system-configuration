@@ -52,6 +52,13 @@ run JSON after denials and an AI explanation, and a fresh ten-check private
 probe on the same AI-enabled VEF image. The temporary job was removed and the
 web image remained ready. The probe used an in-memory ODIP transport; the
 single unchanged deployed cross-project Gate 5 suite is still unrecorded.
+The later [single deployed consumer run](evidence/2026-10-29-deployed-consumer-regression.json)
+on VEF revision 50 and ODIP revision 10 verifies three published manifests,
+all eleven artifact bytes, two new full VEF oracles, idempotency, three 422
+boundaries, budget-zero infeasibility and retained success in one execution.
+It excludes new source ingestion/publication, live ODIP read mutation and the
+DEC-10/11 operational exceptions, so AI-10 remains OPEN rather than being
+reclassified by this narrower PASS.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |

@@ -572,3 +572,34 @@ handling of those injected cases. The sanitized evidence also records the
 deployment declaration, operation IDs, log hash and cleanup.
 These subcases pass; the complete unchanged deployed Gate 5 suite, AI-10 and
 final Gate 6 decision remain open.
+
+### October 29 single deployed ODIP-to-VEF consumer regression: PASS within scope
+
+The new [reproducible consumer script](../scripts/run-deployed-energy-consumer-regression.py),
+documented in its [runbook](2026-10-29-deployed-consumer-runbook.md),
+completed one protected execution on AI-enabled VEF revision 50, image
+`43af99e4107af05a657cf0864555ac466f1003a73fd7e3e21b4d76b997320bfa`,
+and ODIP revision 10. It read the published original, corrected and non-energy
+manifests through ODIP operator routes and matched all eleven artifact bytes
+and digests to pinned fixtures. The human browser principal received
+`401 application_access_denied` on ODIP's service-consumer publication route;
+the successful VEF runs exercised the configured ODIP service binding.
+
+Within the same execution, new VEF runs for `1.0.0` and `1.0.1` each passed
+their complete 252-candidate oracle, recommendation and ranking. Repeating
+each request with its idempotency key returned the same run; reusing the key
+with changed input returned `409 idempotency_conflict`. Existing equipment,
+unknown version and failed publication returned their expected 422 codes with
+no run ID in the response. A new budget-zero run returned `INFEASIBLE`, 0/252
+and no recommendation. The successful corrected result remained semantically
+unchanged after the negative tests. The
+[sanitized report](evidence/2026-10-29-deployed-consumer-regression.json) pins
+all three publication digests, run IDs, deployment images, report and script
+hashes, timing, session cleanup and limits. Temporary browser cookie files and
+clipboard contents were removed after the run.
+
+This is a single deployed **consumer** regression, not the complete unchanged
+Gate 5 suite: the already recorded isolated source capture was not repeated
+inside this invocation, live ODIP read bytes were not mutated, and DEC-10/11
+still classify their stated recovery and non-AI operational checks. AI-10 and
+Gate 6 remain OPEN.

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-10-29T09:12:25.076240+00:00",
+  "scope": "protected deployed ODIP-to-VEF consumer regression; source ingest and recovery excluded",
+  "fixtureArchiveSha256": "8fbb0cf6fb7d65da84be8ee554b5ae48abc808bd4cdb048787f99649d46e9d74",
+  "vefDeployment": {
+    "project": "vareng-test",
+    "revision": 50,
+    "images": {
+      "web": "eseidinger/variability-engineering-framework@sha256:43af99e4107af05a657cf0864555ac466f1003a73fd7e3e21b4d76b997320bfa"
+    }
+  },
+  "odipDeployment": {
+    "project": "odip-test",
+    "revision": 10,
+    "images": {
+      "web": "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+      "ingestion-worker": "docker.io/eseidinger/odip-data-worker@sha256:6acce327d1b15fc0223dddeb7a0f5e1e0f397f3b71a9a7dfbb2ca357465eca02"
+    }
+  },
+  "publications": [
+    {
+      "datasetId": "energy-reference-wasserburg-am-inn-2024",
+      "version": "1.0.0",
+      "draftId": "c123b9fc-75a3-4c9a-a662-e9114e845d34",
+      "manifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715",
+      "artifactCount": 5,
+      "operatorBytesAndDigests": "PASS"
+    },
+    {
+      "datasetId": "energy-reference-wasserburg-am-inn-2024",
+      "version": "1.0.1",
+      "draftId": "a997f9af-1add-45e3-af3d-aeae9b9fbd2a",
+      "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+      "artifactCount": 5,
+      "operatorBytesAndDigests": "PASS"
+    },
+    {
+      "datasetId": "non-energy-mobility-counts-2024",
+      "version": "1.0.0",
+      "draftId": "9408c8eb-07ee-4057-9669-1df444b478c0",
+      "manifestSha256": "f0d4f6b882c1a05154fb43283166953fda7a0dba7f2ed435dd7f46088663bbff",
+      "artifactCount": 1,
+      "operatorBytesAndDigests": "PASS"
+    }
+  ],
+  "runs": [
+    {
+      "version": "1.0.0",
+      "runId": "run-0698b4e4-78db-47d4-9f63-516cee499c54",
+      "manifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715",
+      "status": "SUCCEEDED",
+      "fullOracle": "PASS",
+      "candidateCount": 252,
+      "feasibleCount": 194,
+      "idempotentReplay": "PASS",
+      "changedBodyConflict": "PASS"
+    },
+    {
+      "version": "1.0.1",
+      "runId": "run-58ccee14-5c5b-41a1-ac7c-7c4dd037399e",
+      "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+      "status": "SUCCEEDED",
+      "fullOracle": "PASS",
+      "candidateCount": 252,
+      "feasibleCount": 194,
+      "idempotentReplay": "PASS",
+      "changedBodyConflict": "PASS"
+    },
+    {
+      "version": "1.0.1",
+      "runId": "run-4d637f37-0844-45cc-bf33-d74c40e18b90",
+      "status": "INFEASIBLE",
+      "feasibleCount": 0,
+      "candidateCount": 252,
+      "recommendation": null,
+      "optimality": "NOT_APPLICABLE"
+    }
+  ],
+  "negativeCases": {
+    "existingEquipment": {
+      "status": 422,
+      "code": "existing_equipment_not_supported",
+      "runIdInResponse": false
+    },
+    "unknownVersion": {
+      "status": 422,
+      "code": "publication_not_found",
+      "runIdInResponse": false
+    },
+    "failedVersion": {
+      "status": 422,
+      "code": "publication_not_published",
+      "runIdInResponse": false
+    }
+  },
+  "completedRunUnchanged": true,
+  "completedAtUtc": "2026-10-29T09:12:58.865563+00:00",
+  "status": "PASS",
+  "rawLocalReportSha256": "afc2d84d90544e60eef2eb11370c711576d1ecc31a1d8990c8cf75a4392059bd",
+  "scriptSha256AfterResponseFieldClarification": "6f2acf23005c54349daa4141930e7bca29fc6b2f19f1e15a6c9524e6eb3c2c4c",
+  "sessionHandling": {
+    "vefAndOdipCookieFilesRemoved": true,
+    "windowsClipboardClearedAfterEachCapture": true,
+    "noCookieValueInReport": true
+  },
+  "limitations": [
+    "ODIP bytes were read via protected operator draft routes because the human browser principal receives 401 application_access_denied at the service-consumer publication route; successful VEF runs exercised the configured ODIP service binding.",
+    "The 422 response envelopes contained no run ID; the script did not query an independent run inventory.",
+    "The suite read already-published ODIP versions and did not ingest a new source fixture or publish a new dataset in this invocation.",
+    "The suite did not mutate live ODIP read bytes or run backup restore, restart, outage, retained-log or elapsed-retention checks. DEC-10/11 govern their stated exceptions.",
+    "The script was run before a wording-only report-field change from runIdCreated to runIdInResponse; test control flow was unchanged."
+  ],
+  "caseDisposition": "AI-10 OPEN: this single deployed consumer regression passes its specified assertions but does not cover the unchanged complete Gate 5 suite",
+  "overallGate6Accepted": false
+}
