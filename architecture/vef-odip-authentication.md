@@ -23,7 +23,7 @@ sequenceDiagram
     IDP-->>VEF: Short-lived token with derived audience and group IDs
     VEF->>EDGE: HTTPS GET publication with bearer token
     EDGE->>EDGE: Verify token, active service, route, groups, revocation snapshot
-    EDGE->>ODIP: Strip credentials and spoofed headers; add normalized principal context
+    EDGE->>ODIP: Strip credentials and spoofed headers, then add normalized principal context
     ODIP->>ODIP: Require well-formed trusted context
     ODIP->>AUTHZ: Check stable principal ID and dataset permission
     AUTHZ-->>ODIP: Permit published dataset read
