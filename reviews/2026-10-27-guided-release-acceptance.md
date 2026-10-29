@@ -529,3 +529,29 @@ retroactively add raw-input links to immutable reference versions `1.0.0` or
 `1.0.1`, and it is not a VEF run on the isolated dataset. The failed scheduled
 download of the catalog's GitHub release-page URL remains a separate finding.
 The unchanged complete deployed Gate 5 suite and AI-10 remain OPEN.
+
+### October 29 follow-up on the AI-enabled test deployment
+
+VEF revision 47, image
+`eseidinger/variability-engineering-framework@sha256:3187cc48a5f04fdfb2485194c58f2b12ac69703a15ee585f486b7418359aba89`,
+and ODIP revision 10 were ready. The maintainer created new protected VEF
+runs for unchanged `1.0.0` and corrected `1.0.1`. Result JSON and all three
+candidate pages for each run passed their respective complete 252-candidate
+oracles. Both runs recommended the same configuration, with 194 feasible
+candidates; annualized costs were 360.67 EUR and 365.64 EUR respectively.
+Across versions, candidate IDs, components, feasibility, constraints and all
+non-cost metrics matched by ID. Ranking changed as the corrected tariff changes
+annualized costs; each ranking matched its own oracle.
+
+On that deployment, the maintainer observed HTTP 422 for non-empty existing
+equipment (`existing_equipment_not_supported`), unknown version 9.9.9
+(`publication_not_found`) and failed version 1.0.90
+(`publication_not_published`). A new budget-zero run returned `INFEASIBLE`,
+0 of 252 feasible candidates, null recommendation and `NOT_APPLICABLE`
+optimality in protected JSON. A protected readback of the successful 1.0.1
+result after these tests was semantically identical to its earlier JSON export;
+the saved byte representations differed. The
+[sanitized October 29 evidence](evidence/2026-10-29-ai10-current-image-regression.json)
+records the run IDs, image and oracle pins, export hashes, checks and limits.
+These subcases pass; the complete unchanged deployed Gate 5 suite, AI-10 and
+final Gate 6 decision remain open.

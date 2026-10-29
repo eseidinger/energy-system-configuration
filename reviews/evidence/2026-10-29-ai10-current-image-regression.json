@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-29T07:58:32Z",
+  "scope": "AI-10 guided current-image regression in progress",
+  "contractKitVersion": "0.5.0",
+  "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b",
+  "vef": {
+    "project": "vareng-test",
+    "revision": 47,
+    "webImage": "eseidinger/variability-engineering-framework@sha256:3187cc48a5f04fdfb2485194c58f2b12ac69703a15ee585f486b7418359aba89",
+    "aiEnabled": true,
+    "model": "gpt-6.1-sol"
+  },
+  "odip": {
+    "project": "odip-test",
+    "revision": 10,
+    "webImage": "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+    "workerImage": "docker.io/eseidinger/odip-data-worker@sha256:6acce327d1b15fc0223dddeb7a0f5e1e0f397f3b71a9a7dfbb2ca357465eca02"
+  },
+  "source": "maintainer-saved protected VEF browser JSON; local oracle verifier; live Developer Platform status",
+  "runs": [
+    {
+      "version": "1.0.0",
+      "runId": "run-25477f46-3209-4cf0-a5b6-464de397b9e2",
+      "status": "SUCCEEDED",
+      "manifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715",
+      "recommendedConfigurationId": "pv-standard-400-q18-inverter-5kw-battery-10kwh-q1",
+      "evaluatedCandidateCount": 252,
+      "feasibleCandidateCount": 194,
+      "annualizedCostEUR": 360.67,
+      "optimalityStatus": "PROVEN_OPTIMAL",
+      "modelVersion": "energy-model/1.0.0",
+      "simulationVersion": "energy-simulation/1.0.0",
+      "optimizerVersion": "energy-optimizer/1.0.0",
+      "fullOracle": "PASS: result, 252 candidate metrics and constraints, feasible ranking and provenance",
+      "oracleSha256": "2f078373092a640e138649a2a589231ec6fd8a795538d18358f482481ac2a069",
+      "exportSha256": {
+        "page-0.json": "5e6e4494ee5972ed8319a6263934a46c457ec454b294e397d0847d599901355c",
+        "page-1.json": "828545f1e7f4637cb9aa5a6b67b6f0b934c0325de535f0e43ff38b8dee7f8e76",
+        "page-2.json": "d3b1921e71758efd191cb5030dd0c0f9206bc31e349b9f5e6cd8fa91dcf6ff8b",
+        "run.json": "8a5697e72cfdb28c473417ea887523721438409714b5871bb76b5d2d3c5bb57c"
+      }
+    },
+    {
+      "version": "1.0.1",
+      "runId": "run-ed2756a4-16f6-47f8-8d37-443b61c2c29f",
+      "status": "SUCCEEDED",
+      "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+      "recommendedConfigurationId": "pv-standard-400-q18-inverter-5kw-battery-10kwh-q1",
+      "evaluatedCandidateCount": 252,
+      "feasibleCandidateCount": 194,
+      "annualizedCostEUR": 365.64,
+      "optimalityStatus": "PROVEN_OPTIMAL",
+      "modelVersion": "energy-model/1.0.0",
+      "simulationVersion": "energy-simulation/1.0.0",
+      "optimizerVersion": "energy-optimizer/1.0.0",
+      "fullOracle": "PASS: result, 252 candidate metrics and constraints, feasible ranking and provenance",
+      "oracleSha256": "8b2f66dd5774c001017f7b3d6158c7999ee4a03bb80031eb5214b25faaeafc13",
+      "exportSha256": {
+        "page-0.json": "096d225c91dafbf4d3d2e7ce991c3a79359d582576411d90521d7c14cff70c50",
+        "page-1.json": "cfd4f83eaef857fb298c5bc58cf0ee2af4005be22429bd029537e973ac4a92eb",
+        "page-2.json": "79e97b73afe32060a24e87db97730e6077f189c028fdde68f93158f4de86456a",
+        "run.json": "0afb55eb689468b00e8f4d12a0d4f6db9706f79ea2737aff65b26d877d6bcde8"
+      }
+    }
+  ],
+  "crossVersionComparison": {
+    "status": "PASS",
+    "sameConfigurationIds": true,
+    "sameComponents": true,
+    "sameFeasibility": true,
+    "sameConstraints": true,
+    "sameNonCostMetrics": true,
+    "rankingChanged": true,
+    "rankingOfEachVersionMatchesOwnOracle": true
+  },
+  "caseDisposition": "AI-10 OPEN: current-image numerical, version-isolation, selected negative and retained-result subcases pass; complete unchanged deployed Gate 5 suite remains unrecorded",
+  "rawExports": "ignored local VEF target directory; hashes retained above",
+  "overallGate6Accepted": false,
+  "negativeBrowserObservations": [
+    {
+      "scenario": "non-empty existing equipment",
+      "datasetVersion": "1.0.1",
+      "input": "pv-standard-400",
+      "httpStatus": 422,
+      "errorCode": "existing_equipment_not_supported",
+      "source": "maintainer-reported protected VEF browser response",
+      "noRunIdIndependentlyVerified": false
+    },
+    {
+      "scenario": "unknown publication version",
+      "datasetVersion": "9.9.9",
+      "httpStatus": 422,
+      "errorCode": "publication_not_found",
+      "source": "maintainer-reported protected VEF browser response",
+      "noRunIdIndependentlyVerified": false
+    },
+    {
+      "scenario": "known failed publication version",
+      "datasetVersion": "1.0.90",
+      "httpStatus": 422,
+      "errorCode": "publication_not_published",
+      "schemaVersion": "error/v1",
+      "source": "maintainer-reported protected VEF browser response",
+      "noRunIdIndependentlyVerified": false
+    }
+  ],
+  "infeasibleRun": {
+    "runId": "run-51fe33ef-3b24-420e-a259-277a2ed6b468",
+    "status": "INFEASIBLE",
+    "datasetVersion": "1.0.1",
+    "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+    "evaluatedCandidateCount": 252,
+    "feasibleCandidateCount": 0,
+    "recommendedConfigurationId": null,
+    "optimalityStatus": "NOT_APPLICABLE",
+    "verification": "PASS: protected result JSON; no recommendation and 0 feasible candidates",
+    "exportSha256": "84c1dae52e1ff5d46b748c8da2073fdbb88877eba2e1e113b3f674c9e4fdc5a8"
+  },
+  "postNegativeReferenceReadback": {
+    "runId": "run-ed2756a4-16f6-47f8-8d37-443b61c2c29f",
+    "status": "PASS",
+    "jsonSemanticEquality": true,
+    "byteEquality": false,
+    "beforeSha256": "0afb55eb689468b00e8f4d12a0d4f6db9706f79ea2737aff65b26d877d6bcde8",
+    "afterSha256": "d818dd70940771474199469cab61ec075cd00aa22f5d7633e8b26bdf544368d2",
+    "source": "maintainer-saved protected VEF browser JSON before and after negative/infeasible tests"
+  }
+}
