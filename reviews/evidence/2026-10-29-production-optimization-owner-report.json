@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "production-optimization-owner-report/v1",
+  "reportDate": "2026-10-29",
+  "source": "Maintainer-provided VEF production result and dataset evidence views",
+  "deployment": {
+    "project": "vareng",
+    "revision": 17,
+    "releaseTag": "v1.0.0"
+  },
+  "observed": {
+    "runId": "run-e3ff36bd-755f-4c44-95f1-38854e3d1d7d",
+    "status": "SUCCEEDED",
+    "dataset": {
+      "datasetId": "energy-reference-wasserburg-am-inn-2024",
+      "version": "1.0.0",
+      "manifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715"
+    },
+    "modelVersion": "energy-model/1.0.0",
+    "simulationVersion": "energy-simulation/1.0.0",
+    "optimizerVersion": "energy-optimizer/1.0.0",
+    "optimalityStatus": "PROVEN_OPTIMAL",
+    "recommendedConfigurationId": "pv-standard-400-q18-inverter-5kw-battery-10kwh-q1",
+    "feasibleCandidateCount": 194,
+    "evaluatedCandidateCount": 252,
+    "recommendedCandidate": {
+      "annualizedCostEUR": 360.67,
+      "initialInvestmentEUR": 8240,
+      "selfSufficiency": 0.889509006
+    },
+    "provenanceWarning": "The 2024 calendar profile uses PVGIS 2023 values and a derived leap day; it is not an observed 2024 series."
+  },
+  "oracle": {
+    "path": "contract-kit/expected-results/optimization-reference.json",
+    "comparison": "All supplied dataset, version, status, recommendation, candidate-count, optimality and recommended-candidate metric fields match exactly. The live run ID is intentionally different from the oracle run ID."
+  },
+  "limits": [
+    "The observation was reported from the maintainer's authenticated VEF production browser view; this record is not an independent API response capture.",
+    "The customer request body and all 252 live candidate documents were not captured for this run.",
+    "The synthetic reference profile is not measured 2024 site data."
+  ]
+}

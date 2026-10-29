@@ -38,7 +38,7 @@ on October 19. Hosted AI-05/06/08/11 passed within their recorded limits;
 with explicit limits for this release. [DEC-13](decisions/DEC-13-bounded-gate-6-acceptance.md)
 accepts bounded Gate 6 for the test release with DEC-10/11/12 limits. Kit
 `1.0.0` is published under the maintainer's separate release authorization;
-[DEC-14](decisions/DEC-14-production-deployment-authorization.md) subsequently authorized the bounded production rollout. ODIP and VEF `v1.0.0` are deployed and ready on the [recorded production revisions](reviews/2026-10-29-production-deployment.md). The current release is limited to new installations under
+[DEC-14](decisions/DEC-14-production-deployment-authorization.md) subsequently authorized the bounded production rollout. ODIP and VEF `v1.0.0` are deployed and ready on the [recorded production revisions](reviews/2026-10-29-production-deployment.md); a maintainer-reported production optimization matches the reference oracle. The current release is limited to new installations under
 DEC-07; GAP-06 is closed by that scope decision.
 
 The [cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md)

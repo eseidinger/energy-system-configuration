@@ -69,8 +69,19 @@ retains its existing binding and outbound rules.
 Both versioned production applications are deployed and ready on the observed
 revisions. The same contract-kit 1.0.0 checksum is pinned in both source
 trees. The CI and Developer Platform observations establish release packaging,
-deployment and readiness; they do not establish a fresh authenticated
-end-to-end production optimization run or a new dataset publication.
+deployment and readiness. A subsequent authenticated production optimization
+was [reported by the maintainer](evidence/2026-10-29-production-optimization-owner-report.json):
+`run-e3ff36bd-755f-4c44-95f1-38854e3d1d7d` returned `SUCCEEDED`,
+`PROVEN_OPTIMAL`, 194 feasible of 252 evaluated candidates and recommendation
+`pv-standard-400-q18-inverter-5kw-battery-10kwh-q1`. Its dataset was
+`energy-reference-wasserburg-am-inn-2024` version `1.0.0`, manifest SHA-256
+`252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715`.
+Annualized cost was EUR 360.67, initial investment EUR 8,240 and
+self-sufficiency 0.889509006. All supplied result and evidence fields match
+the immutable kit 1.0.0 reference oracle exactly. The production run was
+observed through the maintainer's browser view; its API JSON and full live
+candidate list were not independently captured. No new production dataset
+publication was performed for this release.
 DEC-10/11/12 exceptions and the missing independent qualified domain review
 remain visible under DEC-14. User-visible energy results continue to disclose
 the synthetic 2024 reference-profile provenance and are not certified system
