@@ -41,6 +41,9 @@ records source revisions, current coverage and executed checks. The subsequent
 [gap analysis](reviews/2026-10-27-gap-analysis.md) assigns remaining implementation,
 scope and evidence work. Historical acceptance is preserved; it does not imply
 that every later regression or recovery scenario has been rerun.
+The [Gate 6 candidate review](reviews/2026-10-29-gate-6-release-candidate-review.md)
+collects current test deployment pins, case dispositions and the exact pending
+cross-project decision without granting release acceptance.
 
 ## Licensing
 
