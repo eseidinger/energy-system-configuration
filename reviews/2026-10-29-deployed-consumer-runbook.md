@@ -2,7 +2,9 @@
 
 This runbook reproduces the protected ODIP-to-VEF consumer test recorded in
 [the October 29 evidence](evidence/2026-10-29-deployed-consumer-regression.json).
-It does not publish a dataset, mutate ODIP responses or exercise recovery.
+The recorded run used its read-only consumer mode. An optional isolated mode
+can capture and publish a new synthetic source version. Neither mode mutates
+published bytes or exercises recovery.
 
 ## Preparation
 
@@ -31,6 +33,18 @@ checks does it create synthetic VEF runs. It verifies both complete oracles,
 idempotent replay and changed-body conflict, three 422 denials, a zero-budget
 infeasible result and unchanged completed-run JSON. It writes only a sanitized
 report with mode `600`.
+
+To include source capture and publication in the same invocation, pass
+`--odip-root` pointing to the ODIP checkout and `--isolated-version` with an
+unused `1.0.x` version of `energy-ai10-lineage-20261027`. The script verifies
+the dataset/source association, operator grant capability, pinned PVGIS source
+SHA-256 and all five generated artifacts before any write. It temporarily
+grants the existing scheduled worker `READ`, `INGEST` and `VALIDATE` on that
+isolated dataset only, captures the raw input, publishes and waits for
+validation, reads the raw bytes and published artifacts back, then revokes and
+checks the three grants before proceeding to the consumer tests. The operator
+session must have rights to manage that isolated dataset. A failed cleanup
+stops the suite and requires an operator to inspect that dataset's grants.
 
 The human ODIP operator session may receive `401 application_access_denied` on
 the service-consumer publication route. The script therefore checks ODIP bytes

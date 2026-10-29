@@ -3,7 +3,9 @@
 
 The sessions are read from owner-only Netscape cookie jars. No cookie, customer
 request, raw response, or AI completion is printed or written to the report.
-This suite does not publish datasets, mutate ODIP responses, or test recovery.
+With --odip-root, the suite also captures and publishes a fresh isolated
+synthetic source version with short-lived worker grants. It never mutates
+published bytes or tests recovery.
 """
 
 import argparse
@@ -15,9 +17,12 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
+import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 import time
 from urllib.parse import urlsplit
 import uuid
@@ -32,6 +37,9 @@ ZIP_SHA = "8fbb0cf6fb7d65da84be8ee554b5ae48abc808bd4cdb048787f99649d46e9d74"
 ORIGINAL_MANIFEST_SHA = "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715"
 ORIGINAL_ORACLE_SHA = "2f078373092a640e138649a2a589231ec6fd8a795538d18358f482481ac2a069"
 MOBILITY_MANIFEST_SHA = "f0d4f6b882c1a05154fb43283166953fda7a0dba7f2ed435dd7f46088663bbff"
+SOURCE_SHA = "d82aff39f867cb3cd77f7f355ec164b2d43c19d27bb86b13e87306885d082f29"
+ISOLATED_DATASET = "energy-ai10-lineage-20261027"
+WORKER_PRINCIPAL = "prn_539e69affc154cd7a08e91c5c262f8c3"
 MAX_RESPONSE = 4 * 1024 * 1024
 
 
@@ -197,6 +205,103 @@ def capture_pages(client, origin, run_id):
     return pages
 
 
+def isolated_source_publication(client, origin, kit, odip_root, original_artifacts, version):
+    """Capture pinned raw input and publish a fresh isolated version, with scoped grants."""
+    sys.path.insert(0, str(odip_root / "workers/data-worker/src"))
+    from odip_worker.contract import canonical_bytes, load_json
+    from odip_worker.energy.profile import reference_outputs
+    from odip_worker.fixtures import publish_fixture
+
+    registered = request(client, "GET", origin + "/api/datasets", 200).json()
+    matches = [item for item in registered if item.get("name") == ISOLATED_DATASET]
+    if len(matches) != 1 or len(matches[0].get("sources", [])) != 1:
+        raise ValueError("Isolated dataset or its single source is absent")
+    dataset = matches[0]
+    if dataset["sources"][0].get("name") != ENERGY:
+        raise ValueError("Isolated dataset source differs")
+    dataset_id = dataset["id"]
+    capabilities = request(client, "GET", origin + "/api/v1/operator-capabilities", 200).json()
+    if not capabilities.get("manageGrants") or dataset_id not in capabilities.get("writableDatasetIds", []):
+        raise ValueError("Operator lacks isolated dataset and grant capabilities")
+    drafts = request(client, "GET", origin + "/api/v1/publication-drafts", 200).json()
+    if any(draft.get("manifest", {}).get("datasetId") == ISOLATED_DATASET
+           and draft.get("manifest", {}).get("version") == version for draft in drafts):
+        raise ValueError("Isolated version already exists; use a fresh version")
+    grant_url = f"{origin}/api/v1/dataset-grants/{dataset_id}"
+    grants = request(client, "GET", grant_url, 200).json()
+    required = ("READ", "INGEST", "VALIDATE")
+    if any(item.get("principalId") == WORKER_PRINCIPAL and item.get("permission") in required
+           for item in grants):
+        raise ValueError("Worker already has temporary rights; inspect before running")
+    source = kit / "fixtures" / ENERGY / "source/pvgis-era5-wasserburg-2023.json"
+    raw = source.read_bytes()
+    if digest(raw) != SOURCE_SHA:
+        raise ValueError("Pinned source JSON checksum differs")
+    generated = reference_outputs(load_json(source))
+    for artifact_id, expected in original_artifacts.items():
+        if canonical_bytes(generated[artifact_id]) != expected:
+            raise ValueError(f"Generated source artifact differs: {artifact_id}")
+
+    with tempfile.TemporaryDirectory(prefix="energy-ai10-lineage-") as temporary:
+        folder = Path(temporary) / ISOLATED_DATASET
+        shutil.copytree(kit / "fixtures" / ENERGY, folder)
+        manifest_path = folder / "manifest.json"
+        manifest = load_json(manifest_path)
+        manifest["datasetId"] = ISOLATED_DATASET
+        manifest["version"] = version
+        expected_manifest = canonical_bytes(manifest)
+        manifest_path.write_bytes(expected_manifest)
+        added = []
+        try:
+            for permission in required:
+                request(client, "PUT", grant_url, 204,
+                        json={"principalId": WORKER_PRINCIPAL, "permission": permission})
+                added.append(permission)
+            prepared = publish_fixture(origin, folder, client)
+            draft_url = f"{origin}/api/v1/publication-drafts/{prepared['id']}"
+            deadline = time.monotonic() + 240
+            while time.monotonic() < deadline:
+                published = request(client, "GET", draft_url, 200).json()
+                if published["status"] == "PUBLISHED":
+                    break
+                if published["status"] == "FAILED":
+                    raise ValueError("Isolated ODIP publication validation failed")
+                time.sleep(3)
+            else:
+                raise ValueError("Isolated ODIP publication did not complete within 240 seconds")
+            if published["manifestSha256"] != digest(expected_manifest):
+                raise ValueError("Isolated publication manifest digest differs")
+            inputs = published.get("inputArtifacts", [])
+            if len(inputs) != 1 or inputs[0].get("sha256") != SOURCE_SHA:
+                raise ValueError("Isolated publication does not link one pinned raw input")
+            raw_id = inputs[0]["rawArtifactId"]
+            content = request(client, "GET", f"{origin}/api/raw-artifacts/{raw_id}/content", 200).content
+            if content != raw:
+                raise ValueError("Isolated raw-input readback differs")
+            artifact_result = publication(client, origin, [published], ISOLATED_DATASET, version,
+                                          expected_manifest, original_artifacts)
+            result = {**artifact_result, "rawArtifactId": raw_id,
+                      "capturePipelineRunId": inputs[0]["pipelineRunId"],
+                      "rawInputSha256": SOURCE_SHA, "rawBytes": len(raw),
+                      "workerPrincipal": WORKER_PRINCIPAL}
+        finally:
+            cleanup_errors = []
+            for permission in reversed(added):
+                try:
+                    request(client, "DELETE", grant_url, 204,
+                            params={"principalId": WORKER_PRINCIPAL, "permission": permission})
+                except (ValueError, requests.RequestException):
+                    cleanup_errors.append(permission)
+            if cleanup_errors:
+                raise ValueError("Temporary worker grants could not all be revoked")
+        remaining = request(client, "GET", grant_url, 200).json()
+        if any(item.get("principalId") == WORKER_PRINCIPAL and item.get("permission") in required
+               for item in remaining):
+            raise ValueError("Temporary worker rights remain after cleanup")
+        result["temporaryWorkerGrantsRemoved"] = True
+        return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--vef-cookie-file", type=Path, required=True)
@@ -207,9 +312,15 @@ def main():
     parser.add_argument("--expected-vef-image", required=True)
     parser.add_argument("--expected-odip-web-image", required=True)
     parser.add_argument("--expected-odip-worker-image", required=True)
+    parser.add_argument("--odip-root", type=Path,
+                        help="ODIP checkout; enables isolated raw-input capture and publication")
+    parser.add_argument("--isolated-version", default="1.0.1",
+                        help="Fresh version for the isolated lineage dataset (default: 1.0.1)")
     args = parser.parse_args()
     if args.report.exists() or not args.report.parent.is_dir():
         raise ValueError("Use a new report path in an existing private directory")
+    if args.odip_root and (not args.odip_root.is_dir() or not re.fullmatch(r"1\.0\.[0-9]+", args.isolated_version)):
+        raise ValueError("Isolated publication requires an ODIP checkout and a fresh 1.0.x version")
     os.umask(0o077)
     vef_deployment = deployment("vareng-test", {"web": args.expected_vef_image}, ai_required=True)
     odip_deployment = deployment("odip-test", {"web": args.expected_odip_web_image,
@@ -222,13 +333,18 @@ def main():
     if digest(archive_path.read_bytes()) != ZIP_SHA:
         raise ValueError("Corrected acceptance fixture archive checksum differs")
     verifier = load_verifier(args.vef_root / "scripts/verify-deployed-energy-oracle.py")
+    scope = ("protected deployed ODIP source capture plus VEF consumer regression; recovery excluded"
+             if args.odip_root else "protected deployed ODIP-to-VEF consumer regression; source ingest and recovery excluded")
     report = {"schemaVersion": 1, "startedAtUtc": datetime.now(timezone.utc).isoformat(),
-              "scope": "protected deployed ODIP-to-VEF consumer regression; source ingest and recovery excluded",
+              "scope": scope,
               "fixtureArchiveSha256": ZIP_SHA, "vefDeployment": vef_deployment,
               "odipDeployment": odip_deployment, "publications": [], "runs": [], "negativeCases": {}}
     with zipfile.ZipFile(archive_path) as archive:
         original = fixture(args.kit, archive, "1.0.0")
         corrected = fixture(args.kit, archive, "1.0.1")
+        if args.odip_root:
+            report["isolatedSourcePublication"] = isolated_source_publication(
+                odip, odip_origin, args.kit, args.odip_root, original[1], args.isolated_version)
         drafts = request(odip, "GET", odip_origin + "/api/v1/publication-drafts", 200).json()
         if not isinstance(drafts, list):
             raise ValueError("ODIP operator publication list has invalid shape")
