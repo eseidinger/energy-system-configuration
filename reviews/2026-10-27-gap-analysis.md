@@ -59,6 +59,10 @@ boundaries, budget-zero infeasibility and retained success in one execution.
 It excludes new source ingestion/publication, live ODIP read mutation and the
 DEC-10/11 operational exceptions, so AI-10 remains OPEN rather than being
 reclassified by this narrower PASS.
+The [remaining-acceptance review aid](2026-10-29-ai10-remaining-acceptance.md)
+sets out the exact evidence and the choice between a newly specified full
+suite and an explicit scope decision; the October 17 Gate 5 acceptance did
+not supply a historical executable suite to rerun unchanged.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
