@@ -1,12 +1,12 @@
-# Contract kit 1.0.0 candidate compatibility notes
+# Contract kit 1.0.0 compatibility notes
 
-**Status:** Candidate for cross-project review; not tagged or published.
+**Status:** Released after bounded Gate 6 acceptance under DEC-13.
 
-This candidate keeps the schemas, OpenAPI descriptions, fixture bytes, expected
+This release keeps the schemas, OpenAPI descriptions, fixture bytes, expected
 numerical results, model and simulation semantics, and AI contract behavior of
 the released `0.5.0` kit. The version, release documentation and scope notes
-are the proposed changes. Existing `0.5.0` consumer locks remain valid until
-coordinated adoption of a published `1.0.0` archive and checksum.
+are the only changes. Existing `0.5.0` consumer locks remain valid until
+coordinated adoption of the `1.0.0` archive and checksum.
 
 For the bounded first release, [DEC-07](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-07-new-equipment-release-scope.md)
 limits optimization to new equipment. A nonempty `existingComponentIds` request
@@ -23,7 +23,7 @@ and [DEC-12](https://github.com/eseidinger/energy-system-configuration/blob/main
 These decisions classify specified tests and limits for this release; they do
 not modify the data contracts or claim that excepted tests passed.
 
-Publishing this candidate requires the separate Gate 6 owner decision,
-deterministic archive and checksum validation, an annotated immutable tag, and
-coordinated consumer pins. No publication or production authorization is
-implied by this candidate.
+The [DEC-13 decision](https://github.com/eseidinger/energy-system-configuration/blob/main/decisions/DEC-13-bounded-gate-6-acceptance.md)
+accepts the bounded test release with the DEC-10/11/12 limits. It does not
+authorize production deployment. Consumers must pin the exact published
+archive checksum before adopting this version.

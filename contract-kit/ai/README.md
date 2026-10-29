@@ -98,7 +98,7 @@ egress, depending on the chosen VEF integration.
 ## Version and release handoff
 
 This AI profile first appeared in the immutable `0.5.0` implementation handoff.
-The `1.0.0` candidate retains it without schema, API or numerical changes.
+The `1.0.0` release retains it without schema, API or numerical changes.
 Existing immutable `0.4.0` and `0.5.0` archives and consumer pins remain valid.
 VEF and ODIP adopt a newly released archive and checksum only through a
 coordinated handoff. No numerical fixture or expected result is changed.
