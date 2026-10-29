@@ -14,11 +14,14 @@ and does not grant final acceptance or silently waive other requirements.
 [DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md). AI-10 is
 ACCEPTED_WITH_LIMITATIONS for this release. The later
 [DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md) accepts Gate 6 for
-the bounded test release with DEC-10/11/12 limits. Kit 1.0.0 publication and
-production deployment remain separate, unauthorized actions. Earlier OPEN
-statements below describe the state when each test or review was recorded.
+the bounded test release with DEC-10/11/12 limits. Kit 1.0.0 was subsequently
+published, and ODIP/VEF v1.0.0 were deployed to production under DEC-14. The
+bounded [Gate 6 is closed with limitations](2026-10-29-gate-6-closure.md).
+Earlier OPEN and unauthorized statements below describe the state when each
+test or review was recorded.
 
-**P1** blocks a claim of complete use-case / Gate 6 release acceptance.
+**P1** marks evidence or scope gaps for an unrestricted later release; the
+bounded 1.0.0 Gate 6 closure explicitly retains these limits.
 **P2** is operational or usability follow-up that must be resolved or explicitly
 scoped for the release. Priorities indicate execution order, not new due dates.
 Owners below are responsible project roles, not new individual assignments.

@@ -9,7 +9,9 @@ Variability Engineering Framework (VEF), and Open Data Intelligence Platform
 ACCEPTED_WITH_LIMITATIONS for this release; the later
 [DEC-13](../decisions/DEC-13-bounded-gate-6-acceptance.md) accepts bounded
 Gate 6 with DEC-10/11/12 limits. The older
-case counts and OPEN statements below are historical review checkpoints.
+case counts and OPEN statements below are historical review checkpoints. Kit
+1.0.0 and application v1.0.0 were subsequently released; the bounded
+[Gate 6 is closed with limitations](2026-10-29-gate-6-closure.md).
 
 The bounded new-equipment workflow and AI assistance are implemented. Gate 5
 remains accepted by maintainer direction; ODIP's publication handoff also remains

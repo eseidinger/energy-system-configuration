@@ -25,6 +25,7 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [Production authorization](decisions/DEC-14-production-deployment-authorization.md) — separate maintainer approval for the bounded VEF and ODIP production rollout.
 - [Production deployment record](reviews/2026-10-29-production-deployment.md) — versioned application releases, CI, image digests and observed readiness.
 - [Gate 6 closure](reviews/2026-10-29-gate-6-closure.md) — final bounded-release disposition and retained evidence limits.
+- [Cross-project documentation review](reviews/2026-10-29-cross-project-documentation-consistency.md) — reconciled ESC, ODIP and VEF status and historical checkpoints.
 - [Shared contract kit](contract-kit/) — executable schemas, APIs, examples, fixtures, expected results, and validation tests.
 
 The documents intentionally separate why the integration exists, what participating systems must guarantee, and how the teams should deliver it.

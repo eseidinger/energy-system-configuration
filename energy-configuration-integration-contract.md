@@ -7,13 +7,13 @@
 
 This contract implements the behavior described in the [use case definition](energy-configuration-use-case.md). Delivery order, repository work packages, and integration gates are defined in the [integration plan](energy-configuration-integration-plan.md). Use-case intent belongs in the use case definition; delivery status belongs in the plan. This document is limited to testable obligations at project boundaries.
 
-Version 0.5 applies the maintainer-approved [DEC-07](decisions/DEC-07-new-equipment-release-scope.md): the current release covers new equipment only. It supersedes the existing-equipment obligations in prose version 0.4 for this release. It also records [DEC-08](decisions/DEC-08-complete-calendar-year.md): energy optimization requires a complete UTC calendar year. Published kit 0.5.0 and consumer pins remain immutable; both decisions must accompany the next shared-kit release before final acceptance.
+Historical prose version 0.5 applied the maintainer-approved [DEC-07](decisions/DEC-07-new-equipment-release-scope.md): this release covers new equipment only. It superseded the existing-equipment obligations in prose version 0.4 for this release. It also recorded [DEC-08](decisions/DEC-08-complete-calendar-year.md): energy optimization requires a complete UTC calendar year. At that checkpoint, published kit 0.5.0 and consumer pins were unchanged; both decisions were subsequently included in released kit 1.0.0.
 
-Version 0.6 additionally applies [DEC-10](decisions/DEC-10-current-release-recovery-test-exception.md): the maintainer accepts this current release without an isolated joint backup/restore test. This explicit exception supersedes the restore-execution acceptance clauses below for this release only; backup, retention and access duties remain. Restoration is unverified, and all other open acceptance cases remain open. Released kit 0.5.0 and consumer pins are unchanged.
+Historical prose version 0.6 additionally applied [DEC-10](decisions/DEC-10-current-release-recovery-test-exception.md): the maintainer accepted this release without an isolated joint backup/restore test. This explicit exception supersedes the restore-execution acceptance clauses below for this release only; backup, retention and access duties remain. Restoration remains unverified. At that checkpoint, released kit 0.5.0 and consumer pins were unchanged; later decisions resolved the other current-release acceptance cases separately.
 
 Version 0.7 applies [DEC-11](decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md): the maintainer accepts the remaining listed non-AI acceptance points without further verification for this release. Their status is ACCEPTED_EXCEPTION; unperformed tests are not PASS. The AI cases are outside the exception, including their own evidence obligations; see the guided record for subsequent test dispositions. Together with DEC-10, this supersedes additional non-AI release-check requirements below without removing implemented controls or authorizing publication/deployment.
 
-Subsequently, the maintainer approved [DEC-12](decisions/DEC-12-proposed-ai10-equivalent-regression.md): AI-10 is ACCEPTED_WITH_LIMITATIONS for the current bounded release. [DEC-13](decisions/DEC-13-bounded-gate-6-acceptance.md) accepts Gate 6/`VEF-05` for the bounded test release with DEC-10/11/12 limits. These decisions do not change the contract schema or immutable kit 0.5.0; the merged kit 1.0.0 candidate is not published and production deployment is not authorized.
+At the later DEC-13 checkpoint, the maintainer had approved [DEC-12](decisions/DEC-12-proposed-ai10-equivalent-regression.md): AI-10 is ACCEPTED_WITH_LIMITATIONS for the current bounded release. [DEC-13](decisions/DEC-13-bounded-gate-6-acceptance.md) accepted Gate 6/`VEF-05` for the bounded test release with DEC-10/11/12 limits. These decisions did not change the contract schema or immutable kit 0.5.0; kit 1.0.0 publication and production deployment were separately authorized afterward.
 
 **Current release update (2026-10-29):** After DEC-13, the maintainer separately authorized publication. [Contract kit 1.0.0](reviews/2026-10-29-contract-kit-1.0.0-release.md) is now published and pinned by ODIP and VEF. The preceding paragraph records the state at the time of DEC-13; the accepted evidence limits still apply. At publication, production deployment had not yet been authorized.
 The maintainer subsequently granted separate [bounded production authorization](decisions/DEC-14-production-deployment-authorization.md). The accepted evidence limits and the normative v1 wire contract remain unchanged.
@@ -86,7 +86,7 @@ ODIP publication is asynchronous. VEF pins one published dataset version at the 
 
 ### 3.1 Publication and retrieval
 
-ODIP MUST expose a generic `DatasetPublication` for any dataset that has passed its applicable validation policy. The proposed read endpoints contain no domain name:
+ODIP MUST expose a generic `DatasetPublication` for any dataset that has passed its applicable validation policy. The implemented read endpoints contain no domain name:
 
 | Method and path | Purpose | Access |
 | --- | --- | --- |
@@ -94,7 +94,7 @@ ODIP MUST expose a generic `DatasetPublication` for any dataset that has passed 
 | `GET /api/v1/datasets/{datasetId}/versions/{version}` | Retrieve an immutable publication manifest. | Approved platform reader group and ODIP dataset allow-list |
 | `GET /api/v1/datasets/{datasetId}/versions/{version}/artifacts/{artifactId}` | Download one immutable artifact by ID. | Approved platform reader group and ODIP dataset allow-list |
 
-ODIP returns `ETag` equal to the manifest or artifact SHA-256 digest and supports conditional retrieval with `If-None-Match`. A version missing from the catalog returns `404`; a version that exists but is not published returns `409 dataset_version_not_published`; lack of authority returns `401` or `403`. ODIP must not return a partially published dataset version. These routes are proposed extensions of the current dataset catalog and version APIs, not claims that they already exist.
+ODIP returns `ETag` equal to the manifest or artifact SHA-256 digest and supports conditional retrieval with `If-None-Match`. A version missing from the catalog returns `404`; a version that exists but is not published returns `409 dataset_version_not_published`; lack of authority returns `401` or `403`. ODIP must not return a partially published dataset version. The generic publication routes are implemented in the accepted ODIP handoff.
 
 The manifest is a small generic JSON document. `schemaRef` identifies the domain contract; `metadata` and artifact `role` values are interpreted by the referenced schema, not by the ODIP core. Large data artifacts are downloaded separately. The example below shows a publication using the energy profile; its values are illustrative rather than real measurements or usable checksums:
 
