@@ -553,5 +553,11 @@ result after these tests was semantically identical to its earlier JSON export;
 the saved byte representations differed. The
 [sanitized October 29 evidence](evidence/2026-10-29-ai10-current-image-regression.json)
 records the run IDs, image and oracle pins, export hashes, checks and limits.
+The maintainer then generated an AI explanation for the new corrected run and
+confirmed that the rendered output states the recorded optimality, 194/252
+count, 365.64 EUR cost, recommendation and synthetic-profile warning correctly.
+The protected run JSON remained semantically identical after that AI call.
+This rendered review does not establish the raw provider response or every
+citation value; those have separate earlier AI-05/06 evidence.
 These subcases pass; the complete unchanged deployed Gate 5 suite, AI-10 and
 final Gate 6 decision remain open.

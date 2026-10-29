@@ -74,7 +74,7 @@
     "rankingChanged": true,
     "rankingOfEachVersionMatchesOwnOracle": true
   },
-  "caseDisposition": "AI-10 OPEN: current-image numerical, version-isolation, selected negative and retained-result subcases pass; complete unchanged deployed Gate 5 suite remains unrecorded",
+  "caseDisposition": "AI-10 OPEN: current-image numerical, version-isolation, selected negative, infeasible, result-retention and rendered-AI subcases pass; complete unchanged deployed Gate 5 suite remains unrecorded",
   "rawExports": "ignored local VEF target directory; hashes retained above",
   "overallGate6Accepted": false,
   "negativeBrowserObservations": [
@@ -125,5 +125,23 @@
     "beforeSha256": "0afb55eb689468b00e8f4d12a0d4f6db9706f79ea2737aff65b26d877d6bcde8",
     "afterSha256": "d818dd70940771474199469cab61ec075cd00aa22f5d7633e8b26bdf544368d2",
     "source": "maintainer-saved protected VEF browser JSON before and after negative/infeasible tests"
+  },
+  "hostedAiExplanation": {
+    "runId": "run-ed2756a4-16f6-47f8-8d37-443b61c2c29f",
+    "source": "maintainer-reported rendered VEF explanation; no raw provider response captured",
+    "status": "SUCCESS",
+    "reportedCorrectFacts": [
+      "PROVEN_OPTIMAL",
+      "194 feasible of 252 evaluated",
+      "annualized cost 365.64 EUR",
+      "recommended configuration pv-standard-400-q18-inverter-5kw-battery-10kwh-q1",
+      "synthetic PVGIS 2023 values used in 2024 profile"
+    ],
+    "storedResultAfterAi": {
+      "status": "PASS",
+      "jsonSemanticEquality": true,
+      "byteEquality": false,
+      "afterSha256": "d818dd70940771474199469cab61ec075cd00aa22f5d7633e8b26bdf544368d2"
+    }
   }
 }
