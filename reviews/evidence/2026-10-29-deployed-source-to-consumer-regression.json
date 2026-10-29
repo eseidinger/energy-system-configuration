@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "startedAtUtc": "2026-10-29T10:44:40.214059+00:00",
+  "scope": "protected deployed ODIP source capture plus VEF consumer regression; recovery excluded",
+  "fixtureArchiveSha256": "8fbb0cf6fb7d65da84be8ee554b5ae48abc808bd4cdb048787f99649d46e9d74",
+  "vefDeployment": {
+    "project": "vareng-test",
+    "revision": 51,
+    "images": {
+      "web": "eseidinger/variability-engineering-framework@sha256:eeb22d874e2a0912a939a8a0e7b5a47a115699b12afbf05544838f9ba0c0c1d6"
+    }
+  },
+  "odipDeployment": {
+    "project": "odip-test",
+    "revision": 10,
+    "images": {
+      "web": "docker.io/eseidinger/odip-platform@sha256:bf4648d452a4542cf18fda6d1d5b5b0b3b8a2fd600ce460e5594df988fd6ebef",
+      "ingestion-worker": "docker.io/eseidinger/odip-data-worker@sha256:6acce327d1b15fc0223dddeb7a0f5e1e0f397f3b71a9a7dfbb2ca357465eca02"
+    }
+  },
+  "publications": [
+    {
+      "datasetId": "energy-reference-wasserburg-am-inn-2024",
+      "version": "1.0.0",
+      "draftId": "c123b9fc-75a3-4c9a-a662-e9114e845d34",
+      "manifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715",
+      "artifactCount": 5,
+      "operatorBytesAndDigests": "PASS"
+    },
+    {
+      "datasetId": "energy-reference-wasserburg-am-inn-2024",
+      "version": "1.0.1",
+      "draftId": "a997f9af-1add-45e3-af3d-aeae9b9fbd2a",
+      "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+      "artifactCount": 5,
+      "operatorBytesAndDigests": "PASS"
+    },
+    {
+      "datasetId": "non-energy-mobility-counts-2024",
+      "version": "1.0.0",
+      "draftId": "9408c8eb-07ee-4057-9669-1df444b478c0",
+      "manifestSha256": "f0d4f6b882c1a05154fb43283166953fda7a0dba7f2ed435dd7f46088663bbff",
+      "artifactCount": 1,
+      "operatorBytesAndDigests": "PASS"
+    }
+  ],
+  "runs": [
+    {
+      "version": "1.0.0",
+      "runId": "run-eacb4949-24e6-44d7-b5e7-8325c8476c12",
+      "manifestSha256": "252b90b18b594a764a2744ba133a8db56b233e9e375301befc7616e9c18c1715",
+      "status": "SUCCEEDED",
+      "fullOracle": "PASS",
+      "candidateCount": 252,
+      "feasibleCount": 194,
+      "idempotentReplay": "PASS",
+      "changedBodyConflict": "PASS"
+    },
+    {
+      "version": "1.0.1",
+      "runId": "run-da796a9e-4af6-4165-9d99-be1b8fcce4d1",
+      "manifestSha256": "ebfd2cc7dcdf73cef4ed81a94b693ec23c4448460c8161ca648369ea0a930f93",
+      "status": "SUCCEEDED",
+      "fullOracle": "PASS",
+      "candidateCount": 252,
+      "feasibleCount": 194,
+      "idempotentReplay": "PASS",
+      "changedBodyConflict": "PASS"
+    },
+    {
+      "version": "1.0.1",
+      "runId": "run-04390b49-621f-4b99-b08e-5f340c0eae12",
+      "status": "INFEASIBLE",
+      "feasibleCount": 0,
+      "candidateCount": 252,
+      "recommendation": null,
+      "optimality": "NOT_APPLICABLE"
+    }
+  ],
+  "negativeCases": {
+    "existingEquipment": {
+      "status": 422,
+      "code": "existing_equipment_not_supported",
+      "runIdInResponse": false
+    },
+    "unknownVersion": {
+      "status": 422,
+      "code": "publication_not_found",
+      "runIdInResponse": false
+    },
+    "failedVersion": {
+      "status": 422,
+      "code": "publication_not_published",
+      "runIdInResponse": false
+    }
+  },
+  "isolatedSourcePublication": {
+    "datasetId": "energy-ai10-lineage-20261027",
+    "version": "1.0.1",
+    "draftId": "5c420f42-ec99-4fae-a5c6-73b448d57f62",
+    "manifestSha256": "60eaaf090783e738887715c91e82a3808240e2e1b9d505783a737d5fd14caaa6",
+    "artifactCount": 5,
+    "operatorBytesAndDigests": "PASS",
+    "rawArtifactId": "b4e7cf6a-f899-4751-9d8c-dedc6089cad7",
+    "capturePipelineRunId": "d4d0fd5b-c14e-4aa2-8359-df1ed8ed37af",
+    "rawInputSha256": "d82aff39f867cb3cd77f7f355ec164b2d43c19d27bb86b13e87306885d082f29",
+    "rawBytes": 824681,
+    "workerPrincipal": "prn_539e69affc154cd7a08e91c5c262f8c3",
+    "temporaryWorkerGrantsRemoved": true
+  },
+  "completedRunUnchanged": true,
+  "completedAtUtc": "2026-10-29T10:46:07.370438+00:00",
+  "status": "PASS",
+  "contractKitVersion": "0.5.0",
+  "contractKitArchiveSha256": "ae4edaf6799d4b57510d14d2004c5b65ff6b05f3b225e96bbd5971b30ce8832b",
+  "rawLocalReportSha256": "3e18db132ab35acefc6c8abd99d0bee60e4550b0ca1d888e325618b7f21e8416",
+  "scriptSha256": "fe9dd485688480aa469af5da0a218c6af7a1d9d4a7a259fa325c9348666bf722",
+  "scriptCommit": "2970cd0",
+  "cleanupIndependentReadback": "PASS: protected ODIP draft remains PUBLISHED; no worker READ, INGEST or VALIDATE grant on isolated dataset",
+  "sessionHandling": {
+    "odipAndVefCookieFilesRemoved": true,
+    "windowsClipboardClearedAfterEachCapture": true,
+    "noCookieValueInReport": true
+  },
+  "limitations": [
+    "This is a newly implemented suite; Gate 5 was accepted on maintainer authority without a historical executable suite, so the unchanged historical suite cannot literally be rerun.",
+    "The new raw-input publication used a separate isolated synthetic dataset; immutable standard energy reference versions 1.0.0 and 1.0.1 were read, not republished.",
+    "Live ODIP read responses were not mutated. The separate private VEF probe covers byte, unit, missing-hour, schema and unpublished boundaries using in-memory ODIP transport.",
+    "Recovery and additional operational checks retain DEC-10/11 current-release exceptions, not PASS.",
+    "The three 422 response envelopes contained no run ID; an independent run inventory was not queried."
+  ],
+  "caseDisposition": "AI-10 OPEN pending explicit acceptance of this newly specified deployed suite as equivalent to the unavailable historical unchanged Gate 5 suite, or execution of a clean full Gate 5 baseline",
+  "overallGate6Accepted": false
+}

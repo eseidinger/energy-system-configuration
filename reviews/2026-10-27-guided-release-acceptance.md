@@ -603,3 +603,44 @@ Gate 5 suite: the already recorded isolated source capture was not repeated
 inside this invocation, live ODIP read bytes were not mutated, and DEC-10/11
 still classify their stated recovery and non-AI operational checks. AI-10 and
 Gate 6 remain OPEN.
+
+### October 29 isolated source-to-consumer regression: PASS within scope
+
+The extended runner completed one new automated invocation on AI-enabled VEF
+revision 51, image
+`eeb22d874e2a0912a939a8a0e7b5a47a115699b12afbf05544838f9ba0c0c1d6`,
+and ODIP revision 10. Before writing, it checked the isolated dataset/source,
+unused `1.0.1` version, operator rights, absent worker grants, pinned PVGIS
+source SHA-256 and all five locally generated artifacts. It temporarily granted
+the ODIP worker `READ`, `INGEST` and `VALIDATE` on that dataset only, captured
+the raw input through ODIP's reference-input API, uploaded and published the
+isolated draft, and waited for worker validation.
+
+ODIP published draft `5c420f42-ec99-4fae-a5c6-73b448d57f62` with canonical
+manifest SHA-256
+`60eaaf090783e738887715c91e82a3808240e2e1b9d505783a737d5fd14caaa6`.
+It links raw artifact `b4e7cf6a-f899-4751-9d8c-dedc6089cad7`, capture run
+`d4d0fd5b-c14e-4aa2-8359-df1ed8ed37af`. Protected readback matched all
+824,681 pinned raw bytes and all five published artifact bytes. The runner
+revoked the temporary grants before continuing; an independent ODIP readback
+confirmed both `PUBLISHED` and no remaining worker grant.
+
+In the same invocation, it read all three standard energy/non-energy
+publications with eleven matching artifact bytes and created new VEF runs
+`run-eacb4949-24e6-44d7-b5e7-8325c8476c12` (`1.0.0`) and
+`run-da796a9e-4af6-4165-9d99-be1b8fcce4d1` (`1.0.1`). Each result and all
+252 candidates passed its complete independent oracle. Idempotent replay,
+changed-body conflict, three 422 denials, zero-budget infeasibility and
+unchanged corrected-run JSON also passed. The
+[sanitized report](evidence/2026-10-29-deployed-source-to-consumer-regression.json)
+pins all images, IDs, hashes, timing, rights cleanup and remaining limits.
+Both temporary browser cookie files and clipboard contents were removed.
+
+This is a newly specified equivalent suite, because the October 17 Gate 5
+acceptance had no historical executable suite to rerun. The source publication
+used a separate synthetic dataset and live ODIP read bytes were not mutated;
+the private VEF probe covers that invalid-content boundary with in-memory
+transport. [Proposed DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md)
+offers explicit current-release acceptance with these limits. Until the
+maintainer approves it or requires a literal clean-baseline test, AI-10 and
+Gate 6 remain OPEN.

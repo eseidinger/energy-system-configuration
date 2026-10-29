@@ -23,6 +23,7 @@ The following execution evidence exists:
 | ODIP raw source to isolated publication | [October 27 lineage](evidence/2026-10-27-ai10-isolated-lineage.json) | Pinned PVGIS JSON, linked raw artifact, validation, publication and five artifact bytes PASS. It used a new synthetic dataset, not the immutable standard versions. |
 | VEF protected numerical and AI checks | [October 29 current-image record](evidence/2026-10-29-ai10-current-image-regression.json) | Both 252-candidate oracles, selected 422 boundaries, infeasibility, stored-result stability and rendered explanation PASS; private ten-check verifier/client probe PASS on its pinned image. The private transport was in memory. |
 | ODIP-to-VEF deployed consumer path | [single consumer report](evidence/2026-10-29-deployed-consumer-regression.json) | One automated invocation checked three published manifests, eleven artifact bytes, two new full VEF oracles, idempotency, three 422 denials, infeasibility and retained success. It read existing publications and did not ingest a new source. |
+| New isolated source-to-consumer suite | [single source-to-consumer report](evidence/2026-10-29-deployed-source-to-consumer-regression.json) | One automated invocation on AI-enabled VEF revision 51 and ODIP revision 10 captured pinned PVGIS raw bytes, published an isolated 1.0.1 with five matching artifacts, removed the scoped worker grants, read all three standard publications and ran two new full VEF oracles plus idempotency, denials, infeasibility and retained-state checks. The new source publication was isolated; immutable standard versions were not republished. |
 | Recovery and additional operational checks | [DEC-10](../decisions/DEC-10-current-release-recovery-test-exception.md), [DEC-11](../decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md) | Current-release exceptions, not test PASS. The exceptions do not automatically accept AI-10. |
 
 The VEF source difference from implementation commit `5cb913f` through
@@ -32,18 +33,20 @@ equivalence must not be reported as a same-image execution.
 
 ## Exact remaining choice
 
-1. **Execute a newly specified full deployed suite.** Create a clean isolated
-   dataset/identity setup, ingest and publish source fixtures, then run the
-   consumer, negative, AI and retained-state checks in one traceable harness.
-   Keep DEC-10/11 exceptions explicit. This would be a new suite, because an
-   unchanged historical executable Gate 5 suite does not exist. A live ODIP
-   read-response mutation would need a safe test seam or an isolated fake
-   transport; immutable published bytes must not be altered in place.
-2. **Accept the assembled evidence as an explicit AI-10 scope decision.** The
-   decision must name the separated source-ingestion proof, the single deployed
-   consumer run, the private fake-transport limit, the doc-only VEF image
-   changes and the DEC-10/11 exceptions. It may accept the release with that
-   limitation but must not claim that the unchanged full Gate 5 suite ran.
+1. **Accept the newly executed equivalent suite with explicit limits.** The
+   owner can accept the single isolated source-to-consumer run together with
+   the separate private invalid-content probe and DEC-10/11 exceptions for
+   this bounded release. A versioned decision must say that the historical
+   *unchanged* Gate 5 suite never existed as executable evidence, the fresh
+   source publication used a separate synthetic dataset, and live ODIP bytes
+   were not corrupted. This is an acceptance decision, not a claim that those
+   unexecuted assertions passed.
+2. **Require a literal clean-baseline Gate 5 execution.** Provision a separate
+   clean environment where the standard dataset identity/version can be
+   freshly published, define an executable baseline for every non-excepted
+   assertion, and add a safe live read-fault seam if that boundary must be
+   observed through the actual ODIP transport. This remains new test work;
+   there is no old executable suite to rerun unchanged.
 
 Until the maintainer chooses and records one path, AI-10 and final Gate 6 stay
 OPEN. No production deployment or kit 1.0.0 publication follows from these

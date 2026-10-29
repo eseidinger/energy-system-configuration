@@ -63,6 +63,15 @@ The [remaining-acceptance review aid](2026-10-29-ai10-remaining-acceptance.md)
 sets out the exact evidence and the choice between a newly specified full
 suite and an explicit scope decision; the October 17 Gate 5 acceptance did
 not supply a historical executable suite to rerun unchanged.
+The subsequent [single isolated source-to-consumer report](evidence/2026-10-29-deployed-source-to-consumer-regression.json)
+passes source capture, raw-byte readback, isolated publication, worker-grant
+cleanup, three standard publication readbacks, both full VEF oracles and the
+consumer negative/idempotency cases in one automated invocation. It uses a
+new isolated source version, so it is an equivalent new suite rather than a
+literal rerun of a historical unchanged suite. The
+[proposed DEC-12](../decisions/DEC-12-proposed-ai10-equivalent-regression.md)
+requires explicit maintainer approval before AI-10 can be classified as
+accepted with its recorded limits; Gate 6 remains open.
 
 | Gap | Current closure status | Still required |
 | --- | --- | --- |
