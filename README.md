@@ -24,6 +24,7 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 - [Contract kit 1.0.0 release record](reviews/2026-10-29-contract-kit-1.0.0-release.md) — publication, checksum, and consumer adoption evidence.
 - [Production authorization](decisions/DEC-14-production-deployment-authorization.md) — separate maintainer approval for the bounded VEF and ODIP production rollout.
 - [Production deployment record](reviews/2026-10-29-production-deployment.md) — versioned application releases, CI, image digests and observed readiness.
+- [Gate 6 closure](reviews/2026-10-29-gate-6-closure.md) — final bounded-release disposition and retained evidence limits.
 - [Shared contract kit](contract-kit/) — executable schemas, APIs, examples, fixtures, expected results, and validation tests.
 
 The documents intentionally separate why the integration exists, what participating systems must guarantee, and how the teams should deliver it.
@@ -38,7 +39,7 @@ on October 19. Hosted AI-05/06/08/11 passed within their recorded limits;
 with explicit limits for this release. [DEC-13](decisions/DEC-13-bounded-gate-6-acceptance.md)
 accepts bounded Gate 6 for the test release with DEC-10/11/12 limits. Kit
 `1.0.0` is published under the maintainer's separate release authorization;
-[DEC-14](decisions/DEC-14-production-deployment-authorization.md) subsequently authorized the bounded production rollout. ODIP and VEF `v1.0.0` are deployed and ready on the [recorded production revisions](reviews/2026-10-29-production-deployment.md); a maintainer-reported production optimization matches the reference oracle. The current release is limited to new installations under
+[DEC-14](decisions/DEC-14-production-deployment-authorization.md) subsequently authorized the bounded production rollout. ODIP and VEF `v1.0.0` are deployed and ready on the [recorded production revisions](reviews/2026-10-29-production-deployment.md); a maintainer-reported production optimization matches the reference oracle. [Gate 6 is closed with limitations](reviews/2026-10-29-gate-6-closure.md). The current release is limited to new installations under
 DEC-07; GAP-06 is closed by that scope decision.
 
 The [cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md)

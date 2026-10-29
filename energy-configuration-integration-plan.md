@@ -9,6 +9,8 @@
 
 **Production status:** ODIP and VEF application releases `v1.0.0` passed their tagged CI workflows and are deployed and ready. The [production record](reviews/2026-10-29-production-deployment.md) pins applied revisions and image digests. The maintainer subsequently reported an authenticated production optimization run whose supplied fields exactly match the immutable kit 1.0.0 reference oracle; the API JSON and full live candidate list were not independently captured.
 
+**Gate 6 disposition:** [CLOSED_WITH_LIMITATIONS](reviews/2026-10-29-gate-6-closure.md) for this bounded 1.0.0 release. DEC-10/11 exceptions and DEC-12 evidence limits remain recorded; the independent API export is optional for this closure and qualified domain review remains outstanding for certified-engineering use.
+
 [DEC-10](decisions/DEC-10-current-release-recovery-test-exception.md) records the maintainer's current-release acceptance without the isolated joint backup/restore test. Restore-execution gate entries below are accepted exceptions for this release, not passed tests. Recovery VM provisioning is not a release prerequisite; other open AI, operational and release-evidence assertions remain required. This exception does not grant final Gate 6 acceptance.
 
 [DEC-11](decisions/DEC-11-current-release-non-ai-acceptance-exceptions.md) additionally accepts the other listed non-AI points without further testing. It supersedes DEC-10's remaining non-AI acceptance prerequisites for the current release. The AI cases stayed outside that exception and were reviewed separately; DEC-12 is the bounded AI-10 decision and DEC-13 the subsequent Gate 6 owner decision. Missing non-AI evidence remains unverified rather than passed.
@@ -170,7 +172,7 @@ Execute the following in one automated environment:
 
 ### Gate 6 — Add AI assistance and release
 
-**Status (2026-10-29):** AI proposals, mandatory current-request confirmation, bounded evidence and validated explanations are implemented in VEF. Hosted AI-05/06/08/11 pass within recorded limits; AI-10 is ACCEPTED_WITH_LIMITATIONS under DEC-12. The new isolated source-to-consumer regression and separate private invalid-content probe support that decision; the historical unchanged Gate 5 suite was not captured as executable evidence. DEC-13 accepts `VEF-05`/Gate 6 for the bounded test release with these limits. Kit `0.5.0` remains the published consumer pin; the merged `1.0.0` candidate is unpublished. ODIP APIs and the numerical baseline are unchanged. See the [release inventory](reviews/2026-10-29-gate-6-release-candidate-review.md) for the accepted evidence and separate publication boundary.
+**Status (2026-10-29): CLOSED_WITH_LIMITATIONS for the bounded 1.0.0 release.** AI proposals, mandatory current-request confirmation, bounded evidence and validated explanations are implemented in VEF. Hosted AI-05/06/08/11 pass within recorded limits; AI-10 is ACCEPTED_WITH_LIMITATIONS under DEC-12. The new isolated source-to-consumer regression and separate private invalid-content probe support that decision; the historical unchanged Gate 5 suite was not captured as executable evidence. DEC-13 accepted `VEF-05`/Gate 6 with these limits. Kit 1.0.0 is published and pinned by both consumers; ODIP and VEF `v1.0.0` are deployed and ready, and a maintainer-reported production run matches the immutable reference oracle. ODIP APIs and the numerical baseline are unchanged. See the [closure record](reviews/2026-10-29-gate-6-closure.md) for the exact disposition and limits.
 
 1. Add natural-language-to-request proposal generation behind mandatory user confirmation.
 2. Restrict explanation input to the bounded run result and approved evidence view.
@@ -180,6 +182,11 @@ Execute the following in one automated environment:
 6. Record contract acceptance by all three owners and tag the shared kit, implementations, images, and deployment definitions used for the release.
 
 **Exit:** `VEF-05` and the AI acceptance scenarios pass; contract version 1 can be accepted and released.
+
+For this bounded release, DEC-13 accepts the stated AI evidence with limitations,
+and the subsequent publication and production deployment complete the release
+steps. This is a limited gate closure; it does not assert that every historical
+unrestricted exit test passed.
 
 ## 5 Dependency and handoff rules
 
@@ -229,3 +236,8 @@ The integration is complete only when:
 - the AI-assisted Gate 6 suite passes without weakening the deterministic suite;
 - the three project owners accept the contract version used by the release;
 - known limitations from the use case are visible in the user-facing result.
+
+The bounded 1.0.0 release is closed under DEC-10/11/12/13/14 with explicit
+exceptions to the full target above. Future releases must either supply the
+missing evidence or renew those exceptions; the full target is not silently
+treated as passed.
