@@ -25,14 +25,16 @@ This repository defines the cross-project reference scenario for AI-assisted ene
 
 The documents intentionally separate why the integration exists, what participating systems must guarantee, and how the teams should deliver it.
 
-## Current status — October 27, 2026
+## Current status — October 29, 2026
 
 ODIP and VEF both pin contract kit **0.5.0**. Immutable publication, deterministic
 new-equipment optimization and the AI-assisted workflow are implemented. Gate 5
 was accepted by maintainer direction on October 17; ODIP's handoff was accepted
-on October 19. **Gate 6 and final release acceptance remain open**, including
-AI-05, AI-06, AI-08, AI-10 and AI-11. The current release is explicitly limited
-to new installations under DEC-07; GAP-06 is closed by that scope decision.
+on October 19. Hosted AI-05/06/08/11 passed within their recorded limits;
+[DEC-12](decisions/DEC-12-proposed-ai10-equivalent-regression.md) accepts AI-10
+with explicit limits for this release. **Gate 6 and final release acceptance
+remain open.** The current release is limited to new installations under
+DEC-07; GAP-06 is closed by that scope decision.
 
 The [cross-project review](reviews/2026-10-27-implementation-and-acceptance-review.md)
 records source revisions, current coverage and executed checks. The subsequent
